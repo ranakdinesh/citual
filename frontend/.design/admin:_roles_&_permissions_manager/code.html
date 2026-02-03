@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Admin - Roles &amp; Permissions</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e664",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                        "border-light": "#d0e7d8",
+                        "border-dark": "#2a4235",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom checkbox style to match brand */
+        input[type="checkbox"]:checked {
+            background-color: #19e664;
+            border-color: #19e664;
+            color: #0e1b13;
+        }
+        input[type="checkbox"]:focus {
+            ring-color: #19e664;
+        }
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0e1b13] dark:text-[#e7f3ec] font-display min-h-screen flex flex-col overflow-x-hidden transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-border-light dark:border-border-dark px-6 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">admin_panel_settings</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Citual Admin</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+<span>Organization:</span>
+<span class="text-slate-900 dark:text-white">Acme Corp</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-xl">help</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-cover bg-center border border-border-light dark:border-border-dark cursor-pointer" data-alt="User profile avatar showing a generic gradient or silhouette" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyCUzWnstxtxS8PYqhhyJPj6SqmGvMUBMDo2QFOgaX-LspDNLkN6kkWSZ-schjky_-WxGWAL7YtKbKJ6r1APOCxdU0X89duryujV7zlMe8iRfdIYNfgsTkQXLWih6mDFbKSYWxtr28LAj7TvXquQFRyGDJxMLMCO5E5aAg5fV75ZmFP2W2FGE1P_vsGyq6tU8EE73fQXk2sDxB4gCEzl7Xsu0L_1LhjMQ3tl0bccJk84SV1AyPjtdjasGFjlK9-4BuEulRRIEmrk1k');">
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col gap-6">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-1">Roles &amp; Permissions</h2>
+<p class="text-slate-500 dark:text-slate-400">Manage access levels and granular permissions for your team.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-sm font-bold transition-colors">
+                    Discard Changes
+                </button>
+<button class="px-6 py-2 rounded-lg bg-primary hover:bg-primary/90 text-[#0e1b13] text-sm font-bold shadow-sm shadow-primary/20 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">save</span>
+                    Save Changes
+                </button>
+</div>
+</div>
+<!-- Dual Pane Interface -->
+<div class="flex flex-col lg:flex-row gap-6 h-full min-h-[600px]">
+<!-- Left Pane: Roles List -->
+<aside class="w-full lg:w-1/4 min-w-[280px] flex flex-col gap-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-4 shadow-sm h-full flex flex-col">
+<div class="flex items-center justify-between mb-4 px-2">
+<h3 class="font-bold text-slate-900 dark:text-white">Defined Roles</h3>
+<span class="text-xs bg-primary/20 text-green-800 dark:text-primary px-2 py-0.5 rounded-full font-medium">5 Active</span>
+</div>
+<!-- Role Items -->
+<div class="flex-1 overflow-y-auto space-y-2 no-scrollbar pr-1">
+<!-- Item: Admin -->
+<div class="group flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-sm text-slate-700 dark:text-slate-200">Super Admin</span>
+<span class="text-xs text-slate-400">3 Users</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">chevron_right</span>
+</div>
+<!-- Item: Editor (Active) -->
+<div class="relative flex items-center justify-between p-3 rounded-lg cursor-pointer bg-primary/10 border border-primary/50 shadow-sm transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-sm text-slate-900 dark:text-white">Editor</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">12 Users</span>
+</div>
+<span class="material-symbols-outlined text-primary">edit</span>
+<!-- Active Indicator Strip -->
+<div class="absolute left-0 top-2 bottom-2 w-1 bg-primary rounded-r-full"></div>
+</div>
+<!-- Item: Viewer -->
+<div class="group flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-sm text-slate-700 dark:text-slate-200">Viewer</span>
+<span class="text-xs text-slate-400">45 Users</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">chevron_right</span>
+</div>
+<!-- Item: Billing -->
+<div class="group flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-sm text-slate-700 dark:text-slate-200">Billing Manager</span>
+<span class="text-xs text-slate-400">2 Users</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">chevron_right</span>
+</div>
+<!-- Item: Support -->
+<div class="group flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-sm text-slate-700 dark:text-slate-200">Support Agent</span>
+<span class="text-xs text-slate-400">8 Users</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">chevron_right</span>
+</div>
+</div>
+<!-- Add Button -->
+<div class="pt-4 mt-2 border-t border-border-light dark:border-border-dark">
+<button class="w-full flex items-center justify-center gap-2 p-3 rounded-lg border border-dashed border-slate-300 dark:border-slate-600 hover:border-primary text-slate-500 hover:text-primary hover:bg-primary/5 transition-all text-sm font-bold">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                            Add New Role
+                        </button>
+</div>
+</div>
+</aside>
+<!-- Right Pane: Permission Matrix -->
+<section class="flex-1 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col overflow-hidden">
+<!-- Header -->
+<div class="p-6 border-b border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-black/20">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                                Configure Permissions: <span class="underline decoration-primary decoration-2 underline-offset-4">Editor</span>
+</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-2xl">
+                                Editors have full control over content and media but limited access to system settings and user management.
+                            </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Quick Actions:</span>
+<button class="text-xs font-bold text-primary hover:underline">Select All</button>
+<span class="text-slate-300">|</span>
+<button class="text-xs font-bold text-red-400 hover:underline">Clear All</button>
+</div>
+</div>
+</div>
+<!-- Matrix Table -->
+<div class="overflow-x-auto flex-1 p-0">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-white/5 border-b border-border-light dark:border-border-dark text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold tracking-wider">
+<th class="px-6 py-4 w-1/3">Module</th>
+<th class="px-4 py-4 text-center w-32">View</th>
+<th class="px-4 py-4 text-center w-32">Create</th>
+<th class="px-4 py-4 text-center w-32">Edit</th>
+<th class="px-4 py-4 text-center w-32">Delete</th>
+<th class="px-4 py-4 text-center w-32">Export</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<!-- Module: Dashboard -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">Dashboard</p>
+<p class="text-xs text-slate-500">Analytics overview</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+</tr>
+<!-- Module: Content Management -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors bg-primary/[0.02]">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-xl">article</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">Content</p>
+<p class="text-xs text-slate-500">Blog posts &amp; pages</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+</tr>
+<!-- Module: Media Library -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors bg-primary/[0.02]">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-xl">perm_media</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">Media Library</p>
+<p class="text-xs text-slate-500">Images &amp; videos</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+</tr>
+<!-- Module: Users -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-xl">group</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">User Management</p>
+<p class="text-xs text-slate-500">Staff &amp; Customers</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+</tr>
+<!-- Module: Billing -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-xl">receipt_long</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">Billing</p>
+<p class="text-xs text-slate-500">Invoices &amp; Plans</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+</tr>
+<!-- Module: Settings -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined text-xl">settings</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">System Settings</p>
+<p class="text-xs text-slate-500">Global config</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="px-4 py-4 text-center">
+<input class="w-5 h-5 rounded border-slate-200 bg-slate-100 opacity-50 cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Simple Toast Notification (Visual only) -->
+<div class="fixed bottom-6 right-6 z-50 animate-bounce">
+<div class="bg-slate-900 dark:bg-slate-700 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="text-sm font-medium">Changes auto-saved to draft</span>
+</div>
+</div>
+<script>
+        // Minimal JS to handle indeterminate state for effect, if needed
+        // Not adding functional logic as per request instructions.
+    </script>
+</body></html>

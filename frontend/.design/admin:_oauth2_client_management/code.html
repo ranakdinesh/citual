@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin: Oauth2 Client Management</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#58846b",
+                        "primary-dark": "#466b56",
+                        "secondary-orange": "#F25A29",
+                        "secondary-orange-dark": "#d14012",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#171b19",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2321",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-72 bg-surface-light dark:bg-surface-dark border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0 transition-colors duration-200">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-emerald-800 flex items-center justify-center text-white font-bold text-xl" data-alt="Citual Logo - Abstract Green Gradient Square">
+                C
+            </div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Citual Admin</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Oauth2 Management</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-2 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary dark:text-primary-400 group" href="#">
+<span class="material-symbols-outlined fill">group</span>
+<span class="text-sm font-semibold leading-normal">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">vpn_key</span>
+<span class="text-sm font-medium leading-normal">Scopes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-sm font-medium leading-normal">Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="text-sm font-medium leading-normal">Server Health</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-slate-500 text-sm">person</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Admin User</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">admin@citual.com</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- Scrollable Area -->
+<div class="flex-1 overflow-y-auto p-6 md:p-10 lg:px-12">
+<div class="max-w-6xl mx-auto flex flex-col gap-8">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Oauth2 Server Clients</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Manage your registered OAuth2 applications, keys, and access permissions.</p>
+</div>
+<div class="flex gap-3">
+<button class="group flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-secondary-orange hover:bg-secondary-orange-dark text-white text-sm font-bold shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span>Revoke Selected</span>
+</button>
+<button class="group flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-primary-dark text-white text-sm font-bold shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Create New Client</span>
+</button>
+</div>
+</div>
+<!-- Filters / Search (Optional enhancement for "Modern UI") -->
+<div class="flex gap-3 items-center bg-surface-light dark:bg-surface-dark p-2 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full bg-transparent border-none text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0 pl-10 h-10" placeholder="Search client ID or name..." type="text"/>
+</div>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<button class="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filter
+                    </button>
+</div>
+<!-- Table -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+<th class="p-4 w-12 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Client ID</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Name</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Created Date</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Status</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 rounded select-all">9f8s7d6f5</span>
+<button class="text-slate-400 hover:text-primary transition-colors" title="Copy ID">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Marketing Dashboard</p>
+<p class="text-xs text-slate-500 dark:text-slate-500">ReadOnly Access</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-slate-400">
+                                        Oct 24, 2023
+                                    </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary-orange hover:text-secondary-orange-dark transition-colors p-1" title="Revoke">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 rounded select-all">2h3j4k5l6</span>
+<button class="text-slate-400 hover:text-primary transition-colors" title="Copy ID">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Mobile App V2</p>
+<p class="text-xs text-slate-500 dark:text-slate-500">Full Access</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-slate-400">
+                                        Sep 15, 2023
+                                    </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary-orange hover:text-secondary-orange-dark transition-colors p-1" title="Revoke">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 rounded select-all">8u7y6t5r4</span>
+<button class="text-slate-400 hover:text-primary transition-colors" title="Copy ID">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 shrink-0">
+<span class="material-symbols-outlined text-[18px]">integration_instructions</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Legacy Integration</p>
+<p class="text-xs text-slate-500 dark:text-slate-500">Write Only</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-slate-400">
+                                        Jan 10, 2023
+                                    </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                            Inactive
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary-orange hover:text-secondary-orange-dark transition-colors p-1" title="Revoke">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 rounded select-all">5t6y7u8i9</span>
+<button class="text-slate-400 hover:text-primary transition-colors" title="Copy ID">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center text-slate-600 dark:text-slate-400 shrink-0">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Internal Script</p>
+<p class="text-xs text-slate-500 dark:text-slate-500">System Admin</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-slate-400">
+                                        Aug 05, 2023
+                                    </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-orange/10 text-secondary-orange dark:bg-secondary-orange/20 dark:text-secondary-orange">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-orange"></span>
+                                            Revoked
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-300 cursor-not-allowed p-1" disabled="" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-300 cursor-not-allowed p-1" disabled="" title="Revoke">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+<div class="text-xs text-slate-500 dark:text-slate-400">
+                            Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">24</span> clients
+                        </div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CMS Upload Progress</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588468",
+                        "secondary-orange": "#F25A29",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#171b18",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#232924",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden">
+<!-- Background Simulation (The "Media Library" behind the modal) -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none" data-alt="Abstract dot pattern representing the background interface" style="background-image: radial-gradient(#588468 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+<!-- Main Modal Layout -->
+<div class="relative flex h-screen w-full items-center justify-center p-4 backdrop-blur-[2px] bg-slate-900/10 dark:bg-black/40">
+<!-- Modal Container -->
+<div class="layout-content-container flex flex-col w-full max-w-[600px] max-h-[90vh] bg-surface-light dark:bg-surface-dark rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800">
+<h1 class="text-slate-900 dark:text-white text-[20px] font-bold leading-tight tracking-[-0.015em]">Upload Progress</h1>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto">
+<!-- List Item 1: In Progress -->
+<div class="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors border-b border-slate-50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex flex-col justify-center flex-1 min-w-0">
+<div class="flex justify-between mb-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">logo.png</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">45%</p>
+</div>
+<!-- Progress Bar Small -->
+<div class="w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700 h-1.5">
+<div class="h-full rounded-full bg-primary transition-all duration-300" style="width: 45%;"></div>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-normal mt-1">1.2 MB of 2.6 MB</p>
+</div>
+</div>
+</div>
+<!-- List Item 2: In Progress -->
+<div class="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors border-b border-slate-50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex flex-col justify-center flex-1 min-w-0">
+<div class="flex justify-between mb-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">hero-bg.jpg</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">78%</p>
+</div>
+<div class="w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700 h-1.5">
+<div class="h-full rounded-full bg-primary transition-all duration-300" style="width: 78%;"></div>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-normal mt-1">3.5 MB of 4.5 MB</p>
+</div>
+</div>
+</div>
+<!-- List Item 3: Completed -->
+<div class="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors border-b border-slate-50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">team_photo.jpg</p>
+<p class="text-primary text-sm font-normal leading-normal line-clamp-2">Completed</p>
+</div>
+</div>
+<div class="shrink-0">
+<div class="text-primary flex size-7 items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+</div>
+<!-- List Item 4: Pending -->
+<div class="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-slate-400 dark:text-slate-500 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0 size-12">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">guidelines.pdf</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">Waiting...</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Total Progress -->
+<div class="bg-slate-50 dark:bg-[#1f2420] px-6 py-5 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col gap-4">
+<!-- Total Stats -->
+<div class="flex gap-6 justify-between items-end">
+<div>
+<p class="text-slate-900 dark:text-white text-base font-semibold leading-normal">Total Progress</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">2 of 4 files uploaded</p>
+</div>
+<p class="text-primary font-bold text-lg leading-normal">65%</p>
+</div>
+<!-- Total Bar -->
+<div class="rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<div class="h-2.5 rounded-full bg-primary animate-pulse" style="width: 65%;"></div>
+</div>
+<!-- Actions -->
+<div class="flex justify-end pt-2">
+<button class="flex items-center justify-center gap-2 px-5 py-2.5 text-secondary-orange hover:bg-secondary-orange/10 rounded-lg text-sm font-semibold transition-all">
+                            Cancel All
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

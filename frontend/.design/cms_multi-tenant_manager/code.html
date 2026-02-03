@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CMS Multi-tenant Manager</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111722",
+                        "surface-dark": "#232f48",
+                        "surface-border": "#324467",
+                        "text-secondary": "#92a4c9"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 flex flex-col border-r border-surface-border bg-background-dark flex-shrink-0 z-20">
+<!-- Brand -->
+<div class="flex items-center gap-3 px-6 py-5 border-b border-surface-border">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold tracking-tight">CMS Manager</h2>
+</div>
+<!-- Tenant Context -->
+<div class="flex flex-col px-4 py-4 gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-text-secondary uppercase tracking-wider">Tenant</label>
+<div class="flex items-center justify-between group cursor-pointer rounded-lg p-2 -ml-2 hover:bg-surface-dark transition-colors">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-1.5 rounded text-primary">
+<span class="material-symbols-outlined text-lg">domain</span>
+</div>
+<div>
+<h3 class="text-sm font-medium text-white">Acme Corp</h3>
+<p class="text-xs text-text-secondary">Enterprise Plan</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-secondary">expand_more</span>
+</div>
+</div>
+<!-- Site Switcher -->
+<div class="relative">
+<label class="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2 block">Active Site</label>
+<button class="flex items-center w-full justify-between bg-surface-dark border border-surface-border text-white text-sm rounded-lg px-3 py-2.5 hover:border-primary/50 transition-colors">
+<span class="truncate">acme.com</span>
+<span class="material-symbols-outlined text-text-secondary text-sm">unfold_more</span>
+</button>
+</div>
+</div>
+<!-- Module Navigation -->
+<nav class="flex-1 overflow-y-auto px-4 py-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">article</span>
+<span class="text-sm font-medium">Posts</span>
+<span class="ml-auto bg-surface-border text-white text-[10px] px-1.5 py-0.5 rounded-full">12</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">perm_media</span>
+<span class="text-sm font-medium">Media</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+<span class="text-sm font-medium">Themes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span class="text-sm font-medium">Plugins</span>
+</a>
+<div class="h-px bg-surface-border my-2 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<!-- Bottom Actions -->
+<div class="p-4 border-t border-surface-border">
+<button class="flex w-full items-center justify-center gap-2 rounded-lg h-10 bg-surface-dark border border-surface-border hover:bg-surface-border text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+<span>Create New Site</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col h-full relative overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 flex items-center justify-between px-6 border-b border-surface-border bg-background-dark z-10">
+<!-- Breadcrumbs (Simplified for Header) -->
+<div class="flex items-center text-sm font-medium">
+<span class="text-text-secondary">Acme Corp</span>
+<span class="material-symbols-outlined text-text-secondary text-sm mx-2">chevron_right</span>
+<span class="text-text-secondary">acme.com</span>
+<span class="material-symbols-outlined text-text-secondary text-sm mx-2">chevron_right</span>
+<span class="text-white">Dashboard</span>
+</div>
+<!-- Right Tools -->
+<div class="flex items-center gap-4">
+<!-- Search -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-lg">search</span>
+<input class="h-10 pl-10 pr-4 bg-surface-dark border-none rounded-lg text-white placeholder-text-secondary focus:ring-1 focus:ring-primary w-64 text-sm" placeholder="Search site content..." type="text"/>
+</div>
+<!-- Icons -->
+<button class="relative p-2 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-background-dark"></span>
+</button>
+<button class="p-2 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<!-- Avatar -->
+<div class="h-9 w-9 rounded-full bg-cover bg-center border border-surface-border ml-2" data-alt="User profile picture showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyN4M2MK8T-mvNmpn9RMjk5ZZsWlJVs299KPnUVNnE12_B2xkodjFo2Sin7hHj-A8bEpa2m5YPmM3wrJwLTO_cT93tZg1XXc-HVB8pSpMmDZo88fQ3NYpwgu91OapvwHBhq6PTkzwjUht-ynm4AldZ-swYjc0VGLaLRdOx3y7WRwWc5DNWXapx8AiG0L3Kyoi_YCUQu8-IYpPEGj7TUwPpYByHXCBWjRU2ofpPZerGb9qwW_r7CDNvFUNjItJG5DxJ3DJaJYtmFSbG");'></div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 lg:p-10 pb-20">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Headline & Quick Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-white text-3xl font-bold tracking-tight">Dashboard: acme.com</h1>
+<p class="text-text-secondary mt-1">Manage your content, analyze performance, and keep your site healthy.</p>
+</div>
+<div class="flex gap-3">
+<a class="text-white bg-surface-dark hover:bg-surface-border border border-surface-border font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                View Site
+                            </a>
+<a class="text-white bg-primary hover:bg-blue-600 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center gap-2 shadow-lg shadow-blue-900/20" href="#">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+                                Write New Post
+                            </a>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6 flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors"></div>
+<div class="flex items-center justify-between z-10">
+<p class="text-text-secondary font-medium">Total Views (30d)</p>
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+</div>
+<p class="text-white text-3xl font-bold z-10">12.5K</p>
+<div class="flex items-center gap-1 z-10">
+<span class="text-[#0bda5e] bg-[#0bda5e]/10 px-1.5 py-0.5 rounded text-xs font-bold">+12%</span>
+<span class="text-text-secondary text-xs">vs last month</span>
+</div>
+</div>
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6 flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-32 bg-purple-500/5 rounded-full -mr-16 -mt-16 group-hover:bg-purple-500/10 transition-colors"></div>
+<div class="flex items-center justify-between z-10">
+<p class="text-text-secondary font-medium">Storage Used</p>
+<span class="material-symbols-outlined text-purple-500">cloud_queue</span>
+</div>
+<p class="text-white text-3xl font-bold z-10">1.2 GB</p>
+<div class="flex items-center gap-1 z-10">
+<span class="text-[#0bda5e] bg-[#0bda5e]/10 px-1.5 py-0.5 rounded text-xs font-bold">+2%</span>
+<span class="text-text-secondary text-xs">within quota</span>
+</div>
+</div>
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6 flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-32 bg-orange-500/5 rounded-full -mr-16 -mt-16 group-hover:bg-orange-500/10 transition-colors"></div>
+<div class="flex items-center justify-between z-10">
+<p class="text-text-secondary font-medium">Active Plugins</p>
+<span class="material-symbols-outlined text-orange-500">extension</span>
+</div>
+<p class="text-white text-3xl font-bold z-10">14</p>
+<div class="flex items-center gap-1 z-10">
+<span class="text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded text-xs font-bold">1 Update</span>
+<span class="text-text-secondary text-xs">pending</span>
+</div>
+</div>
+</div>
+<!-- Main Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Col: Quick Actions & Activity -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Quick Actions Grid -->
+<section>
+<h3 class="text-white text-lg font-semibold mb-4">Quick Actions</h3>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-dark border border-surface-border rounded-xl hover:border-primary/50 hover:bg-surface-dark/80 transition-all group">
+<div class="p-3 rounded-full bg-blue-500/10 text-blue-400 group-hover:text-blue-300 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">post_add</span>
+</div>
+<span class="text-white text-sm font-medium">New Post</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-dark border border-surface-border rounded-xl hover:border-primary/50 hover:bg-surface-dark/80 transition-all group">
+<div class="p-3 rounded-full bg-green-500/10 text-green-400 group-hover:text-green-300 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+</div>
+<span class="text-white text-sm font-medium">Upload Media</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-dark border border-surface-border rounded-xl hover:border-primary/50 hover:bg-surface-dark/80 transition-all group">
+<div class="p-3 rounded-full bg-purple-500/10 text-purple-400 group-hover:text-purple-300 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">person_add</span>
+</div>
+<span class="text-white text-sm font-medium">Add User</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-dark border border-surface-border rounded-xl hover:border-primary/50 hover:bg-surface-dark/80 transition-all group">
+<div class="p-3 rounded-full bg-orange-500/10 text-orange-400 group-hover:text-orange-300 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">update</span>
+</div>
+<span class="text-white text-sm font-medium">Updates</span>
+</button>
+</div>
+</section>
+<!-- Recent Activity Feed -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white text-lg font-semibold">Recent Activity</h3>
+<a class="text-primary text-sm font-medium hover:underline" href="#">View Log</a>
+</div>
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6">
+<div class="relative pl-6 border-l border-surface-border space-y-8">
+<!-- Item 1 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-surface-dark bg-blue-500"></span>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<p class="text-white text-sm">
+<span class="font-bold">Sarah Jenkins</span> published a new post: <a class="text-primary hover:underline" href="#">"Q3 Product Roadmap"</a>
+</p>
+<span class="text-text-secondary text-xs whitespace-nowrap">2 hours ago</span>
+</div>
+<p class="text-text-secondary text-xs mt-1">Status: Published • Visibility: Public</p>
+</div>
+<!-- Item 2 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-surface-dark bg-green-500"></span>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<p class="text-white text-sm">
+<span class="font-bold">System</span> completed scheduled backup
+                                                </p>
+<span class="text-text-secondary text-xs whitespace-nowrap">5 hours ago</span>
+</div>
+<p class="text-text-secondary text-xs mt-1">Size: 450MB • Duration: 2m 15s</p>
+</div>
+<!-- Item 3 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-surface-dark bg-yellow-500"></span>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<p class="text-white text-sm">
+<span class="font-bold">Mark Doe</span> updated theme settings
+                                                </p>
+<span class="text-text-secondary text-xs whitespace-nowrap">Yesterday</span>
+</div>
+<p class="text-text-secondary text-xs mt-1">Changed primary font to "Inter"</p>
+</div>
+<!-- Item 4 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-surface-dark bg-surface-border"></span>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<p class="text-white text-sm">
+<span class="font-bold">Admin</span> added new user <span class="italic">j.smith@acme.com</span>
+</p>
+<span class="text-text-secondary text-xs whitespace-nowrap">2 days ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Col: Site Health -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Health Card -->
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6">
+<h3 class="text-white text-lg font-semibold mb-6">Site Health</h3>
+<div class="flex flex-col items-center justify-center mb-8">
+<div class="relative size-40">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+<!-- Background Circle -->
+<path class="text-surface-border" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Progress Circle (92%) -->
+<path class="text-green-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="92, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+<span class="text-3xl font-bold text-white">92</span>
+<span class="block text-xs text-text-secondary uppercase tracking-wider">Score</span>
+</div>
+</div>
+<p class="text-green-400 font-medium mt-4">Good Condition</p>
+<p class="text-text-secondary text-xs text-center mt-1">Your site is performing well, but there is 1 recommendation.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-lg bg-background-dark/50 border border-surface-border/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="text-white text-sm">SSL Certificate</span>
+</div>
+<span class="text-green-500 text-xs font-bold uppercase">Valid</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-background-dark/50 border border-surface-border/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">timer</span>
+<span class="text-white text-sm">Uptime (30d)</span>
+</div>
+<span class="text-white text-sm font-bold">99.99%</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-orange-400">security_update_warning</span>
+<span class="text-white text-sm">Security</span>
+</div>
+<button class="text-orange-400 text-xs font-bold hover:underline">Update</button>
+</div>
+</div>
+</div>
+<!-- Resources Widget -->
+<div class="bg-surface-dark border border-surface-border rounded-xl p-6">
+<h3 class="text-white text-sm font-semibold mb-4 uppercase tracking-wider text-text-secondary">Resources</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-white">CPU Usage</span>
+<span class="text-text-secondary">24%</span>
+</div>
+<div class="w-full bg-background-dark rounded-full h-1.5">
+<div class="bg-blue-500 h-1.5 rounded-full" style="width: 24%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-white">RAM Usage</span>
+<span class="text-text-secondary">62%</span>
+</div>
+<div class="w-full bg-background-dark rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 62%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

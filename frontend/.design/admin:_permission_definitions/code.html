@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Admin: Permission Definitions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#10cb55",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#102217",
+                        "text-main": "#0d1b13",
+                        "text-secondary": "#4c9a68",
+                        "border-light": "#cfe7d8",
+                        "surface-light": "#f8fcf9",
+                        "surface-dark": "#1a3324",
+                        "surface-hover": "#e7f3ec",
+                        "surface-hover-dark": "#1e3b2a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-main dark:text-white transition-colors duration-200">
+<div class="relative flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<div class="flex-none w-72 border-r border-border-light dark:border-surface-hover-dark bg-surface-light dark:bg-surface-dark hidden md:flex flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10" data-alt="Citual Admin Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJprFEkYC9-CvVETuKMkcAUzktPnFYBzgQ8kJC7J4rhYqam1KijACCOh-Dm0u2oF8qtZ9pECiiPaMuHcjzNTHDzcRGl-qPAo3uEToPDVK__Gfjx5HFWMu80dLFB3YCQQbvvr_26k4NdPmY_KsaAO7u5gFrWzV70_Q89CWvJ9b5F3vk9tFNvNzGcRx_RYyvjEP6SBpQ8XmLt7F656iOyNn41H5OUhxStQ5sI8p5J5a5YfNvaA27yLIHmeqauGjfpqEsOJbC1GH382Uf");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-main dark:text-white text-base font-bold leading-normal">Citual Admin</h1>
+<p class="text-text-secondary dark:text-gray-400 text-sm font-normal leading-normal">Super Admin</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-hover dark:hover:bg-surface-hover-dark group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-main dark:text-gray-300 group-hover:text-primary transition-colors">grid_view</span>
+<p class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-hover dark:hover:bg-surface-hover-dark group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-main dark:text-gray-300 group-hover:text-primary transition-colors">apartment</span>
+<p class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal">Tenants</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-hover dark:hover:bg-surface-hover-dark group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-main dark:text-gray-300 group-hover:text-primary transition-colors">package_2</span>
+<p class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal">Modules</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-hover dark:bg-surface-hover-dark" href="#">
+<span class="material-symbols-outlined text-primary">lock</span>
+<p class="text-text-main dark:text-white text-sm font-bold leading-normal">Permissions</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-hover dark:hover:bg-surface-hover-dark group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-main dark:text-gray-300 group-hover:text-primary transition-colors">settings</span>
+<p class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</div>
+<div class="px-2">
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</button>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="w-full max-w-[1200px] mx-auto p-6 md:p-10 flex flex-col gap-8">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Module Permission Definitions</h1>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal max-w-2xl">Define granular access controls. Create permission keys for modules (e.g., 'cms', 'billing') to assign specific capabilities to tenant roles.</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-white text-sm font-bold shadow-md hover:bg-green-600 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add New Definition</span>
+</button>
+</div>
+<!-- Filters -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-surface-hover-dark shadow-sm">
+<div class="flex flex-col md:flex-row gap-6">
+<label class="flex flex-col gap-2 flex-1">
+<span class="text-text-main dark:text-gray-200 text-sm font-semibold">Select Module</span>
+<div class="relative">
+<select class="w-full appearance-none rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 text-text-main dark:text-white h-12 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+<option>All Modules</option>
+<option>Content Management System (CMS)</option>
+<option>User Management</option>
+<option>Billing &amp; Invoices</option>
+<option>Analytics Dashboard</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+</label>
+<label class="flex flex-col gap-2 flex-[2]">
+<span class="text-text-main dark:text-gray-200 text-sm font-semibold">Search Permission Keys</span>
+<div class="relative">
+<input class="w-full rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 text-text-main dark:text-white h-12 pl-11 pr-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-gray-400" placeholder="e.g. publish_post, delete_user..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+</div>
+</label>
+<div class="flex items-end">
+<button class="h-12 px-6 rounded-lg border border-border-light dark:border-gray-600 hover:bg-surface-hover dark:hover:bg-surface-hover-dark text-text-main dark:text-white font-medium transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Filters</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="flex flex-col rounded-xl border border-border-light dark:border-surface-hover-dark bg-surface-light dark:bg-surface-dark shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full min-w-[800px]">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-border-light dark:border-surface-hover-dark">
+<th class="px-6 py-4 text-left text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider w-[25%]">Permission Key</th>
+<th class="px-6 py-4 text-left text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider w-[30%]">Description</th>
+<th class="px-6 py-4 text-left text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider w-[15%]">Scope</th>
+<th class="px-6 py-4 text-left text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider w-[15%]">Last Updated</th>
+<th class="px-6 py-4 text-right text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider w-[15%]">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-gray-700">
+<tr class="group hover:bg-surface-hover dark:hover:bg-surface-hover-dark/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-purple-100 dark:bg-purple-900/30 p-2 rounded text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-[20px]">article</span>
+</div>
+<span class="text-text-main dark:text-white font-mono text-sm font-medium">cms.publish_post</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-300 text-sm">Allows user to publish content live to the production site.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                            Global
+                                        </span>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400 text-sm">Oct 25, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 rounded text-gray-500 hover:text-primary hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-hover dark:hover:bg-surface-hover-dark/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-purple-100 dark:bg-purple-900/30 p-2 rounded text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-[20px]">perm_media</span>
+</div>
+<span class="text-text-main dark:text-white font-mono text-sm font-medium">cms.delete_media</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-300 text-sm">Allows permanent deletion of media assets from the library.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+                                            Tenant
+                                        </span>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400 text-sm">Oct 24, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 rounded text-gray-500 hover:text-primary hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-hover dark:hover:bg-surface-hover-dark/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-purple-100 dark:bg-purple-900/30 p-2 rounded text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</div>
+<span class="text-text-main dark:text-white font-mono text-sm font-medium">cms.edit_draft</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-300 text-sm">Allows editing of draft content before it is published.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                            Global
+                                        </span>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400 text-sm">Oct 22, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 rounded text-gray-500 hover:text-primary hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-hover dark:hover:bg-surface-hover-dark/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded text-indigo-600 dark:text-indigo-400">
+<span class="material-symbols-outlined text-[20px]">group</span>
+</div>
+<span class="text-text-main dark:text-white font-mono text-sm font-medium">usr.manage_roles</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-300 text-sm">Create, edit and delete user roles within the system.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                            System
+                                        </span>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400 text-sm">Oct 20, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 rounded text-gray-500 hover:text-primary hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-hover dark:hover:bg-surface-hover-dark/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-cyan-100 dark:bg-cyan-900/30 p-2 rounded text-cyan-600 dark:text-cyan-400">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+</div>
+<span class="text-text-main dark:text-white font-mono text-sm font-medium">ana.view_revenue</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-300 text-sm">View sensitive revenue charts and analytics data.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+                                            Tenant
+                                        </span>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400 text-sm">Oct 18, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 rounded text-gray-500 hover:text-primary hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-6 py-4 border-t border-border-light dark:border-gray-700 bg-gray-50 dark:bg-surface-dark">
+<p class="text-sm text-text-secondary dark:text-gray-400">Showing <span class="font-bold text-text-main dark:text-white">1-5</span> of <span class="font-bold text-text-main dark:text-white">42</span> results</p>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg bg-primary text-white text-sm font-bold shadow-sm">1</button>
+<button class="flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-text-main dark:text-white text-sm transition-colors">2</button>
+<button class="flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-text-main dark:text-white text-sm transition-colors">3</button>
+<span class="flex items-center justify-center size-9 text-text-secondary">...</span>
+<button class="flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-text-main dark:text-white text-sm transition-colors">9</button>
+<button class="flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

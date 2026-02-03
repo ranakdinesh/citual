@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRM Leads &amp; Contacts</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1e293b",
+                        "border-dark": "#232f48",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+    }
+.dark ::-webkit-scrollbar-track {
+    background: #111722
+    }
+.dark ::-webkit-scrollbar-thumb {
+    background: #232f48;
+    border-radius: 4px
+    }
+/* Checkbox custom style */
+.custom-checkbox:checked {
+    background-color: #135bec;
+    border-color: #135bec;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCJ1BH-eDYi86WB6YFL-0U-QqrI9JNvBa_YpYK8anLDjDQ0Y4u3yqFVCiAY9iz8pF3jat1WM8zAyu2dfj7Q1NNLE_NPQXHj8t61eJo2ZYP19OJoTxIQ-bdTlaBO0euF6IsISSxWRJjuYNKUeKA4mW4ZUumh8-F8zQHHi0A4o4JPQSKpSRQSzGu9XKZX0zMDgLJ3qmpy94TzlVekw9nFuQgRK53fj-cjrc1DP5qfxr08XpJ9ip2nHHxcu_WGiqfM-4JOmjSNtJHqn0GR)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden h-screen flex">
+<!-- Side Navigation -->
+<aside class="hidden lg:flex w-64 flex-col bg-[#111722] border-r border-border-dark flex-shrink-0">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10" data-alt="Abstract gradient logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHgzsklEkYAQjtRsPcTbptNbN-qkiekmPwYw7zHgtmqcJEnVuNgxrHvfnbHk4T4cuNRVWK6FYngYiXP8ZzqteOhzFMTQIqYCzpEBapraUc8OSzJvmrVJPgEcMB8kQtjo8c7AhEBx9U3sSi5hbCsbQeoEy98J79bnsfnSQdaK898Ekdxg1X93YhQPYXbBBTwehsUOKSkjwfud0mwuGRCsd-tTImQZj3i7rEs96LNlIheXSDzSMuBk39hooPhWI8QmpjCk7UIlayaWqk");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">CRM Suite</h1>
+<p class="text-[#92a4c9] text-xs font-normal leading-normal">Enterprise Edition</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-4 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#232f48] text-white rounded-lg" href="#">
+<span class="material-symbols-outlined text-primary">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">paid</span>
+<span class="text-sm font-medium">Deals</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">bar_chart</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="h-px bg-border-dark my-2 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">folder_shared</span>
+<span class="text-sm font-medium">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">schedule</span>
+<span class="text-sm font-medium">Tasks</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-[#92a4c9] hover:bg-border-dark hover:text-white rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-border-dark px-6 py-3 bg-[#111722] flex-shrink-0 z-20">
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-white text-lg font-bold leading-tight hidden sm:block">Leads Pipeline</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<!-- Search -->
+<div class="hidden md:flex relative max-w-md w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#92a4c9]">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border-none rounded-lg leading-5 bg-[#232f48] text-white placeholder-[#92a4c9] focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm h-10" placeholder="Search leads, contacts, or companies..." type="text"/>
+</div>
+<!-- Actions -->
+<button class="relative p-2 text-[#92a4c9] hover:text-white transition-colors rounded-full hover:bg-[#232f48]">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 border border-[#111722]"></span>
+</button>
+<div class="h-8 w-px bg-[#232f48]"></div>
+<div class="flex items-center gap-3 cursor-pointer">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border-2 border-[#232f48]" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0Wxg02tAWDJDxVHvK1_TR94FbeTPv8y7_2U6XzuW5nwQ9Ky84n0LwNkbNSwVd75qDBjiqDgMIT1MFqZTto7dYgm-9fuZ-a5_ZSc8O6N-015BpoINkji8kASH7r6JosVC0L0QP1bR1IDaVtdPTGz1unuLzox35lf_IOf3VMxSqypK6Ue42rIAFsT7K7-SzjlI3ZKMU5o5Qeb8YyxZPOf6Jj3be1E6x4O3lqSnH9PCIIfKgh9Iql3lsC1XFLdhFgO4jekaHYmC7g2a5");'></div>
+<div class="hidden xl:flex flex-col">
+<span class="text-white text-sm font-medium leading-none">Alex Morgan</span>
+<span class="text-[#92a4c9] text-xs mt-1">Sales Manager</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Area -->
+<main class="flex-1 overflow-hidden flex flex-col relative">
+<!-- Funnel / Stats Section -->
+<div class="bg-[#111722] border-b border-border-dark p-6 flex-shrink-0">
+<div class="flex flex-col gap-4 max-w-[1400px] mx-auto w-full">
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<h3 class="text-white text-xl font-bold">Sales Overview</h3>
+<p class="text-[#92a4c9] text-sm">Real-time pipeline metrics</p>
+</div>
+<div class="flex gap-2">
+<span class="text-xs font-medium text-[#92a4c9] bg-[#232f48] px-2 py-1 rounded">Last 30 Days</span>
+</div>
+</div>
+<!-- Funnel Visualization -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Step 1 -->
+<div class="relative flex flex-col gap-1 rounded-lg p-4 bg-[#1e293b] border border-[#324467] group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-[#92a4c9] text-xs font-medium uppercase tracking-wider">Total Leads</span>
+<span class="material-symbols-outlined text-primary text-lg">filter_alt</span>
+</div>
+<p class="text-white text-2xl font-bold mt-1">2,405</p>
+<div class="flex items-center text-[#0bda5e] text-xs font-medium">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>
+                                +12%
+                            </div>
+<!-- Connector Arrow for visual flow -->
+<div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-[#324467]">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col gap-1 rounded-lg p-4 bg-[#1e293b] border border-[#324467] group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-[#92a4c9] text-xs font-medium uppercase tracking-wider">New</span>
+<span class="material-symbols-outlined text-blue-400 text-lg">new_releases</span>
+</div>
+<p class="text-white text-2xl font-bold mt-1">850</p>
+<div class="flex items-center text-[#0bda5e] text-xs font-medium">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>
+                                +5%
+                            </div>
+<div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-[#324467]">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-col gap-1 rounded-lg p-4 bg-[#1e293b] border border-[#324467] group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-[#92a4c9] text-xs font-medium uppercase tracking-wider">Contacted</span>
+<span class="material-symbols-outlined text-yellow-400 text-lg">phone_in_talk</span>
+</div>
+<p class="text-white text-2xl font-bold mt-1">600</p>
+<div class="flex items-center text-[#0bda5e] text-xs font-medium">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>
+                                +2%
+                            </div>
+<div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-[#324467]">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex flex-col gap-1 rounded-lg p-4 bg-[#1e293b] border border-[#324467] group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-[#92a4c9] text-xs font-medium uppercase tracking-wider">Qualified</span>
+<span class="material-symbols-outlined text-purple-400 text-lg">verified</span>
+</div>
+<p class="text-white text-2xl font-bold mt-1">400</p>
+<div class="flex items-center text-[#0bda5e] text-xs font-medium">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>
+                                +8%
+                            </div>
+<div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-[#324467]">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col gap-1 rounded-lg p-4 bg-[#1e293b] border border-[#324467] group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-[#92a4c9] text-xs font-medium uppercase tracking-wider">Won</span>
+<span class="material-symbols-outlined text-green-400 text-lg">emoji_events</span>
+</div>
+<p class="text-white text-2xl font-bold mt-1">405</p>
+<div class="flex items-center text-[#0bda5e] text-xs font-medium">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>
+                                +15%
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Split View -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Data Table Section -->
+<div class="flex-1 flex flex-col overflow-hidden relative">
+<!-- Action Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-4 border-b border-border-dark bg-[#111722]/50">
+<div class="flex items-center gap-2">
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 bg-[#232f48] hover:bg-[#324467] text-white rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-[#4b5d84]">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                    Filter
+                                </button>
+</div>
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 bg-[#232f48] hover:bg-[#324467] text-white rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-[#4b5d84]">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                                    Sort
+                                </button>
+</div>
+<div class="h-6 w-px bg-border-dark mx-1"></div>
+<div class="text-[#92a4c9] text-sm"><span class="text-white font-bold">25</span> selected</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center gap-2 px-4 py-2 bg-[#232f48] text-white text-sm font-medium rounded-lg hover:bg-[#324467] transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                Export
+                            </button>
+<button class="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                Add Lead
+                            </button>
+</div>
+</div>
+<!-- Table -->
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#1e293b] sticky top-0 z-10 shadow-sm">
+<tr>
+<th class="p-4 border-b border-border-dark w-12">
+<input class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider">Lead Name</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider">Status</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider">Company</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider">Value</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider">Last Activity</th>
+<th class="p-4 border-b border-border-dark text-xs font-semibold text-[#92a4c9] uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark bg-[#111722]">
+<!-- Row 1 (Active/Selected) -->
+<tr class="group hover:bg-[#1e293b] transition-colors cursor-pointer bg-[#1e293b]/50 border-l-2 border-l-primary">
+<td class="p-4">
+<input checked="" class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center flex-shrink-0" data-alt="Portrait of Sarah Connor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCexqx5GsPSb5MS0E5H4Wvi4fxtodU5UN77_-XymD1P0Vo36uHDB1wL3NpnY8y5TqzkaNi0n6LwxkPdJvTCkiQ0FPaL_L1D7NJmTUEVR93YYEgAq8kjquhI7vln4oz7VVzSfPPLePwQjOn6bzYX3ZL6T2IMn0ubhB44kHXZfZoYxnBcMlS9KhfYomKh_VAHAE-_pEnSd_jStWuo-nqMQZQvAKxzzWbYepvsyVEOnqCar38q4zPxD_PEmbA_nhiqGxB6cGj7hDwP2FWS");'></div>
+<div>
+<p class="text-white text-sm font-medium">Sarah Connor</p>
+<p class="text-[#92a4c9] text-xs">sarah@cyberdyne.com</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                                            Qualified
+                                        </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded bg-[#232f48] flex items-center justify-center text-xs text-white font-bold">C</div>
+<span class="text-white text-sm">Cyberdyne Systems</span>
+</div>
+</td>
+<td class="p-4">
+<span class="text-white text-sm font-medium">$50,000</span>
+</td>
+<td class="p-4">
+<span class="text-[#92a4c9] text-sm">2 days ago</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#92a4c9] hover:text-white p-1 rounded hover:bg-[#232f48] opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-[#1e293b] transition-colors cursor-pointer border-l-2 border-l-transparent">
+<td class="p-4">
+<input class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-200 text-sm font-bold border border-blue-500/30">JD</div>
+<div>
+<p class="text-white text-sm font-medium">John Doe</p>
+<p class="text-[#92a4c9] text-xs">j.doe@initech.com</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                            New
+                                        </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded bg-[#232f48] flex items-center justify-center text-xs text-white font-bold">I</div>
+<span class="text-white text-sm">Initech Corp</span>
+</div>
+</td>
+<td class="p-4">
+<span class="text-white text-sm font-medium">$12,500</span>
+</td>
+<td class="p-4">
+<span class="text-[#92a4c9] text-sm">5 hours ago</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#92a4c9] hover:text-white p-1 rounded hover:bg-[#232f48] opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-[#1e293b] transition-colors cursor-pointer border-l-2 border-l-transparent">
+<td class="p-4">
+<input class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center flex-shrink-0" data-alt="Portrait of Ellen Ripley" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMyry5oDm21WZdCkcmBhU0Ze8j_Pw4NftBSPcaXyH-63D72yXGEtNAV8uc_Aau7SA8KXsPH1tAWXPpJyUteQKojRmTDPzLqQjFHj9YDsaG1ZL3IEM1iPFo1n_Xb78JtHhh3hzNDbc1UOQxmvlT1R6L2jnEJA3Rj9EFIDL-cynsCei84jKF3ivShgTvvrV17t3_Ri6iqiJ3KWEnS55g5h3mJu1_LCdTeYAbIjjsIe5xTGEriOsRurlUayBxshCICNOaYX2ZSmeQhCI5");'></div>
+<div>
+<p class="text-white text-sm font-medium">Ellen Ripley</p>
+<p class="text-[#92a4c9] text-xs">ripley@weyland.com</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                                            Contacted
+                                        </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded bg-[#232f48] flex items-center justify-center text-xs text-white font-bold">W</div>
+<span class="text-white text-sm">Weyland-Yutani</span>
+</div>
+</td>
+<td class="p-4">
+<span class="text-white text-sm font-medium">$240,000</span>
+</td>
+<td class="p-4">
+<span class="text-[#92a4c9] text-sm">1 day ago</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#92a4c9] hover:text-white p-1 rounded hover:bg-[#232f48] opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-[#1e293b] transition-colors cursor-pointer border-l-2 border-l-transparent">
+<td class="p-4">
+<input class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-purple-900/50 flex items-center justify-center text-purple-200 text-sm font-bold border border-purple-500/30">KM</div>
+<div>
+<p class="text-white text-sm font-medium">Kevin Mitnick</p>
+<p class="text-[#92a4c9] text-xs">kevin@security.com</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20">
+                                            Won
+                                        </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded bg-[#232f48] flex items-center justify-center text-xs text-white font-bold">G</div>
+<span class="text-white text-sm">Global Security</span>
+</div>
+</td>
+<td class="p-4">
+<span class="text-white text-sm font-medium">$15,000</span>
+</td>
+<td class="p-4">
+<span class="text-[#92a4c9] text-sm">Just now</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#92a4c9] hover:text-white p-1 rounded hover:bg-[#232f48] opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-[#1e293b] transition-colors cursor-pointer border-l-2 border-l-transparent">
+<td class="p-4">
+<input class="custom-checkbox h-4 w-4 rounded border-[#324467] bg-[#111722] text-primary focus:ring-offset-[#111722] focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center flex-shrink-0" data-alt="Portrait of Tony Stark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhRV-jaIGbA7LFl9wpAQOTLEKLVfr4UxXtgd6AaKZW2gkIc0eQlfAgzqjcQ9pRsNvVCl6i2hXjlqCbplnWuPFre4SwA6L3q-VHF4w5s8NkEjB5GAfha7O4sNhv15m_8me1B18Vi3DfDy_lEj9vvbVHovrfbSXS_7ZcVrhhWiwtpdxAhZN00a5w9vEYXRALDpDmlhnzpQajm2Mok-fvWwaW1oRznFeuuaDdSR8BeyrNL9a21KHoH8qx2-M-GW6FpMD0Sg08lcKIXkK0");'></div>
+<div>
+<p class="text-white text-sm font-medium">Tony Stark</p>
+<p class="text-[#92a4c9] text-xs">tony@stark.com</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20">
+                                            Lost
+                                        </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded bg-[#232f48] flex items-center justify-center text-xs text-white font-bold">S</div>
+<span class="text-white text-sm">Stark Ind.</span>
+</div>
+</td>
+<td class="p-4">
+<span class="text-white text-sm font-medium">$1,000,000</span>
+</td>
+<td class="p-4">
+<span class="text-[#92a4c9] text-sm">1 week ago</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#92a4c9] hover:text-white p-1 rounded hover:bg-[#232f48] opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Quick View Sidebar -->
+<aside class="hidden xl:flex w-96 bg-[#111722] border-l border-border-dark flex-col shadow-xl z-20">
+<!-- Profile Header -->
+<div class="p-6 border-b border-border-dark flex flex-col items-center relative">
+<button class="absolute top-4 right-4 text-[#92a4c9] hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="size-20 rounded-full bg-cover bg-center border-2 border-primary mb-3" data-alt="Portrait of Sarah Connor large" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqB9-Ugj_H5PUqu1M6_xOjKONWIX89IY9ZEhn0rbX15iBYbe4mFSoKQ-gcIN8tJ-eZv3HXxsYclh9oNirLl2FS50KuZawfOOTrWFhr7X3E5U00vh2qtww82rvag2-t5boeKNhdkw1s9aBt8XKu1x1iVYxtux6L7mcVd5-XVHmhyTAiMAB3wdahD46M2upqX1EEm-x06bSm-sCv6kMd0zoU-c8eTPoR_RO2li1mxZxW8zYrB4uZovFQEhO3bQ6XF2nsIAwB-TGg9S9F");'></div>
+<h3 class="text-white text-lg font-bold">Sarah Connor</h3>
+<p class="text-[#92a4c9] text-sm">Director of Operations</p>
+<p class="text-primary text-sm font-medium mt-1">Cyberdyne Systems</p>
+<!-- Quick Actions -->
+<div class="flex gap-3 mt-6 w-full justify-center">
+<button class="flex flex-col items-center gap-1 group">
+<div class="size-10 rounded-full bg-[#232f48] flex items-center justify-center text-white group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</div>
+<span class="text-[11px] text-[#92a4c9] group-hover:text-white uppercase font-medium tracking-wide">Call</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="size-10 rounded-full bg-[#232f48] flex items-center justify-center text-white group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<span class="text-[11px] text-[#92a4c9] group-hover:text-white uppercase font-medium tracking-wide">Email</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="size-10 rounded-full bg-[#232f48] flex items-center justify-center text-white group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<span class="text-[11px] text-[#92a4c9] group-hover:text-white uppercase font-medium tracking-wide">Meet</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="size-10 rounded-full bg-[#232f48] flex items-center justify-center text-white group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</div>
+<span class="text-[11px] text-[#92a4c9] group-hover:text-white uppercase font-medium tracking-wide">More</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Details -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Contact Info -->
+<div>
+<h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Contact Details</h4>
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[#92a4c9] text-[20px] mt-0.5">mail</span>
+<div class="flex flex-col">
+<span class="text-white text-sm">sarah@cyberdyne.com</span>
+<span class="text-[#92a4c9] text-xs">Work</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[#92a4c9] text-[20px] mt-0.5">phone_iphone</span>
+<div class="flex flex-col">
+<span class="text-white text-sm">+1 (555) 019-2834</span>
+<span class="text-[#92a4c9] text-xs">Mobile</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[#92a4c9] text-[20px] mt-0.5">location_on</span>
+<div class="flex flex-col">
+<span class="text-white text-sm">Los Angeles, CA</span>
+<span class="text-[#92a4c9] text-xs">United States</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Notes -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<h4 class="text-white text-xs font-bold uppercase tracking-wider">Internal Notes</h4>
+<button class="text-primary text-xs font-medium hover:underline">Edit</button>
+</div>
+<div class="bg-[#1e293b] p-3 rounded-lg border border-[#324467]">
+<p class="text-[#92a4c9] text-sm leading-relaxed">
+                                    Key decision maker for the new AI defense contracts. Interested in the T-800 series prototypes. Needs follow-up regarding security protocols next week.
+                                </p>
+</div>
+</div>
+<!-- Activity Timeline -->
+<div>
+<h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Activity Timeline</h4>
+<div class="relative pl-4 space-y-6 before:absolute before:left-[5px] before:top-2 before:bottom-2 before:w-px before:bg-[#324467]">
+<div class="relative pl-4">
+<div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary border-2 border-[#111722]"></div>
+<div class="flex flex-col gap-1">
+<p class="text-white text-sm font-medium">Proposal Sent</p>
+<p class="text-[#92a4c9] text-xs">You sent "Q4 Security Proposal_v2.pdf"</p>
+<p class="text-[#556987] text-[11px] mt-0.5">Today, 10:23 AM</p>
+</div>
+</div>
+<div class="relative pl-4">
+<div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#92a4c9] border-2 border-[#111722]"></div>
+<div class="flex flex-col gap-1">
+<p class="text-white text-sm font-medium">Call Logged</p>
+<p class="text-[#92a4c9] text-xs">Spoke about budget constraints. They are flexible if we include maintenance.</p>
+<p class="text-[#556987] text-[11px] mt-0.5">Yesterday, 4:00 PM</p>
+</div>
+</div>
+<div class="relative pl-4">
+<div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#92a4c9] border-2 border-[#111722]"></div>
+<div class="flex flex-col gap-1">
+<p class="text-white text-sm font-medium">Stage Changed</p>
+<p class="text-[#92a4c9] text-xs">Moved from <span class="text-white">Contacted</span> to <span class="text-purple-400">Qualified</span></p>
+<p class="text-[#556987] text-[11px] mt-0.5">Oct 24, 2:15 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Footer -->
+<div class="p-4 border-t border-border-dark bg-[#1e293b]">
+<button class="w-full py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20">
+                            Create Task
+                        </button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

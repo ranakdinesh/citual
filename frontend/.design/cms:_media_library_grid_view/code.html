@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual CMS - Media Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#578567",
+              "secondary": "#F25A29",
+              "background-light": "#f9fafa",
+              "background-dark": "#171b18",
+              "surface-light": "#ffffff",
+              "surface-dark": "#2a2f2b",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#131614] dark:text-[#f0f0f0] overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Side Navigation -->
+<aside class="w-64 flex-shrink-0 flex flex-col justify-between bg-surface-light dark:bg-surface-dark border-r border-[#ecefed] dark:border-[#333] h-full transition-colors duration-200">
+<div class="flex flex-col h-full">
+<!-- Branding -->
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-sm" data-alt="Citual abstract logo in green" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEpDuqnVH-m5B0yKPApJK1QwDM6LWY_amtXMK9WOKiUu08Bg40XAs8G6Ra9CcwrWap31lap93yDcI31-MUVUD6WMgQSe3440--zkf_OtQVNd0yMeak8vWaYGDKtqcPUyjlbgHyXR_bRpU-CqXkh_GnX3vpugOSArTqCaSKRDzSeg2KeXTGiiWAbKkewNwlL7t7LD9-Deog8Eq8dMxGXJrbFSPe5a829xnkoMZ0sASqw9T3VmkAklsMoPpAnJ_P7MfaxqmP3vl20Vtx");'></div>
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-normal dark:text-white">Citual CMS</h1>
+<p class="text-[#6a7c70] text-xs font-normal leading-normal dark:text-[#9aa]">Manage content</p>
+</div>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex-1 px-4 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6a7c70] dark:text-[#9aa] hover:bg-[#f0f2f1] dark:hover:bg-[#3a3f3b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6a7c70] dark:text-[#9aa] hover:bg-[#f0f2f1] dark:hover:bg-[#3a3f3b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">description</span>
+<span class="text-sm font-medium">Pages</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary-400" href="#">
+<span class="material-symbols-outlined text-[20px] font-bold fill-1">image</span>
+<span class="text-sm font-bold">Media</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6a7c70] dark:text-[#9aa] hover:bg-[#f0f2f1] dark:hover:bg-[#3a3f3b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">Users</span>
+</a>
+<div class="h-px bg-[#ecefed] dark:bg-[#333] my-2 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6a7c70] dark:text-[#9aa] hover:bg-[#f0f2f1] dark:hover:bg-[#3a3f3b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<!-- User Profile -->
+<div class="p-4 border-t border-[#ecefed] dark:border-[#333]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden" data-alt="User profile picture placeholder">
+<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-green-700 text-white text-xs font-bold">JD</div>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium dark:text-white">Jane Doe</span>
+<span class="text-xs text-[#6a7c70]">Admin</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header Section (Sticky) -->
+<div class="bg-background-light dark:bg-background-dark z-10 px-8 pt-8 pb-4">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- Page Heading & Action -->
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-[#131614] dark:text-white text-3xl font-black tracking-tight">Media Library</h2>
+<p class="text-[#6a7c70] dark:text-[#9aa] text-sm">Manage your images, videos, and documents.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-[#cfd4d2] dark:border-[#444] text-[#131614] dark:text-white bg-transparent hover:bg-gray-50 dark:hover:bg-[#333] transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+                                New Folder
+                            </button>
+<button class="flex items-center justify-center gap-2 h-10 px-5 rounded-lg bg-primary text-white hover:bg-[#466b53] shadow-sm hover:shadow transition-all text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+                                Upload New
+                            </button>
+</div>
+</div>
+<!-- Search & Filters Toolbar -->
+<div class="flex flex-col md:flex-row gap-4 justify-between items-center w-full">
+<!-- Search Bar -->
+<div class="relative w-full md:max-w-md">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#6a7c70] material-symbols-outlined text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg border-none bg-white dark:bg-[#2a2f2b] text-[#131614] dark:text-white placeholder:text-[#9ca3af] focus:ring-2 focus:ring-primary/50 shadow-sm text-sm" placeholder="Search media files..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto no-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary text-white text-sm font-medium shadow-sm">All</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-[#2a2f2b] border border-[#ecefed] dark:border-[#444] text-[#6a7c70] dark:text-[#9aa] hover:border-primary hover:text-primary text-sm font-medium transition-colors">Images</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-[#2a2f2b] border border-[#ecefed] dark:border-[#444] text-[#6a7c70] dark:text-[#9aa] hover:border-primary hover:text-primary text-sm font-medium transition-colors">Video</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-[#2a2f2b] border border-[#ecefed] dark:border-[#444] text-[#6a7c70] dark:text-[#9aa] hover:border-primary hover:text-primary text-sm font-medium transition-colors">Audio</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-[#2a2f2b] border border-[#ecefed] dark:border-[#444] text-[#6a7c70] dark:text-[#9aa] hover:border-primary hover:text-primary text-sm font-medium transition-colors">Docs</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto px-8 pb-8">
+<div class="max-w-7xl mx-auto flex h-full gap-6">
+<!-- Grid View -->
+<div class="flex-1">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+<!-- Card 1 (Selected) -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border-2 border-secondary cursor-pointer ring-4 ring-secondary/10">
+<div class="absolute top-3 right-3 z-10 bg-secondary text-white rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-[16px] font-bold block">check</span>
+</div>
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Office interior with modern furniture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmgHuRQqcPV9Ap5u_2-YuHFwpGQUHG_PvfgFEvIuARyhPl0EiJ5CoKuHCkf7MgAZQgPOBWxNxgzCvCe3joowNJX0fmL714Qg18pokxUf9AGseczOoF0KgVCLW86KtsW0jBjx9O_QltD2fsUC4KfIqCY5GCSuTotqFaj-JDqS8D8Ou_NGfNVdFTZ9hYgeX6ngsze68krsSRwn96BWFXMBoIA8aaUDR0QcdObYVCESXWbvjDBgUXijQtVOyKsvjpiUPVIX7Xby-YC_kJ");'></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">office-lobby-renovated.jpg</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">2.4 MB • JPG</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Team meeting in conference room" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUJDu-f0CQbRcijNKv6AMdrKChpQh1Tv8GST3V_7NaQSI8_fPNVSX9ZJtHAQvPj4vfbMpGQVuynQC9CShsW0ORTnsusSMLa0whcgNExawX_DZp73Lpr8EDvbqCnng89p16HNVPZjKbQdIZowWWQ2YyaNT4qHvV9qlyt1YPjXuJ7cn1ZAF7YcZC7i1_yqrxJHB3Kp6Ac3YIKPmslRQVQS5sE_i-V_Ci03m17wGqUsvYJqYjTkk34zSfq_tUlZSRGnrwp0lInj42sG0g");'></div>
+<div class="absolute bottom-2 right-2 bg-black/50 backdrop-blur-sm text-white text-[10px] px-1.5 py-0.5 rounded">JPG</div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">team-meeting-q3.jpg</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">1.8 MB • JPG</p>
+</div>
+</div>
+<!-- Card 3 (Video) -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
+<div class="w-full h-full bg-center bg-cover opacity-80" data-alt="Video thumbnail abstract blur" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9NsuDj2QV9j-Wy8OmDLdagZqsYqDMatBoOrDBXJJQKYrB61-UGKXUy2BFX_FdwLBowgZc_QMYuIEOzziLuBsTR-tS2aycvHCtvV9RGLoB9zhrN47iYtB5zj-w8iAcjYkzKuYjPrhsOE6L4o0fGMc0pwkn2QECbbpZWkts6UP7-x1hSI0o_hIVJ9mrMxfkB4XWK3oo84qT-csajTNaFlfuMcssPL9ZlWwA9Trt3yXadYFJaAMyHyC7O1scp6koVr_NCojsH_VCp4yq");'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/20 backdrop-blur-md rounded-full p-2 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-[24px]">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-1.5 py-0.5 rounded">02:14</div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">product-demo-v2.mp4</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">45 MB • MP4</p>
+</div>
+</div>
+<!-- Card 4 (Doc) -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-[#ecefed] dark:bg-[#333] rounded-lg overflow-hidden flex items-center justify-center group-hover:bg-[#e0e5e2] dark:group-hover:bg-[#3d423e] transition-colors">
+<span class="material-symbols-outlined text-[#6a7c70] text-[48px]">description</span>
+<div class="absolute bottom-2 right-2 bg-secondary/80 text-white text-[10px] px-1.5 py-0.5 rounded">PDF</div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">annual-report-2023.pdf</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">5.2 MB • PDF</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abstract colorful gradient pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA36WywCxeu8R4koCkvT_SvJa0yTTi6Z0XxOsyK8YjPndSNc86Fl7osNlXBW9BXzhdRGG1uhLXwE2U8F6SjsVo7OsKhGxUnEupwv6QzP1H4KgBb2--T32Aa6MzAh15KIKVFUIXMDPFce-3-4uWgx63LyXDMMvhq-kpLY2Yr1qfeKX6dooX1TB2lp3j62e7QWSqo-q-dM35Ob3eQhDGf72i2a5GDxq6INDm7xEe3vUq9Tu8zRFxQYiVOWCoaSsON7UbJ2keLOx06GbVu");'></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">hero-banner-main.png</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">3.1 MB • PNG</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist desk setup with laptop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARO-4PgMnRmo2azxJQtpUBIND2OwYXyhYZigNxd5WNa658DYJ4efWVHNLO3Vf4_jiZ8ktqyRlBFo46pUwhYB8Yq-FhMbOHINcoKasrbx59RD4SjvF0luXmiF5jxfx7EFEje9DojX3q-iolfU2MONopozToAwflpANGjtog8ctRzMu4RBmyJxbAPtPLYv0TTifYRIkVrChxUDFzy87du578YdOq4ws0-kt0N67iuZH219iV7BxAl1oQXd-Fw5rZxsY14xe06A1dFKLT");'></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">blog-post-remote-work.jpg</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">1.2 MB • JPG</p>
+</div>
+</div>
+<!-- Card 7 (Audio) -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-[#ecefed] dark:bg-[#333] rounded-lg overflow-hidden flex items-center justify-center group-hover:bg-[#e0e5e2] dark:group-hover:bg-[#3d423e] transition-colors">
+<span class="material-symbols-outlined text-[#6a7c70] text-[48px]">headphones</span>
+<div class="absolute bottom-2 right-2 bg-purple-500/80 text-white text-[10px] px-1.5 py-0.5 rounded">MP3</div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">podcast-intro.mp3</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">8.4 MB • MP3</p>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="City skyline at sunset" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCdOuvn2ohunZkAmOFADTyeBYmQzh91BdrHUhAZ3hi6qFRsSiwsnWcqxbmYbFLRRumwZkSz3KROD8Ei8IXoHGCaNtCPhgcsKhnPoCfseWhLDXukuJc1dgy9NA8YAtKiqlwrPZqv_bsqotDwPoFp540IOW3l_v9MygbPQWsI9Ep7uxNAZiviBE5j-H5MvoGJjOPx3CdDwlGoEb0hn1M71Rq7lYhgaRlzyOKBtbjBQEwVVIbEhUdMW6ka5w4u3cgklBi1HWV1Hz5I-o9u");'></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">city-skyline-cover.jpg</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">4.5 MB • JPG</p>
+</div>
+</div>
+<!-- Card 9 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of coffee cup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYoo7y4sK38mFacKJCzrg-ZZ0I7IjoiYq-eBcBoBJNrH5vN1ucmGqNZrC4UNj5jX5esuVHaObBX_iWjEh45_6fCMRc2l1KZbfTxR83VASoyQf-Jjrmx693HjwykMEl7bLh8e7j4sX8nUiUlW9TlMo0pXAH2MpfC_51iuNo-uxk2A7XYWINPQ7IDNoEEnexWho_dETLH1tYqMNdnnkxkwhVueydVUNogF1GVdxyRZyPlZwk4CiDehL3ub3NN3qLgOJRJRFJu3jfYMIF");'></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">coffee-break.jpg</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">980 KB • JPG</p>
+</div>
+</div>
+<!-- Card 10 -->
+<div class="group relative flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-[#2a2f2b] shadow-sm hover:shadow-md transition-all border border-transparent hover:border-[#ecefed] dark:hover:border-[#444] cursor-pointer">
+<div class="relative w-full aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abstract geometric shapes 3d render" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5keqSxXP1wJof1dpOU8iMFNsQtO_y3cF7M_WZAgEAuLv0n2GMSBI4nwqtpXvpvxcyH40CiRfLesh72UEptRwuAx99BOrxvxm86HH_1CjQrf-PC93DExQYkM_aA9sqslvS_vcPkSplW9RYeEwq2yak5bGfjoaf_3-38LouMwVLFJwKWwh9SRYV04SEEgo7ibr6jA6bOfCnA-uhS2W9EXmBQXFx_FT4UrcT_dQc6CYCfqpySuUfbSlyobFZ_760DPNMOWoTHm7avhIU");'></div>
+</div>
+<div class="px-1 pb-1">
+<p class="text-[#131614] dark:text-white text-xs font-semibold truncate">3d-asset-render.png</p>
+<p class="text-[#6a7c70] text-[10px] font-medium">5.6 MB • PNG</p>
+</div>
+</div>
+</div>
+<div class="py-8 text-center">
+<button class="text-primary text-sm font-medium hover:underline">Load more assets</button>
+</div>
+</div>
+<!-- Right Sidebar (Details) -->
+<aside class="w-80 flex-shrink-0 bg-white dark:bg-[#2a2f2b] rounded-2xl shadow-sm border border-[#ecefed] dark:border-[#333] hidden lg:flex flex-col overflow-hidden self-start sticky top-0 h-[calc(100vh-200px)]">
+<div class="p-4 border-b border-[#ecefed] dark:border-[#333] flex justify-between items-center">
+<h3 class="font-bold text-[#131614] dark:text-white">File Details</h3>
+<button class="text-[#6a7c70] hover:text-[#131614] dark:hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+<!-- Preview -->
+<div class="w-full aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border border-[#ecefed] dark:border-[#444]">
+<div class="w-full h-full bg-center bg-contain bg-no-repeat" data-alt="Office interior with modern furniture preview" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMWEeluT0y0hobGgOeTBYaTKtD01jwKuAeFzqc6p6etQq-F77iy8bKlta_O5ix15J6U7quPPJYrcYZehKXOkS2i8WbPzLel_ljGDs3fWOqyuctfO-zVh99CvndBpWqatw8klzekkC_E8tsDHwNU_x2ksuHDmuUP_e56PJX09lmVBi2kLndtVsuLe4q9JxnK9VveoR_fIZkto-g1Kp6-Fo3K_WJAQ1xdfqNs6YcsJNQi0S36cDhGL5g8fGLtJ-ZTCWNVr_BqVA2_bF_");'></div>
+</div>
+<!-- Meta Data -->
+<div class="flex flex-col gap-4">
+<div>
+<label class="text-xs font-semibold text-[#6a7c70] uppercase tracking-wide">Filename</label>
+<p class="text-sm font-medium text-[#131614] dark:text-white break-all">office-lobby-renovated.jpg</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-xs font-semibold text-[#6a7c70] uppercase tracking-wide">Dimensions</label>
+<p class="text-sm font-medium text-[#131614] dark:text-white">2400 x 1600 px</p>
+</div>
+<div>
+<label class="text-xs font-semibold text-[#6a7c70] uppercase tracking-wide">Size</label>
+<p class="text-sm font-medium text-[#131614] dark:text-white">2.4 MB</p>
+</div>
+<div>
+<label class="text-xs font-semibold text-[#6a7c70] uppercase tracking-wide">Type</label>
+<p class="text-sm font-medium text-[#131614] dark:text-white">image/jpeg</p>
+</div>
+<div>
+<label class="text-xs font-semibold text-[#6a7c70] uppercase tracking-wide">Uploaded</label>
+<p class="text-sm font-medium text-[#131614] dark:text-white">Oct 24, 2023</p>
+</div>
+</div>
+</div>
+<div class="h-px bg-[#ecefed] dark:bg-[#333]"></div>
+<!-- Editable Fields -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-[#131614] dark:text-white">Alt Text</label>
+<textarea class="w-full rounded-lg border border-[#ecefed] dark:border-[#444] bg-[#f9fafa] dark:bg-[#1a1e1b] text-sm p-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none resize-none h-24" placeholder="Describe the image for SEO and accessibility...">Modern office lobby with wooden accents and comfortable seating area.</textarea>
+<p class="text-xs text-[#6a7c70]">Used for SEO and screen readers.</p>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-[#131614] dark:text-white">Caption</label>
+<input class="w-full rounded-lg border border-[#ecefed] dark:border-[#444] bg-[#f9fafa] dark:bg-[#1a1e1b] text-sm p-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none" type="text" value="Our renovated lobby space"/>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-4 border-t border-[#ecefed] dark:border-[#333] bg-[#f9fafa] dark:bg-[#222724] flex justify-between gap-3">
+<button class="flex-1 py-2 px-3 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                Delete
+                            </button>
+<button class="flex-1 py-2 px-3 rounded-lg bg-primary text-white hover:bg-[#466b53] text-sm font-bold shadow-sm">
+                                Save
+                            </button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588368",
+                        "primary-dark": "#466953",
+                        "secondary": "#F25A29",
+                        "tertiary": "#162531",
+                        "background-light": "#ffffff",
+                        "background-dark": "#162531",
+                        "surface-dark": "#1e293b",
+                        "surface-border": "#2e3b52"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+        // Simple dark mode toggle logic
+        function toggleDarkMode() {
+            const html = document.querySelector('html');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                html.classList.remove('light');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #111722;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #2e3b52;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8; 
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #3e4c66;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-tertiary dark:text-white font-display antialiased overflow-hidden transition-colors duration-300">
+<div class="flex h-screen w-full">
+<aside class="flex w-64 flex-col border-r border-gray-200 dark:border-surface-border bg-primary dark:bg-[#0f1a23] flex-shrink-0 transition-all duration-300">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2">
+<div class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-white/10 p-1">
+<img alt="Citual Logo" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFTX9zcbPvwS8JlLpOZNKx2DQ3mSzb4gdrFuZdB791qHEfgO9sqbqwH2V0ggEwBjRVxY442p-OwuVa30CJ9AIMstvouFxNk1qjvcJ1z7Lvk68QuONJy6-eTfwabcGWmMUjZHw8NwcGBxJsyHaFDvwU1sqDjegc04knJnZa8tV0B2xOtWp-yltJeGpVDxauQZP_bkNkkxZJKg8O_1xM1n46xNByGfOXWo-v2Jwjkwqcc0iJQe-FNaFR7ydiT2b0GXBQhgtoOPiVGrNo"/>
+</div>
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-tight text-white">Citual</h1>
+<p class="text-white/70 text-xs font-medium">Tenant: Acme Corp</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg bg-white/20 px-3 py-2.5 text-white shadow-sm transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" style="font-size: 20px;">database</span>
+<span class="text-sm font-medium">Admin</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" style="font-size: 20px;">article</span>
+<span class="text-sm font-medium">CMS</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" style="font-size: 20px;">group</span>
+<span class="text-sm font-medium">CRM</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" style="font-size: 20px;">work</span>
+<span class="text-sm font-medium">Projects</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" style="font-size: 20px;">support_agent</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+</nav>
+</div>
+<div class="border-t border-white/10 pt-4">
+<button class="flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-white/10 transition-colors text-left">
+<div class="h-9 w-9 overflow-hidden rounded-full border border-white/20 bg-cover bg-center" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAee0F5Kl-YJPuhG63oXRbvDJL7asKBiEyCKkyjgHkwqfzT5VXWsBdcFNafJOjqZbfuq5m-astioI6ZjZAr3zqtUAw8fl1J96knDmhrryydYp7pNwltkPZeREDpIcKOp4SUglU7pErX1GJf-nBAOf2DBEAitWctV6PZOmNxyBJeIiViFP_94zK1kbBRSuE-s5PLAvRrk9jy4-FxuhSFyd9SFDSX7SuAxj_2DwymMeCq0ouWQjtp9KUHDPzFco7iatOUryTFqyKj9ONI");'></div>
+<div class="flex flex-1 flex-col overflow-hidden">
+<span class="truncate text-sm font-medium text-white">Alex Morgan</span>
+<span class="truncate text-xs text-white/60">alex@acmecorp.com</span>
+</div>
+<span class="material-symbols-outlined text-white/60" style="font-size: 20px;">expand_more</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex flex-1 flex-col overflow-y-auto bg-gray-50 dark:bg-background-dark">
+<header class="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-gray-200 dark:border-surface-border bg-white/90 dark:bg-[#162531]/90 backdrop-blur-md px-6">
+<div class="flex items-center gap-6 flex-1">
+<div class="flex items-center text-sm font-medium text-tertiary/60 dark:text-slate-400">
+<span class="hover:text-primary cursor-pointer transition-colors">Home</span>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<span class="text-tertiary dark:text-white font-semibold">Command Center</span>
+</div>
+<div class="relative hidden max-w-md w-full md:block">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-tertiary/40 dark:text-slate-400">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</span>
+<input class="w-full rounded-lg border-none bg-gray-100 dark:bg-surface-dark py-2 pl-10 pr-4 text-sm text-tertiary dark:text-white placeholder-tertiary/40 focus:ring-2 focus:ring-primary dark:placeholder-slate-400 transition-all" placeholder="Search modules, tickets, or projects..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex h-9 w-9 items-center justify-center rounded-lg text-tertiary/60 hover:bg-gray-100 hover:text-primary dark:text-slate-400 dark:hover:bg-surface-border dark:hover:text-white transition-colors" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+<span class="material-symbols-outlined dark:hidden" style="font-size: 22px;">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block" style="font-size: 22px;">light_mode</span>
+</button>
+<button class="relative flex h-9 w-9 items-center justify-center rounded-lg text-tertiary/60 hover:bg-gray-100 hover:text-primary dark:text-slate-400 dark:hover:bg-surface-border dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 22px;">notifications</span>
+<span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-secondary ring-2 ring-white dark:ring-[#162531]"></span>
+</button>
+<button class="flex h-9 w-9 items-center justify-center rounded-lg text-tertiary/60 hover:bg-gray-100 hover:text-primary dark:text-slate-400 dark:hover:bg-surface-border dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 22px;">settings</span>
+</button>
+<div class="h-6 w-px bg-gray-200 dark:bg-surface-border"></div>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+<span>Create New</span>
+</button>
+</div>
+</header>
+<div class="flex-1 p-6 md:p-8">
+<div class="mx-auto max-w-7xl space-y-8">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-bold tracking-tight text-tertiary dark:text-white">Welcome back, Alex</h2>
+<p class="text-tertiary/60 dark:text-slate-400">Here is your Citual overview for today.</p>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#1a2c3b] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-emerald-500/10 p-1.5 text-emerald-600 dark:text-emerald-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">dns</span>
+</div>
+<h3 class="font-semibold text-tertiary dark:text-white">Admin Status</h3>
+</div>
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-sm text-tertiary/60 dark:text-slate-400">System Uptime</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-tertiary dark:text-white">99.9%</span>
+<span class="text-xs font-medium text-emerald-600 dark:text-emerald-500">Operational</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-tertiary/60 dark:text-slate-400">OAuth2 Server</p>
+<div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-surface-border">
+<div class="h-full w-full rounded-full bg-emerald-500"></div>
+</div>
+<p class="mt-1 text-right text-xs text-tertiary/40 dark:text-slate-400">Latency: 24ms</p>
+</div>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#1a2c3b] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-secondary/10 p-1.5 text-secondary">
+<span class="material-symbols-outlined" style="font-size: 20px;">pie_chart</span>
+</div>
+<h3 class="font-semibold text-tertiary dark:text-white">CRM Pipeline</h3>
+</div>
+<span class="material-symbols-outlined text-tertiary/40 group-hover:text-secondary transition-colors" style="font-size: 20px;">arrow_forward</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative h-20 w-20 flex-shrink-0">
+<svg class="h-full w-full rotate-[-90deg]" viewBox="0 0 36 36">
+<path class="text-slate-100 dark:text-surface-border" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.8"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-linecap="round" stroke-width="3.8"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-sm font-bold text-tertiary dark:text-white">65%</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-2xl font-bold text-tertiary dark:text-white">1,240</span>
+<span class="text-sm text-tertiary/60 dark:text-slate-400">Total Leads</span>
+<span class="text-xs font-medium text-emerald-600 dark:text-emerald-500 flex items-center mt-1">
+<span class="material-symbols-outlined mr-0.5" style="font-size: 14px;">trending_up</span>
+                                        +12.5% vs last mo
+                                    </span>
+</div>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#1a2c3b] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-secondary/10 p-1.5 text-secondary">
+<span class="material-symbols-outlined" style="font-size: 20px;">fire_extinguisher</span>
+</div>
+<h3 class="font-semibold text-tertiary dark:text-white">Support Queue</h3>
+</div>
+<span class="rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary">High Load</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="text-3xl font-bold text-tertiary dark:text-white">14</div>
+<p class="text-sm text-tertiary/60 dark:text-slate-400">Open Tickets</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="flex items-center gap-1.5 rounded bg-secondary/10 px-2 py-1">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span>
+<span class="text-xs font-medium text-secondary">2 Critical</span>
+</div>
+<span class="text-xs text-tertiary/40 dark:text-slate-400">Avg resp: 2h 15m</span>
+</div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 xl:col-span-1 group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#1a2c3b] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-primary/10 p-1.5 text-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">post</span>
+</div>
+<h3 class="font-semibold text-tertiary dark:text-white">Recent Posts (CMS)</h3>
+</div>
+<button class="text-xs font-medium text-primary hover:text-primary-dark transition-colors">View All</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between rounded-lg bg-gray-50 dark:bg-surface-border/30 p-2 hover:bg-gray-100 dark:hover:bg-surface-border/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="Blog post thumbnail abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxbSp-Pl4r9t1xbvaGRpYeekejOl9BFOSTBb-CyaeKfivgX15FgsCp3xLUxL-ot95BcEdxtl23yS8Z_KJkl3fdHIgL6X8NvfuUbAtOi5fEElJUQ4V3PFB-3mp6p-G0QdhV_TvPpcz-KxWwjJHR16p32RgqWKS6fMYbh-3TtlzQYjf_mXORgokxpxuNLPpxRjMvpDN6wGULsmj1-525TpSvEwRuFBjZPN6z4nFR0MGjn88li1RAB6RR1UOBW2bboHCj1gM_o3w7aL68");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-tertiary dark:text-white line-clamp-1">Q3 Product Roadmap</span>
+<span class="text-xs text-tertiary/50 dark:text-slate-400">Edited 2m ago</span>
+</div>
+</div>
+<span class="rounded bg-yellow-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">Draft</span>
+</div>
+<div class="flex items-center justify-between rounded-lg bg-gray-50 dark:bg-surface-border/30 p-2 hover:bg-gray-100 dark:hover:bg-surface-border/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="Technology blog thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0p9qy2IkNpn0yGicbGG4znbZKQpiIw49JSZ5qXhvnA5hdVUaMHL-sEhKRS6X_UceXY_nN8PTssI_oT9x3WgxTy7JcyZ4pCw4x8jSqjfxr1yUXKf3oI9PgBr8z7keJgyCny9QJ5UhNfD8HXNU-jvg1x_BsZFchVTWP1iKdrDbDiAL6TTAhnAZm8jFwOc9lUqrZd91hvRqb-q33-KRUGhMpSKgKaS9o0XUHe1CX7WNHQCCFJD7tEWv5ywcfD11rzqwuLYTO7VvSqsiF");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-tertiary dark:text-white line-clamp-1">New Feature Launch</span>
+<span class="text-xs text-tertiary/50 dark:text-slate-400">Published 1h ago</span>
+</div>
+</div>
+<span class="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Live</span>
+</div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 xl:col-span-4 group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#1a2c3b] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-blue-500/10 p-1.5 text-blue-600 dark:text-blue-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">rocket_launch</span>
+</div>
+<h3 class="font-semibold text-tertiary dark:text-white">Active Projects</h3>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-1 text-xs font-medium text-tertiary/60 hover:text-primary dark:text-slate-400">
+<span>Filter</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">filter_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+<div class="flex flex-col gap-3 rounded-lg border border-gray-100 dark:border-surface-border bg-gray-50 dark:bg-surface-border/10 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white dark:bg-surface-border shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-size: 24px;">smartphone</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-tertiary dark:text-white">Mobile App Redesign</h4>
+<p class="text-xs text-tertiary/60 dark:text-slate-400">Due in 2 days</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#1a2c3b] object-cover" data-alt="Team member 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDABawUkaUL3chELABZiZehzLeb9cUZan1Wp6gcG6YLTFeCHVjpyicg514tywF02D-623mptD9qTxuyExyiXF3A83SrTYDxV6denOTuwemR8RkVp7IlkkSCTGF8R9snPFhcGg83AoB8vEj0Jf0KuSSKuguoDGaawHz39jbYj_ySwWxhJmYmJMxXgBYqVGEKnEFu7D1Ys_7y3Z7kY2XSPcpSzqzfqyO6sCSThto2HMeEmAo0KHtgz_Ie2oo1ID3Mn7iIAmxjsIM00Ur"/>
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#1a2c3b] object-cover" data-alt="Team member 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC_ATyS0crPfhVT6IpHDshSwBHRLV--Kn4lENMiiZpW4F0_jcFvNGQ8estLpGA0hgyPi9HGWn_vyfvyLrFM6RIyRv2mCSjQMQ7FMOnslryrFFUwui-7Q_Ct6rR6-sjgEszhdvgKxNLuF-yhX4rkOTU9v___6xDIFNRQjOyU-8L9RJCg4COEdG6GU88RNYgLFldmKJ7bBkhJyNCROKPjFz2HXVSvi_VOIibYDmJ1-cXWE1En3pxgF3Qh7tVo1oBqoOmj9Esh-CxzcVo"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border ring-2 ring-white dark:ring-[#1a2c3b] text-xs font-medium text-tertiary dark:text-slate-300">+3</div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-tertiary/60 dark:text-slate-400">Progress</span>
+<span class="font-medium text-tertiary dark:text-white">75%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-surface-border">
+<div class="h-full rounded-full bg-primary" style="width: 75%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg border border-gray-100 dark:border-surface-border bg-gray-50 dark:bg-surface-border/10 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white dark:bg-surface-border shadow-sm">
+<span class="material-symbols-outlined text-amber-500" style="font-size: 24px;">database_upload</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-tertiary dark:text-white">Server Migration</h4>
+<p class="text-xs text-tertiary/60 dark:text-slate-400">Due next week</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#1a2c3b] object-cover" data-alt="Team member 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0ay_mc4EJHoA4SxuYVbATKg1Dr9OtLLS8PhjUAo58ALSP2_d6ExGgz1xkjBDLQceGExY5jfdRzrkydGRIB2YNJ8hohcYTIE59iQoeIxSziSTGBRrJTxltb--Xr0Cg5FI9lWj2lZA0ibNistq5JeSPrjDb3qfToI1YnNNyUJw1uU6XvtwxP126a58-xRag6Hi2tDWwkVfUcoQkkfCEgy4pBBhPTWv__IoJxbPRCnNtSKt2-qTyNYbwm9QRtU8RLFs7sijpHhNe-FRh"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border ring-2 ring-white dark:ring-[#1a2c3b] text-xs font-medium text-tertiary dark:text-slate-300">+1</div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-tertiary/60 dark:text-slate-400">Progress</span>
+<span class="font-medium text-tertiary dark:text-white">30%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-surface-border">
+<div class="h-full rounded-full bg-amber-500" style="width: 30%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

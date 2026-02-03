@@ -5,7 +5,9 @@ import (
 	"fmt"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/ranakdinesh/citual/internal/modules/identity"
 	"github.com/ranakdinesh/citual/internal/platform/config"
+	"github.com/ranakdinesh/citual/internal/platform/db"
 	"github.com/ranakdinesh/citual/internal/platform/httpserver"
 	"github.com/ranakdinesh/citual/internal/platform/logger"
 )
@@ -28,13 +30,27 @@ func New(ctx context.Context) (*App, error) {
 	log := logger.NewWithOptions(logger.Options{
 		Environment: cfg.AppEnv,
 	})
-	// setting up the database
-	//dbPool := db.NewPool(ctx, cfg.DatabaseURL)
-	routerSetup := func(r chi.Router) {
 
+	// 3. Database
+	dbPool := db.NewPool(ctx, cfg.DatabaseURL)
+
+	// 4. Modules
+	identityModule := identity.New(dbPool, log)
+
+	routerSetup := func(r chi.Router) {
+		r.Mount("/", identityModule.Router)
+		// r.Mount("/api/v1/identity", identityModule.Router) // Alternative
 	}
 	srv := httpserver.NewServer(httpserver.Options{
-		Addr: cfg.HTTPAddr,
+		Addr:       cfg.HTTPAddr,
+		EnableCORS: true,
+		AllowedMethods: []string{
+			"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH",
+		},
+		AllowedHeaders: []string{
+			"Accept", "Authorization", "Content-Type", "X-CSRF-Token",
+		},
+		AllowedOrigins: []string{"*"}, // Allow all for dev
 	}, log, routerSetup)
 
 	return &App{

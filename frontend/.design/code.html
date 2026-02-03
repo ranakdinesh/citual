@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Module Under Construction - SaaS Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-slate-900 dark:text-white antialiased overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-slate-200 dark:border-b-[#232f48] px-6 py-4 md:px-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">dashboard_customize</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">SaaS Dashboard</h2>
+</div>
+<button class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-slate-200 dark:bg-[#232f48] hover:bg-slate-300 dark:hover:bg-[#324467] text-slate-900 dark:text-white text-sm font-bold transition-colors">
+<span class="truncate">Dashboard Home</span>
+</button>
+<button class="md:hidden flex text-slate-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center p-4 py-12 md:py-20">
+<div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Illustration Column -->
+<div class="flex flex-col items-center justify-center order-1 lg:order-2">
+<div class="relative w-full aspect-square max-w-[500px] bg-slate-200 dark:bg-[#1b263b] rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 border border-slate-300 dark:border-[#232f48]">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Abstract 3D illustration of blue digital blocks being assembled into a structure" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBojmyPZ3zKsQStXBidSILN7ozSdj5DvZxoKMDtbAmUJMNXitqE26QXDb-pADkSMUJHu6twBQwzajj3INF6jhAIBYTyqnmkdeme0skNNIBkfr6W2iq-EfYlBNZ6R8TAvWst28HhrOl0KPPs5evcXzb09-cOa2szBPAavnxHOIAlGkz0fgCqIdC3vHqN9v0KIKBvSjr8bfJx8AJTkATZBVh0dyAP7diHlMJMt3M1IeJSjck169JbefTe8hyrne1xZYWgDFg3goHRsPNP");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent opacity-80 lg:opacity-40"></div>
+</div>
+</div>
+<!-- Content Column -->
+<div class="flex flex-col gap-8 order-2 lg:order-1 px-4 md:px-0">
+<!-- Badge & Title -->
+<div class="flex flex-col gap-4">
+<div class="inline-flex items-center gap-2 self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Under Construction
+                    </div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                        Building the <span class="text-primary">Analytics</span> Module
+                    </h1>
+<p class="text-lg text-slate-600 dark:text-[#92a4c9] leading-relaxed max-w-xl">
+                        We are currently fine-tuning this module to bring you a seamless data visualization experience. Stay tuned for the launch!
+                    </p>
+</div>
+<!-- Progress Section -->
+<div class="flex flex-col gap-3 max-w-lg bg-white dark:bg-[#1b263b] p-5 rounded-xl border border-slate-200 dark:border-[#232f48] shadow-sm">
+<div class="flex gap-6 justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">construction</span>
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Development Status</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-bold font-mono">75%</p>
+</div>
+<div class="w-full h-2.5 bg-slate-100 dark:bg-[#0f1521] rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full relative" style="width: 75%;">
+<div class="absolute inset-0 bg-white/20 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
+</div>
+</div>
+<p class="text-slate-500 dark:text-[#92a4c9] text-xs font-medium">Estimated completion: 2 weeks</p>
+</div>
+<!-- Notify Form -->
+<div class="flex flex-col gap-4 max-w-lg pt-4">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg">Get notified when we launch</h3>
+<form class="flex w-full flex-col sm:flex-row gap-3">
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<input class="w-full rounded-lg border-slate-300 dark:border-none bg-white dark:bg-[#232f48] pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary dark:focus:ring-primary h-12" placeholder="name@company.com" type="email"/>
+</div>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 text-white text-sm font-bold tracking-wide transition-all shadow-lg shadow-primary/25" type="button">
+                            Notify Me
+                        </button>
+</form>
+<p class="text-xs text-slate-500 dark:text-slate-500">
+                        We promise not to spam your inbox. You can unsubscribe at any time.
+                    </p>
+</div>
+<!-- Back Link -->
+<div class="pt-2">
+<a class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-[#92a4c9] hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Go Back to Dashboard
+                    </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-slate-200 dark:border-[#232f48] bg-background-light dark:bg-background-dark py-8">
+<div class="container mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm font-normal">© 2023 SaaS Module Dashboard. All rights reserved.</p>
+<div class="flex flex-wrap items-center justify-center gap-6">
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary dark:hover:text-white text-sm font-medium transition-colors" href="#">Support</a>
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary dark:hover:text-white text-sm font-medium transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary dark:hover:text-white text-sm font-medium transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -145,6 +145,10 @@ func GetTenantID(ctx context.Context) string {
 	return ""
 }
 
+func SetTenantID(ctx context.Context, tenantID string) context.Context {
+	return context.WithValue(ctx, TenantIDKey, tenantID)
+}
+
 func GetRoles(ctx context.Context) []string {
 
 	if v, ok := ctx.Value(RolesKey).([]string); ok {

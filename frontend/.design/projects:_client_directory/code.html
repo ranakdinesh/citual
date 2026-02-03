@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projects: Client Directory - Citual</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588468",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#171c19",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden">
+<div class="relative flex h-screen w-full flex-row overflow-hidden">
+<!-- Side Navigation -->
+<aside class="flex h-full w-72 flex-col justify-between border-r border-[#313a34] bg-[#171c19] p-4 shrink-0 overflow-y-auto hidden lg:flex">
+<div class="flex flex-col gap-8">
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Citual abstract logo with green geometric shapes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASW8oC8ukRic6BWLUVP8IsRdnkSmO5cjenlFYVi-FHpPKAsn-TxTjgc0mwiAUXvXYhQ5A_iWvnHxgD09rvRXWzVHVHoA_1TdNVjOKCCqSn-Ak_q4Fwtdlr54Gkb1UTTMTaaowyrwz3tyutLXG9SqKsWU-vCR9W2wrtk8hOCzBHenmrxX62sXQqRSwwP0YEGgyzc0FzGV4fsR6-_1JPokCXnGjaGyx7bJv40iccI_aUdCqnpN-0STE6VekWphvwTamMRO_vQ6UypqIv");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-medium leading-normal">Citual</h1>
+<p class="text-[#a7b4ac] text-sm font-normal leading-normal">SaaS Platform</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#313a34] text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">view_kanban</span>
+<p class="text-sm font-medium leading-normal">Projects</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">check_box</span>
+<p class="text-sm font-medium leading-normal">Tasks</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<p class="text-sm font-medium leading-normal">Team</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4 px-2">
+<div class="p-4 rounded-xl bg-[#232925] border border-[#313a34]">
+<p class="text-white text-sm font-semibold mb-1">Pro Plan</p>
+<p class="text-[#a7b4ac] text-xs mb-3">Your team has 12 seats left.</p>
+<button class="w-full text-xs font-bold text-black bg-primary rounded-lg py-2 hover:bg-opacity-90 transition">Manage Plan</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col h-full relative overflow-y-auto">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-20 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#313a34] bg-[#171c19] px-6 py-3 w-full">
+<div class="flex items-center gap-4 text-white lg:hidden">
+<button class="text-[#a7b4ac] hover:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="hidden lg:flex items-center gap-4 text-white">
+<div class="size-5 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Projects</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 sm:gap-8 items-center">
+<div class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#a7b4ac] flex border-none bg-[#313a34] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#313a34] focus:border-none h-full placeholder:text-[#a7b4ac] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search clients..." value=""/>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#313a34] text-white hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#313a34] text-white hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[#313a34]" data-alt="User profile picture of a professional woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4k1859xvszK6EeOuHkEDJXEqIq5yg917TNDESwXQnghd-8HNVLSM4ikOmi1sLd8iAGKl1OM0gjt6hA0GLmQbcZui2G65CP5u-HfZsb-hRIcRRUwA9GDpl6pnP1ifkbnwhScWgeTzALxxfG3uvchSs9c2JqnoCu-tMsXoPFRKe6fRsf1g5qXZGIMI_UHNZ9VHH3vTYzMOjsJ9S6hKWisbqEaa5xbPr69BwDqT3Nn5P2zJQYXDmbuzTZsB2gZ6uB4kcRixQPIWQOXx5");'></div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex flex-col w-full max-w-[1200px] mx-auto px-4 md:px-8 py-6 md:py-8 gap-6">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between gap-4 items-end">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Client Directory</h1>
+<p class="text-[#a7b4ac] text-base font-normal leading-normal">Manage your client list and view active projects.</p>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-[#4a7258] transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-lg shadow-green-900/20">
+<span class="material-symbols-outlined text-[20px] mr-2">add</span>
+<span class="truncate">Add Client</span>
+</button>
+</div>
+<!-- Tabs -->
+<div class="w-full overflow-x-auto pb-1">
+<div class="flex border-b border-[#46534b] min-w-max gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#a7b4ac] hover:text-white pb-3 pt-4 px-2 transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Overview</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#a7b4ac] hover:text-white pb-3 pt-4 px-2 transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Tasks</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#a7b4ac] hover:text-white pb-3 pt-4 px-2 transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Files</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-white pb-3 pt-4 px-2" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Client Directory</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#a7b4ac] hover:text-white pb-3 pt-4 px-2 transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Reports</p>
+</a>
+</div>
+</div>
+<!-- Filters & Search within Table -->
+<div class="flex flex-wrap items-center justify-between gap-4 py-2">
+<div class="flex items-center gap-3">
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#313a34] text-white text-sm font-medium hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                Filter
+                           </button>
+</div>
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#313a34] text-white text-sm font-medium hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                                Sort
+                           </button>
+</div>
+</div>
+<span class="text-[#a7b4ac] text-sm font-medium">Showing 7 of 42 clients</span>
+</div>
+<!-- Table Container -->
+<div class="@container w-full">
+<div class="flex flex-col overflow-hidden rounded-xl border border-[#46534b] bg-[#171c19] shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#232925] border-b border-[#46534b]">
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold">Client Name</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold hidden sm:table-cell">Contact Person</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold hidden md:table-cell">Email</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold hidden lg:table-cell">Phone</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold text-center">Active Projects</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold">Status</th>
+<th class="p-4 text-xs uppercase tracking-wider text-[#a7b4ac] font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#46534b]">
+<!-- Row 1 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs" data-alt="Acme logo placeholder">AC</div>
+<span class="text-white font-medium text-sm">Acme Corp</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">John Doe</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">john@acme.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0101</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                3 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold text-xs" data-alt="Globex logo placeholder">GL</div>
+<span class="text-white font-medium text-sm">Globex Inc</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Jane Smith</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">jane@globex.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0102</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                1 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-white font-bold text-xs" data-alt="Soylent logo placeholder">SC</div>
+<span class="text-white font-medium text-sm">Soylent Corp</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Bob Brown</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">bob@soylent.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0103</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                5 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold text-xs" data-alt="Initech logo placeholder">IN</div>
+<span class="text-white font-medium text-sm">Initech</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Peter Gibbons</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">peter@initech.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0104</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                2 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20">
+<span class="size-1.5 rounded-full bg-red-400"></span>
+                                                Inactive
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white font-bold text-xs" data-alt="Umbrella Corp logo placeholder">UC</div>
+<span class="text-white font-medium text-sm">Umbrella Corp</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Alice Wesker</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">alice@umbrella.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0105</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white/50">
+                                                0 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+<span class="size-1.5 rounded-full bg-yellow-400"></span>
+                                                On Hold
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-white font-bold text-xs" data-alt="Stark Ind logo placeholder">SI</div>
+<span class="text-white font-medium text-sm">Stark Ind</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Tony Stark</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">tony@stark.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0106</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                7 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-[#313a34]/30 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-gradient-to-br from-indigo-500 to-violet-700 flex items-center justify-center text-white font-bold text-xs" data-alt="Wayne Enterprises logo placeholder">WE</div>
+<span class="text-white font-medium text-sm">Wayne Ent</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden sm:table-cell">Bruce Wayne</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden md:table-cell">bruce@wayne.com</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden lg:table-cell">+1 555-0107</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#313a34] text-white">
+                                                12 Active
+                                            </span>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-1 rounded-md hover:bg-[#46534b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-[#46534b] p-4">
+<button class="text-[#a7b4ac] text-sm font-medium hover:text-white disabled:opacity-50 flex items-center gap-2" disabled="">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                                Previous
+                            </button>
+<div class="flex items-center gap-2">
+<button class="size-8 rounded-lg bg-primary text-white text-sm font-bold flex items-center justify-center">1</button>
+<button class="size-8 rounded-lg hover:bg-[#313a34] text-[#a7b4ac] hover:text-white text-sm font-medium flex items-center justify-center transition-colors">2</button>
+<button class="size-8 rounded-lg hover:bg-[#313a34] text-[#a7b4ac] hover:text-white text-sm font-medium flex items-center justify-center transition-colors">3</button>
+<span class="text-[#a7b4ac]">...</span>
+<button class="size-8 rounded-lg hover:bg-[#313a34] text-[#a7b4ac] hover:text-white text-sm font-medium flex items-center justify-center transition-colors">6</button>
+</div>
+<button class="text-white text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                                Next
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

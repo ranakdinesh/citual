@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Oauth2 Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better look in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<div class="hidden md:flex flex-col w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111722] shrink-0">
+<div class="flex items-center gap-3 p-6">
+<div class="bg-primary aspect-square rounded-lg size-10 flex items-center justify-center text-white font-bold text-xl">
+                    S
+                </div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-normal">SaaS Admin</h1>
+<p class="text-slate-500 dark:text-[#92a4c9] text-xs font-normal leading-normal">Production Env</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-3 py-4 grow overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">pie_chart</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-white dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary dark:text-white">lock_person</span>
+<span class="text-sm font-medium">OAuth2 Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">credit_card</span>
+<span class="text-sm font-medium">Billing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<div class="mt-8 px-3 text-xs font-semibold text-slate-400 dark:text-slate-600 uppercase tracking-wider">Developer Tools</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">webhook</span>
+<span class="text-sm font-medium">Webhooks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 dark:text-[#92a4c9] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">terminal</span>
+<span class="text-sm font-medium">Logs</span>
+</a>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBn2lcaVKLK-xiLCguBGyvf7UXXnpE9viuAOwwEuT0h5d1XfqTzLQv-qibGpgN8_WqelTRvCS8rq2xZDuGas3RNfS5DVk_0thf9jgg7yTQ2umDQe1XwR5oFd27rgFUzEc235lLp5DJf4FsnsPI3zGXy9tNQ4CuuXkDDAk8q5mg4NsNh7yv0AVzOOw2anxZbxGMGwZ-n0L1TXLL56K-IGbo_AIRtX-FZXdCX-i_eA9sI_sO-jIa3V8oNqsEI2Q4QrN00qO1cWYGHTkqv");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Jane Admin</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">jane@saas.com</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="flex flex-col flex-1 overflow-hidden relative">
+<!-- Top Navigation / Header -->
+<header class="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111722]">
+<div class="flex flex-col gap-1">
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-[#92a4c9]">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[12px] opacity-50">arrow_forward_ios</span>
+<a class="hover:text-primary transition-colors" href="#">Admin</a>
+<span class="material-symbols-outlined text-[12px] opacity-50">arrow_forward_ios</span>
+<span class="text-slate-900 dark:text-white font-medium">OAuth2 Management</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-slate-100 dark:bg-[#1e293b] rounded-lg p-1 border border-slate-200 dark:border-slate-700">
+<button class="px-3 py-1.5 rounded text-xs font-semibold bg-white dark:bg-[#334155] text-slate-900 dark:text-white shadow-sm transition-all">Production</button>
+<button class="px-3 py-1.5 rounded text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">Staging</button>
+</div>
+<button class="flex items-center justify-center gap-2 px-4 py-2 bg-primary hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Create New Client
+                     </button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto p-6 scroll-smooth">
+<div class="max-w-7xl mx-auto flex flex-col gap-8 pb-12">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white">OAuth2 Server Management</h1>
+<p class="text-slate-500 dark:text-[#92a4c9] max-w-2xl">Manage registered clients, configure API scopes, and monitor the health of your authentication server endpoints.</p>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium">Server Uptime</p>
+<span class="material-symbols-outlined text-emerald-500">check_circle</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">99.99%</h3>
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">+0.01%</span>
+</div>
+</div>
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium">Active Tokens</p>
+<span class="material-symbols-outlined text-primary">key</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">14,205</h3>
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">+5.4%</span>
+</div>
+</div>
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium">Avg Latency</p>
+<span class="material-symbols-outlined text-amber-500">speed</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">12ms</h3>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Stable</span>
+</div>
+</div>
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium">Error Rate</p>
+<span class="material-symbols-outlined text-red-500">error</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">0.02%</h3>
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">-0.01%</span>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Request Volume Chart -->
+<div class="p-6 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] shadow-sm flex flex-col h-[320px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-slate-900 dark:text-white font-semibold">API Request Volume</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Last 24 Hours</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900 dark:text-white">2.4M</p>
+<p class="text-xs text-emerald-500 font-medium">+12% vs yesterday</p>
+</div>
+</div>
+<div class="flex-1 w-full relative">
+<!-- Mock SVG Chart -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 500 150">
+<defs>
+<lineargradient id="gradient1" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#135bec" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#135bec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,120 C50,120 50,40 100,40 C150,40 150,90 200,90 C250,90 250,20 300,20 C350,20 350,70 400,70 C450,70 450,110 500,110 V150 H0 Z" fill="url(#gradient1)"></path>
+<path d="M0,120 C50,120 50,40 100,40 C150,40 150,90 200,90 C250,90 250,20 300,20 C350,20 350,70 400,70 C450,70 450,110 500,110" fill="none" stroke="#135bec" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between text-xs text-slate-400 dark:text-slate-600 mt-2 absolute bottom-0 w-full">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+<!-- Failure Chart -->
+<div class="p-6 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] shadow-sm flex flex-col h-[320px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-slate-900 dark:text-white font-semibold">Auth Failures</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Invalid tokens &amp; bad requests</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900 dark:text-white">142</p>
+<p class="text-xs text-emerald-500 font-medium">-2% vs yesterday</p>
+</div>
+</div>
+<div class="flex-1 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 500 150">
+<defs>
+<lineargradient id="gradient2" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#fa6238" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#fa6238" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,140 L50,130 L100,135 L150,110 L200,125 L250,130 L300,90 L350,110 L400,130 L450,135 L500,130 V150 H0 Z" fill="url(#gradient2)"></path>
+<path d="M0,140 L50,130 L100,135 L150,110 L200,125 L250,130 L300,90 L350,110 L400,130 L450,135 L500,130" fill="none" stroke="#fa6238" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="flex justify-between text-xs text-slate-400 dark:text-slate-600 mt-2 absolute bottom-0 w-full">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Management Tabs -->
+<div class="flex flex-col gap-6">
+<div class="border-b border-slate-200 dark:border-slate-700">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a aria-current="page" class="border-primary text-primary dark:text-white border-b-2 py-4 px-1 text-sm font-medium" href="#">Clients</a>
+<a class="border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-300 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" href="#">API Keys</a>
+<a class="border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-300 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" href="#">Scopes</a>
+<a class="border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-300 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" href="#">Settings</a>
+</nav>
+</div>
+<!-- Table Section -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white">Registered Clients</h3>
+<div class="flex gap-2">
+<div class="relative">
+<input class="pl-9 pr-4 py-2 bg-white dark:bg-[#151c2a] border border-slate-200 dark:border-[#324467] rounded-lg text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary w-64" placeholder="Search client ID..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-slate-400 text-[18px]">search</span>
+</div>
+<button class="p-2 bg-white dark:bg-[#151c2a] border border-slate-200 dark:border-[#324467] rounded-lg text-slate-500 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#151c2a] border border-slate-200 dark:border-[#324467] rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-[#1e293b] text-slate-500 dark:text-slate-300 font-medium">
+<tr>
+<th class="px-6 py-4">Client Name / ID</th>
+<th class="px-6 py-4 hidden sm:table-cell">Grant Type</th>
+<th class="px-6 py-4 hidden md:table-cell">Created</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1e293b]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-slate-900 dark:text-white">SaaS Web App</span>
+<div class="flex items-center gap-1.5 group cursor-pointer w-fit">
+<span class="font-mono text-xs text-slate-500 dark:text-[#92a4c9]">ax8729...912f</span>
+<span class="material-symbols-outlined text-[12px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300 hidden sm:table-cell">
+<span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-700/30">Auth Code</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400 hidden md:table-cell">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-slate-700 dark:text-slate-200">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Regenerate Secret">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1e293b]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-slate-900 dark:text-white">Mobile Consumer App</span>
+<div class="flex items-center gap-1.5 group cursor-pointer w-fit">
+<span class="font-mono text-xs text-slate-500 dark:text-[#92a4c9]">bv9211...00qa</span>
+<span class="material-symbols-outlined text-[12px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300 hidden sm:table-cell">
+<span class="inline-flex items-center rounded-md bg-purple-50 dark:bg-purple-900/30 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-300 ring-1 ring-inset ring-purple-700/10 dark:ring-purple-700/30">PKCE</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400 hidden md:table-cell">Nov 12, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-slate-700 dark:text-slate-200">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Regenerate Secret">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1e293b]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-slate-900 dark:text-white">Legacy Service</span>
+<div class="flex items-center gap-1.5 group cursor-pointer w-fit">
+<span class="font-mono text-xs text-slate-500 dark:text-[#92a4c9]">cz1188...55rt</span>
+<span class="material-symbols-outlined text-[12px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300 hidden sm:table-cell">
+<span class="inline-flex items-center rounded-md bg-slate-50 dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-400 ring-1 ring-inset ring-slate-500/10 dark:ring-slate-400/20">Client Creds</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400 hidden md:table-cell">Jan 05, 2022</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-red-500"></div>
+<span class="text-slate-700 dark:text-slate-200">Revoked</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Restore">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1e293b]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-slate-900 dark:text-white">Marketing Analytics Tool</span>
+<div class="flex items-center gap-1.5 group cursor-pointer w-fit">
+<span class="font-mono text-xs text-slate-500 dark:text-[#92a4c9]">mk2231...99zz</span>
+<span class="material-symbols-outlined text-[12px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300 hidden sm:table-cell">
+<span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-700/30">Auth Code</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400 hidden md:table-cell">Feb 10, 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-amber-500"></div>
+<span class="text-slate-700 dark:text-slate-200">Expiring</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Regenerate Secret">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+<button class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">Showing 4 of 12 clients</p>
+<div class="flex gap-1">
+<button class="px-3 py-1 text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 text-sm text-primary font-medium bg-primary/10 rounded transition-colors">1</button>
+<button class="px-3 py-1 text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">2</button>
+<button class="px-3 py-1 text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">3</button>
+<button class="px-3 py-1 text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- API Scopes Preview Section (Sub-section) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-1 flex flex-col gap-4">
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] shadow-sm">
+<h3 class="font-semibold text-slate-900 dark:text-white mb-4">Security Overview</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-green-500 mt-0.5">verified_user</span>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">MFA Enforced</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Multi-factor auth is enabled for all admin accounts.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-amber-500 mt-0.5">warning</span>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Key Rotation Due</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">2 API keys are older than 90 days. Consider rotating.</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                    View Security Report
+                                </button>
+</div>
+</div>
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="p-5 rounded-xl border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#151c2a] shadow-sm h-full">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-semibold text-slate-900 dark:text-white">Recent Audit Logs</h3>
+<a class="text-xs text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-0">
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-blue-500"></div>
+<p class="text-sm text-slate-700 dark:text-slate-300">New client <span class="font-mono text-xs">ax87...</span> created by Jane Admin</p>
+</div>
+<span class="text-xs text-slate-400">2 min ago</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-red-500"></div>
+<p class="text-sm text-slate-700 dark:text-slate-300">Client <span class="font-mono text-xs">cz11...</span> secret revoked</p>
+</div>
+<span class="text-xs text-slate-400">1 hour ago</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<p class="text-sm text-slate-700 dark:text-slate-300">Scope <span class="font-mono text-xs">billing:write</span> added to <span class="font-mono text-xs">mk22...</span></p>
+</div>
+<span class="text-xs text-slate-400">3 hours ago</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-slate-400"></div>
+<p class="text-sm text-slate-700 dark:text-slate-300">System maintenance completed</p>
+</div>
+<span class="text-xs text-slate-400">Yesterday</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

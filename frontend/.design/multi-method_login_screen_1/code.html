@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Multi-Method Login</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "card-dark": "#1A2230",
+                        "input-dark": "#232e42",
+                        "border-dark": "#324467",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Utilities if needed */
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+<!-- Main Container -->
+<div class="relative min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden">
+<!-- Ambient Background Gradients -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] mix-blend-screen opacity-40 animate-blob"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 rounded-full blur-[120px] mix-blend-screen opacity-40 animate-blob animation-delay-2000"></div>
+</div>
+<!-- Login Card -->
+<div class="w-full max-w-[440px] flex flex-col gap-6 relative z-10">
+<!-- Card Content -->
+<div class="flex flex-col rounded-2xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark shadow-2xl overflow-hidden">
+<!-- Header Section -->
+<div class="px-8 pt-8 pb-4 text-center">
+<h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Welcome Back</h1>
+<p class="text-slate-500 dark:text-[#92a4c9] text-sm">Log in to manage your dashboard</p>
+</div>
+<!-- Tabs Navigation -->
+<div class="border-b border-slate-200 dark:border-border-dark">
+<div class="flex px-4 justify-between">
+<!-- Username Tab -->
+<a class="group flex flex-col items-center justify-center border-b-[3px] border-b-transparent hover:border-b-slate-300 dark:hover:border-b-slate-600 text-slate-400 dark:text-[#92a4c9] gap-2 pb-3 pt-4 flex-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-slate-600 dark:group-hover:text-slate-400">person</span>
+<span class="text-xs font-semibold uppercase tracking-wider">Username</span>
+</a>
+<!-- Email Tab (Active) -->
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary dark:text-white gap-2 pb-3 pt-4 flex-1" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">mail</span>
+<span class="text-xs font-semibold uppercase tracking-wider">Email</span>
+</a>
+<!-- Mobile Tab -->
+<a class="group flex flex-col items-center justify-center border-b-[3px] border-b-transparent hover:border-b-slate-300 dark:hover:border-b-slate-600 text-slate-400 dark:text-[#92a4c9] gap-2 pb-3 pt-4 flex-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-slate-600 dark:group-hover:text-slate-400">smartphone</span>
+<span class="text-xs font-semibold uppercase tracking-wider">Mobile</span>
+</a>
+</div>
+</div>
+<!-- Form Area -->
+<div class="flex flex-col p-6 gap-5">
+<!-- Input: Email -->
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-white text-sm font-medium">Email Address</span>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none group-focus-within:text-primary transition-colors">alternate_email</span>
+<input class="w-full rounded-xl bg-slate-50 dark:bg-input-dark border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-[#64748b] h-12 pl-11 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="name@company.com" type="email" value=""/>
+</div>
+</label>
+<!-- Toggle: Password vs OTP -->
+<div class="flex w-full items-center justify-center rounded-lg bg-slate-100 dark:bg-input-dark p-1">
+<label class="cursor-pointer relative flex-1 flex items-center justify-center py-1.5 rounded-md transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#324467] has-[:checked]:shadow-sm has-[:checked]:text-primary dark:has-[:checked]:text-white text-slate-500 dark:text-[#92a4c9]">
+<span class="text-sm font-medium z-10">Password</span>
+<input checked="" class="sr-only" name="auth-method" type="radio" value="password"/>
+</label>
+<label class="cursor-pointer relative flex-1 flex items-center justify-center py-1.5 rounded-md transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#324467] has-[:checked]:shadow-sm has-[:checked]:text-primary dark:has-[:checked]:text-white text-slate-500 dark:text-[#92a4c9]">
+<span class="text-sm font-medium z-10">One-Time Password</span>
+<input class="sr-only" name="auth-method" type="radio" value="otp"/>
+</label>
+</div>
+<!-- Input: Password -->
+<label class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="text-slate-700 dark:text-white text-sm font-medium">Password</span>
+<a class="text-xs font-medium text-primary hover:text-primary/80 transition-colors" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full rounded-xl bg-slate-50 dark:bg-input-dark border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-[#64748b] h-12 pl-11 pr-11 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Enter your password" type="password"/>
+<button class="absolute right-0 top-0 h-full px-4 flex items-center text-slate-400 dark:text-[#92a4c9] hover:text-slate-600 dark:hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</label>
+<!-- Submit Button -->
+<button class="mt-2 w-full h-12 bg-primary hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2 group">
+<span>Log In</span>
+<span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-slate-200 dark:border-border-dark"></div>
+<span class="flex-shrink mx-4 text-slate-400 text-xs font-medium uppercase">Or continue with</span>
+<div class="flex-grow border-t border-slate-200 dark:border-border-dark"></div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-3">
+<button class="flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-border-dark bg-white dark:bg-input-dark hover:bg-slate-50 dark:hover:bg-[#2b3952] transition-colors">
+<img alt="Google" class="h-5 w-5" data-alt="Google Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJLRmNVPgqSdV51BtejZkqYgBSbsM70NcPiy97mA-jWENp-Rfa1rsxgBnesiAk5k4iuWkoYphSlVMEjGtYxUKR28jnKkhmWuNcHPxe5zSUksbzofmJIAgOkIo23zqmlRPVL48jWoS10sk1j33rbXXyW2ZsPPvzVUbXtp-nZuQBl-ONhuDgU7LwbJY-MYjRBD3jGN_wjMpUWfb4-ysrgAvdUX6rGswKyJZdQjaO3eEOsqcBiKB9t_ZZzONhek9mMDwGXE-BWs9bEvjY"/>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Google</span>
+</button>
+<button class="flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-border-dark bg-white dark:bg-input-dark hover:bg-slate-50 dark:hover:bg-[#2b3952] transition-colors">
+<img alt="Microsoft" class="h-5 w-5" data-alt="Microsoft Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxueFM5PO5cmaotc_dInf_FpCJaeXgnmq5ap3Q5Z1qefKOtJcEOHJus2NlIG03bg1KE2JwHaPzGPEy3GAN7lT9kwkMUhzkYr3DHr-dnWvnwa8-hfxxfGM-PBRyDjZPO4_zZyo00Ig8UZ4QwpusAP70lUm1MrHNhiTgif0DuHtG3aVyGnvND5RcS97IEDsYIONSD_VAuHPBzCrR_Qt2rveGLGxQk2ChkZQseHdH_EuZg-d-eaqthsINLCuekSBhEAoBjNheWJEfGq7i"/>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Microsoft</span>
+</button>
+</div>
+</div>
+<!-- Footer Area -->
+<div class="bg-slate-50 dark:bg-[#151b28] py-4 px-6 text-center border-t border-slate-200 dark:border-border-dark">
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                        Don't have an account? 
+                        <a class="font-semibold text-primary hover:text-primary/80 transition-colors" href="#">Sign up</a>
+</p>
+</div>
+</div>
+<!-- Extra help links outside card -->
+<div class="flex justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</div>
+</body></html>

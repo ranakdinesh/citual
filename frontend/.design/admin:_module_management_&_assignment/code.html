@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Admin - Module Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588468",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#131614",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2320",
+                        "text-main": "#131614",
+                        "text-main-dark": "#f0f2f1",
+                        "text-secondary": "#6a7c70",
+                        "border-light": "#ecefed",
+                        "border-dark": "#2a302c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #588468;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #588468;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-text-main-dark transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-6 py-3 lg:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Citual Admin</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal text-text-secondary hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium leading-normal text-text-secondary hover:text-primary transition-colors" href="#">Tenants</a>
+<a class="text-sm font-medium leading-normal text-primary" href="#">Modules</a>
+<a class="text-sm font-medium leading-normal text-text-secondary hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center justify-end gap-6">
+<div class="hidden sm:flex w-full max-w-[240px] items-center rounded-lg bg-border-light dark:bg-surface-dark px-3 py-2">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">search</span>
+<input class="w-full bg-transparent border-none text-sm px-2 text-text-main dark:text-text-main-dark placeholder:text-text-secondary focus:ring-0" placeholder="Search"/>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border border-border-light dark:border-border-dark" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4fB2T3aCBmkmg2aI5DgrAL2Ro4BHCsfUrCArD1FGY-8joH9x2BFPMHBAX2WUb4ImtczKxuFmS8pTU7_z97ggCS2Gh9ImtD-6Kd_782BvMesnr1QtPLth3GzSBZNOt3mYIv0bt_BqeoEbazOoX1aVOmmXkxWPF8AbqmAe-rhit-DPtaNDB0kAwzw-KrxlxT1DyXOO2j2V3cq-fmIJXWoxh2PRUoRSW86F_MUyOBvxYJIQbe2ltDGQYZcYjODwD64OZpExNjlK2IU0h");'></div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex flex-1 flex-col items-center px-4 py-8 md:px-10 lg:px-40">
+<div class="flex w-full max-w-[960px] flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col gap-3 py-4">
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Module Management &amp; Assignment</h1>
+<p class="text-text-secondary text-base">Manage system modules and assign them to tenants.</p>
+</div>
+<!-- Tabs -->
+<div class="border-b border-border-light dark:border-border-dark">
+<div class="flex gap-8">
+<a class="group flex flex-col items-center justify-center border-b-[3px] border-b-transparent pb-3 pt-4 hover:border-b-primary/50" href="#">
+<p class="text-text-secondary group-hover:text-primary text-sm font-bold tracking-[0.015em] transition-colors">All Modules</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary pb-3 pt-4" href="#">
+<p class="text-primary text-sm font-bold tracking-[0.015em]">Tenant Assignment</p>
+</a>
+</div>
+</div>
+<!-- Content Area: Tenant Assignment -->
+<div class="flex flex-col gap-8 pt-6">
+<!-- Selector Section -->
+<div class="flex flex-col gap-4">
+<h3 class="text-2xl font-bold leading-tight">Assign Modules to Tenant</h3>
+<div class="w-full max-w-md">
+<label class="flex flex-col gap-2">
+<span class="text-text-main dark:text-text-main-dark text-base font-medium">Select Tenant</span>
+<div class="relative">
+<select class="w-full appearance-none rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-3 pr-10 text-base text-text-main dark:text-text-main-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+<option disabled="" selected="" value="">Choose a tenant company...</option>
+<option value="techflow">TechFlow Systems</option>
+<option value="acme">Acme Corp</option>
+<option value="globex">Globex Corporation</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+<p class="mt-2 text-sm text-text-secondary">Select a tenant to view and modify their enabled modules.</p>
+</div>
+</div>
+<!-- Modules List -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2">
+<h4 class="text-lg font-bold">Available Modules</h4>
+<button class="text-primary text-sm font-bold hover:underline">Reset to Default</button>
+</div>
+<!-- Module Item: CRM -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 shadow-sm transition-all hover:border-primary/30">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[28px]">contacts</span>
+</div>
+<div>
+<h5 class="text-lg font-bold text-text-main dark:text-text-main-dark">CRM Suite</h5>
+<p class="text-sm text-text-secondary leading-normal max-w-lg">Customer relationship management tools including contact database, pipeline tracking, and interaction history.</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-border-light dark:bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20"></div>
+</label>
+</div>
+<!-- Module Item: CMS -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 shadow-sm transition-all hover:border-primary/30">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 text-orange-600">
+<span class="material-symbols-outlined text-[28px]">article</span>
+</div>
+<div>
+<h5 class="text-lg font-bold text-text-main dark:text-text-main-dark">CMS Pro</h5>
+<p class="text-sm text-text-secondary leading-normal max-w-lg">Advanced content management system for publishing blogs, pages, and managing media assets.</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-border-light dark:bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20"></div>
+</label>
+</div>
+<!-- Module Item: Analytics (Disabled) -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 shadow-sm transition-all hover:border-primary/30">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-purple-500/10 text-purple-600">
+<span class="material-symbols-outlined text-[28px]">monitoring</span>
+</div>
+<div>
+<h5 class="text-lg font-bold text-text-main dark:text-text-main-dark">Analytics Dashboard</h5>
+<p class="text-sm text-text-secondary leading-normal max-w-lg">Real-time data visualization, user behavior tracking, and custom reporting tools.</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-border-light dark:bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20"></div>
+</label>
+</div>
+<!-- Module Item: Project Management -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 shadow-sm transition-all hover:border-primary/30">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600">
+<span class="material-symbols-outlined text-[28px]">view_kanban</span>
+</div>
+<div>
+<h5 class="text-lg font-bold text-text-main dark:text-text-main-dark">Project Management</h5>
+<p class="text-sm text-text-secondary leading-normal max-w-lg">Task assignment, kanban boards, and sprint planning for internal teams.</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-border-light dark:bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20"></div>
+</label>
+</div>
+<!-- Module Item: Payment Gateway (Disabled) -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 shadow-sm transition-all hover:border-primary/30 opacity-75">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-[28px]">payments</span>
+</div>
+<div>
+<h5 class="text-lg font-bold text-text-main dark:text-text-main-dark">Stripe Integration</h5>
+<p class="text-sm text-text-secondary leading-normal max-w-lg">Process payments directly through the platform. <span class="italic text-xs">(Requires higher tier plan)</span></p>
+</div>
+</div>
+<label class="relative inline-flex cursor-not-allowed items-center opacity-50">
+<input class="peer sr-only" disabled="" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-border-light dark:bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex justify-end gap-4 pt-8 pb-12">
+<button class="rounded-lg bg-transparent px-6 py-3 text-sm font-bold text-text-main dark:text-text-main-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                        Cancel
+                    </button>
+<button class="rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors">
+                        Save Changes
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

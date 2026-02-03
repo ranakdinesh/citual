@@ -13,26 +13,30 @@ type txContextKey struct{}
 
 // RunInTx executes a function within a database transaction with RLS enforcement.
 func RunInTx(ctx context.Context, pool *pgxpool.Pool, fn func(ctx context.Context) error) error {
-	// 1. Begin Transaction
 	tx, err := pool.Begin(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to begin transaction: %w", err)
 	}
 	defer tx.Rollback(ctx)
 
-	// 2. RLS Enforcement (The Magic Glue)
-	// We check if this request is from a Super User (System) or a specific Tenant
+	// --- THE MAGIC GLUE (RLS) ---
+	// Extract Tenant ID from context (assuming you have a domain.GetTenantID(ctx))
+	if tenantID := ctx.Value("tenant_id"); tenantID != nil {
+		// Enforce isolation at the Postgres level
+		// All subsequent queries in this TX will fail if they try to touch other tenants' rows
+		_, err := tx.Exec(ctx, "SELECT set_config('citual.current_tenant', $1, true)", tenantID)
+		if err != nil {
+			return fmt.Errorf("failed to set tenant context: %w", err)
+		}
+	}
+	// ----------------------------
 
-	// 3. Inject Transaction into Context
-	// We use a specific key so GetTx can find it later
 	txCtx := context.WithValue(ctx, txContextKey{}, tx)
 
-	// 4. Run Business Logic
 	if err := fn(txCtx); err != nil {
 		return err
 	}
 
-	// 5. Commit
 	return tx.Commit(ctx)
 }
 

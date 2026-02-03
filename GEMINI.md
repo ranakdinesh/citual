@@ -71,26 +71,36 @@ adapters/http/: HTTP Handlers, DTOs, and Routing specific to this module.
 ## 5. Coding Standards & Guidelines
 ### Backend (Go)
 
-**Database:**
-* Always use sqlc for queries.
-* Place migrations in internal/modules/<module>/sql/migrations.
-* Place queries in internal/modules/<module>/sql/queries.
+# Project: Citual (Identity Module)
 
-**Temporal:**
-* Use Temporal for ANY task longer than a standard HTTP request (e.g., >2s) or when interacting with Python AI agents.
-* Define Workflows in internal/modules/<module>/workflows.
+## 1. Architecture Guardrails (STRICT)
+* **Pattern:** Hexagonal Architecture (Ports & Adapters).
+* **Database:**
+  * **Driver:** `pgx/v5` (via `pgxpool`).
+  * **ORM:** `sqlc` (Type-safe, generated code). **NO GORM.**
+  * **Transaction Management:** MUST use `internal/platform/db.RunInTx`.
+  * **Store Pattern:** ONE single `postgres.Store` struct that wraps the `pgxpool` and `sqlc.Queries`. Do NOT create separate DB connections for Fosite.
+* **Tenancy:**
+  * **Hard Constraint:** Every domain query MUST filter by `tenant_id`.
+  * **RLS:** The `db.RunInTx` helper handles RLS context injection (`set_config`).
+* **Identity Provider:** Ory Fosite v0.49+.
 
-**Error Handling:**
-* Use custom error types in core/domain. Map them to HTTP status codes in adapters/http.
+## 2. Package Structure & Imports
+* **Root:** `github.com/ranakdinesh/citual`
+* **Platform (Shared):** `internal/platform/...`
+  * DB Helper: `internal/platform/db` (Contains `RunInTx`, `GetTx`).
+* **Identity Module:** `internal/modules/identity/...`
+  * **Domain:** `core/domain` (Pure Go structs).
+  * **Ports:** `core/ports` (Interfaces).
+  * **Postgres Adapter:** `adapters/postgres` (Holds `Store` struct and `sqlc` generated code).
+  * **Fosite Adapter:** `adapters/fosite_store` (Implements `fosite.Storage` using `postgres.Store`).
 
-### Frontend (TypeScript)
-
-* **Strict Mode:** Enabled.
-* **API Interaction:** Use generated types or strict interfaces matching the Go backend DTOs.
-* **Design:** Implement pixel-perfect designs from the `./design` folder.
-
-## 6. Development Workflow
-1. **Design:** Check `./design` for templates.
-2. **Backend:** Implement module core -> adapters -> wire in module.go.
-3. **Frontend:** Build UI -> Connect to API.
-4. **Verification:** Run `docker-compose.itest.yml` for integration tests.
+## 3. The `postgres.Store` Contract
+The `adapters/postgres` package exports a `Store` struct.
+```go
+type Store struct {
+    Pool    *pgxpool.Pool
+    Queries *sqlc.Queries
+}
+// Helper to get queries with active transaction if present
+func (s *Store) getQueries(ctx context.Context) *sqlc.Queries { ... }

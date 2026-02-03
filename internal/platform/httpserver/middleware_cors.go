@@ -18,7 +18,7 @@ func CORS(opts Options) func(http.Handler) http.Handler {
 			origin := r.Header.Get("Origin")
 
 			// Dynamic Origin Handling
-			if allowAll {
+			if allowAll || allowedOrigins["*"] {
 				w.Header().Set("Access-Control-Allow-Origin", "*")
 			} else if allowedOrigins[origin] {
 				w.Header().Set("Access-Control-Allow-Origin", origin)

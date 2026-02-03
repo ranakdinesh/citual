@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Admin - System Health</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588468",
+                        "secondary-alert": "#F25A29",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#171b18",
+                        "surface-dark": "#1e2320",
+                        "border-dark": "#313a34",
+                        "text-muted": "#a7b4ac",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark mode feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #313a34;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #46534b;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="w-72 flex flex-col border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark flex-shrink-0 transition-colors duration-200">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-sm" data-alt="Citual Admin Logo Abstract Green" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKJSCqC6ugkigOYdeNvVerP4eNaDe_fc0KwdQaJkMAWAvh8HEndLhMIoRj3WNXMHnBcEV_UAHh_2V7GbdZYkKnfOJWT-qtT_t3WZms9nJhyt3YMBGlsRIyfdWZGivORa8QIo7c0Jy8-tzKI_mboOqtZ7iP8MacJ0RavMV84jEmVk6UkTKyTchuQskZu7mFSib5skSxeoMXW4j10hdm6fvCG-roJHDSP3l-JWyS2uX5_uAtNjtzXu4B-o1MTKhlNAuRZgQqnvYDtKTs");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-normal">Citual Admin</h1>
+<p class="text-slate-500 dark:text-text-muted text-xs font-normal leading-normal">SaaS Management</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-text-muted hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-text-muted group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-md shadow-primary/20" href="#">
+<span class="material-symbols-outlined text-white fill-1">show_chart</span>
+<p class="text-sm font-medium leading-normal">System Health</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-text-muted hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-text-muted group-hover:text-primary transition-colors">group</span>
+<p class="text-sm font-medium leading-normal">User Management</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-text-muted hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-text-muted group-hover:text-primary transition-colors">description</span>
+<p class="text-sm font-medium leading-normal">Audit Logs</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-text-muted hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-text-muted group-hover:text-primary transition-colors">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-border-dark">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-100 dark:bg-surface-dark">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8" data-alt="Admin User Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANEQougO9tIOoq3217TNW6O73Ih4Lw6mD_sdpNECshdTPG-MN89Mehju5cKfaQLRN4dV4LqykZC9e1NX0E42lLCEcMIKusqPPxekuVy1h-hIFZsuJ20ScdgKgdfZJGwC_s8YAMB4eFYBwcKg3LdvWlJcOc9z3btBQJCevLj8qScPs8kKydmrR2iTwmRkea56RyKwICvTBdZdzRT62glu-4Bd-JZqRak8kNiCmOr0j7bsNBmF2LPscTYc9o1jUxuv9wLV93T52BoMxV");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-slate-900 dark:text-white text-sm font-medium truncate">Alex Morgan</p>
+<p class="text-slate-500 dark:text-text-muted text-xs truncate">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Top Navbar -->
+<header class="flex items-center justify-between px-8 py-4 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-border-dark flex-shrink-0 z-10">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white">
+<button class="lg:hidden p-1 rounded-md hover:bg-slate-100 dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">dns</span>
+<h2 class="text-lg font-bold leading-tight tracking-tight">System Monitoring</h2>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-40 h-10 w-full max-w-sm relative group">
+<div class="flex w-full flex-1 items-center rounded-lg h-full bg-slate-100 dark:bg-surface-dark border border-transparent focus-within:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-slate-400 dark:text-text-muted pl-3 text-[20px]">search</span>
+<input class="w-full bg-transparent border-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-text-muted focus:ring-0 text-sm h-full" placeholder="Search metrics or logs..." value=""/>
+</div>
+</label>
+<button class="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-text-muted">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-secondary-alert rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<button class="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-text-muted">help</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Server Health &amp; Monitoring</h1>
+<p class="text-slate-500 dark:text-text-muted text-base">Real-time metrics for CPU, Memory, and OAuth2 Sessions</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark text-slate-700 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-[#2a302c] transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-[#466a53] transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Generate Report</span>
+</button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-text-muted text-sm font-medium">Current CPU Load</p>
+<span class="material-symbols-outlined text-slate-400 dark:text-text-muted text-[20px]">memory</span>
+</div>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-none">42%</p>
+<div class="flex items-center gap-1 text-primary bg-primary/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span>-5%</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-[#313a34] rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 42%"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-text-muted text-sm font-medium">Memory Usage</p>
+<span class="material-symbols-outlined text-slate-400 dark:text-text-muted text-[20px]">storage</span>
+</div>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-none">6.8 GB</p>
+<div class="flex items-center gap-1 text-secondary-alert bg-secondary-alert/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+1.2%</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-[#313a34] rounded-full h-1.5 mt-2">
+<div class="bg-secondary-alert h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-text-muted text-sm font-medium">Active OAuth2 Sessions</p>
+<span class="material-symbols-outlined text-slate-400 dark:text-text-muted text-[20px]">lock_clock</span>
+</div>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-none">1,245</p>
+<div class="flex items-center gap-1 text-primary bg-primary/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+8%</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-[#313a34] rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<!-- Chart 1: CPU History -->
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-900 dark:text-white text-lg font-bold">CPU Usage History</p>
+<p class="text-slate-500 dark:text-text-muted text-sm">Last 24 hours</p>
+</div>
+<div class="text-right">
+<p class="text-slate-900 dark:text-white text-2xl font-bold">Avg 45%</p>
+<p class="text-primary text-sm font-medium">-2% from yesterday</p>
+</div>
+</div>
+<div class="h-48 w-full mt-4">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="gradientCpu" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#588468" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#588468" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area fill -->
+<path d="M0,80 C30,80 30,40 60,40 C90,40 90,90 120,90 C150,90 150,50 180,50 C210,50 210,70 240,70 C270,70 270,30 300,30 C330,30 330,80 360,80 C390,80 400,60 400,60 V150 H0 Z" fill="url(#gradientCpu)"></path>
+<!-- Line -->
+<path d="M0,80 C30,80 30,40 60,40 C90,40 90,90 120,90 C150,90 150,50 180,50 C210,50 210,70 240,70 C270,70 270,30 300,30 C330,30 330,80 360,80 C390,80 400,60 400,60" fill="none" stroke="#588468" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<div class="flex justify-between text-xs text-slate-400 dark:text-text-muted mt-2 border-t border-slate-100 dark:border-border-dark pt-3">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>24:00</span>
+</div>
+</div>
+<!-- Chart 2: Memory Trends -->
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-900 dark:text-white text-lg font-bold">Memory Trends</p>
+<p class="text-slate-500 dark:text-text-muted text-sm">Allocation over time</p>
+</div>
+<div class="text-right">
+<p class="text-slate-900 dark:text-white text-2xl font-bold">Peak 7.2GB</p>
+<p class="text-secondary-alert text-sm font-medium">+5% usage spike</p>
+</div>
+</div>
+<div class="h-48 w-full mt-4">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="gradientMem" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#F25A29" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#F25A29" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area fill -->
+<path d="M0,100 C40,100 40,60 80,60 C120,60 120,110 160,110 C200,110 200,40 240,40 C280,40 280,90 320,90 C360,90 380,20 400,20 V150 H0 Z" fill="url(#gradientMem)"></path>
+<!-- Line -->
+<path d="M0,100 C40,100 40,60 80,60 C120,60 120,110 160,110 C200,110 200,40 240,40 C280,40 280,90 320,90 C360,90 380,20 400,20" fill="none" stroke="#F25A29" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<div class="flex justify-between text-xs text-slate-400 dark:text-text-muted mt-2 border-t border-slate-100 dark:border-border-dark pt-3">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Bar Chart & Logs -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pb-8">
+<!-- Active Sessions Bar Chart -->
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div>
+<p class="text-slate-900 dark:text-white text-lg font-bold">Sessions by Region</p>
+<div class="flex gap-2 items-center mt-1">
+<p class="text-slate-900 dark:text-white text-2xl font-bold">3.5k</p>
+<span class="text-primary text-xs font-bold bg-primary/10 px-1.5 py-0.5 rounded">+12%</span>
+</div>
+</div>
+<div class="flex-1 min-h-[160px] grid grid-cols-4 gap-4 items-end pb-2">
+<!-- Bar 1 -->
+<div class="flex flex-col items-center gap-2 h-full justify-end group">
+<div class="w-full bg-primary/20 dark:bg-primary/10 rounded-t-sm relative h-[50%] group-hover:bg-primary/30 transition-colors">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm" style="height: 100%"></div>
+</div>
+<span class="text-xs font-bold text-slate-500 dark:text-text-muted">NA</span>
+</div>
+<!-- Bar 2 -->
+<div class="flex flex-col items-center gap-2 h-full justify-end group">
+<div class="w-full bg-primary/20 dark:bg-primary/10 rounded-t-sm relative h-[75%] group-hover:bg-primary/30 transition-colors">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm" style="height: 100%"></div>
+</div>
+<span class="text-xs font-bold text-slate-500 dark:text-text-muted">EU</span>
+</div>
+<!-- Bar 3 -->
+<div class="flex flex-col items-center gap-2 h-full justify-end group">
+<div class="w-full bg-primary/20 dark:bg-primary/10 rounded-t-sm relative h-[35%] group-hover:bg-primary/30 transition-colors">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm" style="height: 100%"></div>
+</div>
+<span class="text-xs font-bold text-slate-500 dark:text-text-muted">AS</span>
+</div>
+<!-- Bar 4 -->
+<div class="flex flex-col items-center gap-2 h-full justify-end group">
+<div class="w-full bg-primary/20 dark:bg-primary/10 rounded-t-sm relative h-[60%] group-hover:bg-primary/30 transition-colors">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm" style="height: 100%"></div>
+</div>
+<span class="text-xs font-bold text-slate-500 dark:text-text-muted">SA</span>
+</div>
+</div>
+</div>
+<!-- Recent Logs Table (Span 2) -->
+<div class="lg:col-span-2 flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm overflow-hidden">
+<div class="flex justify-between items-center">
+<p class="text-slate-900 dark:text-white text-lg font-bold">Recent System Alerts</p>
+<button class="text-primary text-sm font-medium hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-border-dark">
+<th class="py-3 px-2 text-xs font-semibold text-slate-500 dark:text-text-muted uppercase tracking-wider">Severity</th>
+<th class="py-3 px-2 text-xs font-semibold text-slate-500 dark:text-text-muted uppercase tracking-wider">Message</th>
+<th class="py-3 px-2 text-xs font-semibold text-slate-500 dark:text-text-muted uppercase tracking-wider">Service</th>
+<th class="py-3 px-2 text-xs font-semibold text-slate-500 dark:text-text-muted uppercase tracking-wider text-right">Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<tr class="group hover:bg-slate-50 dark:hover:bg-[#252b27] transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-alert/10 text-secondary-alert">
+<span class="size-1.5 rounded-full bg-secondary-alert"></span>
+                                                    Critical
+                                                </span>
+</td>
+<td class="py-3 px-2 text-sm text-slate-900 dark:text-white font-medium">Memory threshold exceeded</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted">Redis-Cluster-01</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted text-right font-mono">10:42 AM</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-[#252b27] transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-600 dark:text-yellow-500">
+<span class="size-1.5 rounded-full bg-yellow-500"></span>
+                                                    Warning
+                                                </span>
+</td>
+<td class="py-3 px-2 text-sm text-slate-900 dark:text-white font-medium">Latency spike detected</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted">API Gateway</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted text-right font-mono">10:38 AM</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-[#252b27] transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                    Info
+                                                </span>
+</td>
+<td class="py-3 px-2 text-sm text-slate-900 dark:text-white font-medium">Backup completed successfully</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted">Database Service</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted text-right font-mono">10:00 AM</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-[#252b27] transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                    Info
+                                                </span>
+</td>
+<td class="py-3 px-2 text-sm text-slate-900 dark:text-white font-medium">New instance auto-scaled</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted">Worker Node 4</td>
+<td class="py-3 px-2 text-sm text-slate-500 dark:text-text-muted text-right font-mono">09:45 AM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

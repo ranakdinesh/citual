@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SaaS Modular Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1e293b",
+                        "surface-border": "#2e3b52"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111722; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e3b52; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e4c66; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="flex w-64 flex-col border-r border-gray-200 dark:border-surface-border bg-white dark:bg-[#111722] flex-shrink-0 transition-all duration-300">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Branding -->
+<div class="flex items-center gap-3 px-2">
+<div class="flex items-center justify-center rounded-lg bg-primary/20 p-2">
+<div class="text-primary material-symbols-outlined" style="font-size: 24px;">grid_view</div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-tight">ModularSaaS</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Tenant: Acme Corp</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg bg-primary px-3 py-2.5 text-white shadow-md shadow-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-border hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 20px;">database</span>
+<span class="text-sm font-medium">Admin</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-border hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 20px;">article</span>
+<span class="text-sm font-medium">CMS</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-border hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 20px;">group</span>
+<span class="text-sm font-medium">CRM</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-border hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 20px;">work</span>
+<span class="text-sm font-medium">Projects</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-border hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 20px;">support_agent</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+</nav>
+</div>
+<!-- User Profile -->
+<div class="border-t border-gray-200 dark:border-surface-border pt-4">
+<button class="flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-slate-100 dark:hover:bg-surface-border transition-colors text-left">
+<div class="h-9 w-9 overflow-hidden rounded-full border border-gray-200 dark:border-surface-border bg-cover bg-center" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAee0F5Kl-YJPuhG63oXRbvDJL7asKBiEyCKkyjgHkwqfzT5VXWsBdcFNafJOjqZbfuq5m-astioI6ZjZAr3zqtUAw8fl1J96knDmhrryydYp7pNwltkPZeREDpIcKOp4SUglU7pErX1GJf-nBAOf2DBEAitWctV6PZOmNxyBJeIiViFP_94zK1kbBRSuE-s5PLAvRrk9jy4-FxuhSFyd9SFDSX7SuAxj_2DwymMeCq0ouWQjtp9KUHDPzFco7iatOUryTFqyKj9ONI");'></div>
+<div class="flex flex-1 flex-col overflow-hidden">
+<span class="truncate text-sm font-medium text-slate-900 dark:text-white">Alex Morgan</span>
+<span class="truncate text-xs text-slate-500 dark:text-slate-400">alex@acmecorp.com</span>
+</div>
+<span class="material-symbols-outlined text-slate-400" style="font-size: 20px;">expand_more</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col overflow-y-auto bg-gray-50 dark:bg-background-dark">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-gray-200 dark:border-surface-border bg-white/80 dark:bg-[#111722]/80 backdrop-blur-md px-6">
+<!-- Breadcrumbs & Search -->
+<div class="flex items-center gap-6 flex-1">
+<div class="flex items-center text-sm font-medium text-slate-500 dark:text-slate-400">
+<span class="hover:text-primary cursor-pointer transition-colors">Home</span>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<span class="text-slate-900 dark:text-white">Command Center</span>
+</div>
+<div class="relative hidden max-w-md w-full md:block">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</span>
+<input class="w-full rounded-lg border-none bg-slate-100 dark:bg-surface-dark py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:ring-2 focus:ring-primary dark:placeholder-slate-400 transition-all" placeholder="Search modules, tickets, or projects..." type="text"/>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="relative flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-primary dark:text-slate-400 dark:hover:bg-surface-border dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 22px;">notifications</span>
+<span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-[#111722]"></span>
+</button>
+<button class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-primary dark:text-slate-400 dark:hover:bg-surface-border dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 22px;">settings</span>
+</button>
+<div class="h-6 w-px bg-gray-200 dark:bg-surface-border"></div>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+<span>Create New</span>
+</button>
+</div>
+</header>
+<!-- Content Container -->
+<div class="flex-1 p-6 md:p-8">
+<div class="mx-auto max-w-7xl space-y-8">
+<!-- Page Heading -->
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome back, Alex</h2>
+<p class="text-slate-500 dark:text-slate-400">Here is your Acme Corp overview for today.</p>
+</div>
+<!-- Widgets Grid -->
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<!-- Admin / System Status -->
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#151b28] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-emerald-500/10 p-1.5 text-emerald-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">dns</span>
+</div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Admin Status</h3>
+</div>
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400">System Uptime</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">99.9%</span>
+<span class="text-xs font-medium text-emerald-500">Operational</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400">OAuth2 Server</p>
+<div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-surface-border">
+<div class="h-full w-full rounded-full bg-emerald-500"></div>
+</div>
+<p class="mt-1 text-right text-xs text-slate-400">Latency: 24ms</p>
+</div>
+</div>
+</div>
+<!-- CRM / Pipeline -->
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#151b28] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-primary/10 p-1.5 text-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">pie_chart</span>
+</div>
+<h3 class="font-semibold text-slate-900 dark:text-white">CRM Pipeline</h3>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors" style="font-size: 20px;">arrow_forward</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative h-20 w-20 flex-shrink-0">
+<!-- Simple CSS Donut Chart -->
+<svg class="h-full w-full rotate-[-90deg]" viewbox="0 0 36 36">
+<path class="text-slate-100 dark:text-surface-border" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.8"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-linecap="round" stroke-width="3.8"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-sm font-bold text-slate-900 dark:text-white">65%</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">1,240</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">Total Leads</span>
+<span class="text-xs font-medium text-emerald-500 flex items-center mt-1">
+<span class="material-symbols-outlined mr-0.5" style="font-size: 14px;">trending_up</span>
+                                        +12.5% vs last mo
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Support / Tickets -->
+<div class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#151b28] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-rose-500/10 p-1.5 text-rose-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">fire_extinguisher</span>
+</div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Support Queue</h3>
+</div>
+<span class="rounded-full bg-rose-500/10 px-2 py-0.5 text-xs font-medium text-rose-500">High Load</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="text-3xl font-bold text-slate-900 dark:text-white">14</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Open Tickets</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="flex items-center gap-1.5 rounded bg-rose-500/10 px-2 py-1">
+<span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
+<span class="text-xs font-medium text-rose-500">2 Critical</span>
+</div>
+<span class="text-xs text-slate-400">Avg resp: 2h 15m</span>
+</div>
+</div>
+</div>
+<!-- CMS / Recent Posts (Spans 2 columns on larger screens) -->
+<div class="col-span-1 md:col-span-2 xl:col-span-1 group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#151b28] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-purple-500/10 p-1.5 text-purple-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">post</span>
+</div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Recent Posts (CMS)</h3>
+</div>
+<button class="text-xs font-medium text-primary hover:text-primary/80">View All</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between rounded-lg bg-slate-50 dark:bg-surface-border/30 p-2 hover:bg-slate-100 dark:hover:bg-surface-border/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="Blog post thumbnail abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxbSp-Pl4r9t1xbvaGRpYeekejOl9BFOSTBb-CyaeKfivgX15FgsCp3xLUxL-ot95BcEdxtl23yS8Z_KJkl3fdHIgL6X8NvfuUbAtOi5fEElJUQ4V3PFB-3mp6p-G0QdhV_TvPpcz-KxWwjJHR16p32RgqWKS6fMYbh-3TtlzQYjf_mXORgokxpxuNLPpxRjMvpDN6wGULsmj1-525TpSvEwRuFBjZPN6z4nFR0MGjn88li1RAB6RR1UOBW2bboHCj1gM_o3w7aL68");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white line-clamp-1">Q3 Product Roadmap</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Edited 2m ago</span>
+</div>
+</div>
+<span class="rounded bg-yellow-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">Draft</span>
+</div>
+<div class="flex items-center justify-between rounded-lg bg-slate-50 dark:bg-surface-border/30 p-2 hover:bg-slate-100 dark:hover:bg-surface-border/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="Technology blog thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0p9qy2IkNpn0yGicbGG4znbZKQpiIw49JSZ5qXhvnA5hdVUaMHL-sEhKRS6X_UceXY_nN8PTssI_oT9x3WgxTy7JcyZ4pCw4x8jSqjfxr1yUXKf3oI9PgBr8z7keJgyCny9QJ5UhNfD8HXNU-jvg1x_BsZFchVTWP1iKdrDbDiAL6TTAhnAZm8jFwOc9lUqrZd91hvRqb-q33-KRUGhMpSKgKaS9o0XUHe1CX7WNHQCCFJD7tEWv5ywcfD11rzqwuLYTO7VvSqsiF");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white line-clamp-1">New Feature Launch</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Published 1h ago</span>
+</div>
+</div>
+<span class="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Live</span>
+</div>
+</div>
+</div>
+<!-- Projects / Active Sprints (Large Widget) -->
+<div class="col-span-1 md:col-span-2 xl:col-span-4 group relative overflow-hidden rounded-xl border border-gray-200 dark:border-surface-border bg-white dark:bg-[#151b28] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+<div class="mb-5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="rounded-md bg-blue-500/10 p-1.5 text-blue-500">
+<span class="material-symbols-outlined" style="font-size: 20px;">rocket_launch</span>
+</div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Active Projects</h3>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-primary dark:text-slate-400">
+<span>Filter</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">filter_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+<!-- Project 1 -->
+<div class="flex flex-col gap-3 rounded-lg border border-gray-100 dark:border-surface-border bg-slate-50 dark:bg-surface-border/10 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white dark:bg-surface-border shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-size: 24px;">smartphone</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Mobile App Redesign</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Due in 2 days</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#151b28] object-cover" data-alt="Team member 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDABawUkaUL3chELABZiZehzLeb9cUZan1Wp6gcG6YLTFeCHVjpyicg514tywF02D-623mptD9qTxuyExyiXF3A83SrTYDxV6denOTuwemR8RkVp7IlkkSCTGF8R9snPFhcGg83AoB8vEj0Jf0KuSSKuguoDGaawHz39jbYj_ySwWxhJmYmJMxXgBYqVGEKnEFu7D1Ys_7y3Z7kY2XSPcpSzqzfqyO6sCSThto2HMeEmAo0KHtgz_Ie2oo1ID3Mn7iIAmxjsIM00Ur"/>
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#151b28] object-cover" data-alt="Team member 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC_ATyS0crPfhVT6IpHDshSwBHRLV--Kn4lENMiiZpW4F0_jcFvNGQ8estLpGA0hgyPi9HGWn_vyfvyLrFM6RIyRv2mCSjQMQ7FMOnslryrFFUwui-7Q_Ct6rR6-sjgEszhdvgKxNLuF-yhX4rkOTU9v___6xDIFNRQjOyU-8L9RJCg4COEdG6GU88RNYgLFldmKJ7bBkhJyNCROKPjFz2HXVSvi_VOIibYDmJ1-cXWE1En3pxgF3Qh7tVo1oBqoOmj9Esh-CxzcVo"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-surface-border ring-2 ring-white dark:ring-[#151b28] text-xs font-medium text-slate-600 dark:text-slate-300">+3</div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500 dark:text-slate-400">Progress</span>
+<span class="font-medium text-slate-900 dark:text-white">75%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-surface-border">
+<div class="h-full rounded-full bg-primary" style="width: 75%"></div>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="flex flex-col gap-3 rounded-lg border border-gray-100 dark:border-surface-border bg-slate-50 dark:bg-surface-border/10 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white dark:bg-surface-border shadow-sm">
+<span class="material-symbols-outlined text-amber-500" style="font-size: 24px;">database_upload</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Server Migration</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Due next week</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-[#151b28] object-cover" data-alt="Team member 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0ay_mc4EJHoA4SxuYVbATKg1Dr9OtLLS8PhjUAo58ALSP2_d6ExGgz1xkjBDLQceGExY5jfdRzrkydGRIB2YNJ8hohcYTIE59iQoeIxSziSTGBRrJTxltb--Xr0Cg5FI9lWj2lZA0ibNistq5JeSPrjDb3qfToI1YnNNyUJw1uU6XvtwxP126a58-xRag6Hi2tDWwkVfUcoQkkfCEgy4pBBhPTWv__IoJxbPRCnNtSKt2-qTyNYbwm9QRtU8RLFs7sijpHhNe-FRh"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-surface-border ring-2 ring-white dark:ring-[#151b28] text-xs font-medium text-slate-600 dark:text-slate-300">+1</div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500 dark:text-slate-400">Progress</span>
+<span class="font-medium text-slate-900 dark:text-white">30%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-surface-border">
+<div class="h-full rounded-full bg-amber-500" style="width: 30%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

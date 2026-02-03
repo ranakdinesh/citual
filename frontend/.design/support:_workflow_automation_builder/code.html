@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual - Workflow Automation Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#17cf17",
+              "background-light": "#f6f8f6",
+              "background-dark": "#112111",
+              "workspace-blue": "#162531",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="w-full border-b border-slate-200 dark:border-[#244724] bg-white dark:bg-background-dark px-6 py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-white">Citual Support</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Tickets</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Customers</a>
+<a class="text-sm font-medium text-slate-900 dark:text-white" href="#">Workflows</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-[#244724] text-slate-600 dark:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-[#244724] text-slate-600 dark:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</button>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-slate-200 dark:border-[#244724]" data-alt="User profile picture showing a woman smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBaKGT9zCvyq41HTOGkyHuTRnQEeZ7CeET1oYlV3GbXsOrd5g4xhSzyGSxo3uTQTc4n6FPaaO4szDX5rd9cax0YjWomOXvdCtBySlp67XDolpckFKuofaqTgsAVD6Swjx1t1aZWcyICQVtqf-a4SRe9LlDa24RsdweYBsMikjdxiXyDMuwJkEVh5vyb2oHIlLaaPclzz9nvNs76bEjQlF1TmH8ZbOTM4wNt_FnNRmQphabYg9CEKvg0w3IPrmAmRC5DmECTMQsd0KiZ');">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8">
+<!-- PageHeading & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">New Routing Workflow</h1>
+<p class="text-slate-600 dark:text-[#93c893] text-base font-normal">Define rules to automatically route and assign support tickets based on their properties.</p>
+</div>
+<div class="flex gap-3">
+<button class="h-10 px-6 rounded-lg border border-slate-300 dark:border-[#346534] text-slate-700 dark:text-white font-bold text-sm hover:bg-slate-50 dark:hover:bg-[#1a321a] transition-colors">
+                    Cancel
+                </button>
+<button class="h-10 px-6 rounded-lg bg-primary text-background-dark font-bold text-sm hover:bg-green-400 transition-colors shadow-[0_0_15px_rgba(23,207,23,0.3)]">
+                    Save Workflow
+                </button>
+</div>
+</div>
+<!-- Meta Data Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl bg-white dark:bg-[#112111] border border-slate-200 dark:border-[#244724]">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold text-slate-700 dark:text-white">Workflow Name</span>
+<input class="form-input w-full rounded-lg bg-slate-50 dark:bg-[#1a321a] border-slate-200 dark:border-[#346534] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#5a8a5a] focus:ring-2 focus:ring-primary focus:border-transparent h-12 px-4" placeholder="e.g., High Priority Routing" type="text" value="VIP Customer Routing"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold text-slate-700 dark:text-white">Description</span>
+<input class="form-input w-full rounded-lg bg-slate-50 dark:bg-[#1a321a] border-slate-200 dark:border-[#346534] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#5a8a5a] focus:ring-2 focus:ring-primary focus:border-transparent h-12 px-4" placeholder="Brief description of what this workflow does" type="text" value="Route all VIP tickets directly to the Senior Support team"/>
+</label>
+</div>
+<!-- Workflow Builder Workspace -->
+<div class="flex flex-col rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl h-[800px]">
+<!-- Workspace Toolbar -->
+<div class="bg-slate-100 dark:bg-[#0f1a24] px-6 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Builder Canvas</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Zoom Out"><span class="material-symbols-outlined">remove</span></button>
+<span class="text-xs font-mono text-slate-500">100%</span>
+<button class="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Zoom In"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<!-- Canvas Area -->
+<div class="flex-1 bg-slate-50 dark:bg-workspace-blue relative overflow-y-auto p-10 flex flex-col items-center">
+<!-- Grid Background -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]" data-alt="Abstract subtle dot grid pattern for background" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Start Node (Trigger) -->
+<div class="relative z-10 w-full max-w-[500px] group">
+<div class="absolute -left-16 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest rotate-180" style="writing-mode: vertical-rl;">Trigger</div>
+<div class="bg-white dark:bg-[#1e3243] rounded-xl border-l-4 border-primary shadow-lg p-5 flex items-start gap-4 hover:shadow-primary/10 transition-shadow">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<div class="flex-1">
+<h4 class="text-base font-bold text-slate-900 dark:text-white">New Ticket Created</h4>
+<p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Triggers when a ticket enters the system via Email or Portal.</p>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Connector -->
+<div class="h-12 w-0.5 bg-slate-300 dark:bg-slate-600 my-2 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-2 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+</div>
+<!-- Condition Node -->
+<div class="relative z-10 w-full max-w-[500px]">
+<div class="absolute -left-16 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest rotate-180" style="writing-mode: vertical-rl;">If</div>
+<div class="bg-white dark:bg-[#1e3243] rounded-xl border-l-4 border-yellow-500 shadow-lg p-5 flex items-start gap-4">
+<div class="size-10 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-yellow-500">call_split</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 uppercase">And</span>
+</div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Customer Tier is VIP</h4>
+<p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Checks the 'Plan' property of the requester.</p>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Connector -->
+<div class="h-12 w-0.5 bg-slate-300 dark:bg-slate-600 my-2 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-2 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+</div>
+<!-- Condition Node 2 -->
+<div class="relative z-10 w-full max-w-[500px]">
+<div class="bg-white dark:bg-[#1e3243] rounded-xl border-l-4 border-yellow-500 shadow-lg p-5 flex items-start gap-4 opacity-90">
+<div class="size-10 rounded-full bg-yellow-500/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-yellow-500">priority_high</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 uppercase">And</span>
+</div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Ticket Status is Open</h4>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Connector with Add Button -->
+<div class="h-16 w-0.5 bg-slate-300 dark:bg-slate-600 my-2 flex flex-col items-center justify-center relative">
+<button class="absolute bg-slate-200 dark:bg-slate-700 hover:bg-primary hover:text-black hover:scale-110 transition-all text-slate-600 dark:text-slate-300 rounded-full p-1 z-20 shadow-sm border-4 border-slate-50 dark:border-workspace-blue">
+<span class="material-symbols-outlined text-lg block">add</span>
+</button>
+</div>
+<!-- Action Node -->
+<div class="relative z-10 w-full max-w-[500px]">
+<div class="absolute -left-16 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest rotate-180" style="writing-mode: vertical-rl;">Then</div>
+<div class="bg-white dark:bg-[#1e3243] rounded-xl border-l-4 border-primary shadow-lg p-5 flex items-start gap-4">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">assignment_ind</span>
+</div>
+<div class="flex-1">
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Assign to Team Lead</h4>
+<p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Assignee: Sarah Jenkins (Lead)</p>
+<div class="mt-3 flex items-center gap-2">
+<div class="size-6 rounded-full bg-cover bg-center border border-slate-500" data-alt="Profile picture of Sarah Jenkins" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgc-OeIaISupQffh8FGeQ7gDTsbmO4Ah1LZ5UwbfvupKrFIBfPG5GPAG_04x3jEfJaign34Kx_UVtJ_ZtoeDNlMDYFrpvwkbdJRJwgWmRKHG52zyZHGkT6oGFW3Y4Wlf1cCedMt-Zbc158zMzRii91nUsUB563zJF-HF1gO8amNLbHUqts1is9kZbMllMlyyqdXfK2dSvFsV0T2owVRigwGvRfXyeZkvhZzrc6D1GrHBBM1XA5Zf3GmUMNNFjw4eIYEEgK4rveYrjp');"></div>
+<span class="text-xs text-slate-400 font-medium">Sarah Jenkins</span>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Connector -->
+<div class="h-12 w-0.5 bg-slate-300 dark:bg-slate-600 my-2 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-2 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+</div>
+<!-- Action Node 2 -->
+<div class="relative z-10 w-full max-w-[500px] opacity-70">
+<div class="bg-white dark:bg-[#1e3243] rounded-xl border-l-4 border-blue-500 shadow-lg p-5 flex items-start gap-4 border border-dashed border-slate-300 dark:border-slate-600">
+<div class="size-10 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-blue-500">mail</span>
+</div>
+<div class="flex-1">
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Send Email Notification</h4>
+<p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Template: VIP Acknowledgement</p>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- End Cap -->
+<div class="mt-8 flex flex-col items-center gap-2 opacity-50">
+<div class="size-3 rounded-full bg-slate-400 dark:bg-slate-600"></div>
+<span class="text-xs font-bold uppercase text-slate-400 dark:text-slate-600">End Workflow</span>
+</div>
+</div>
+</div>
+</main>
+</body></html>

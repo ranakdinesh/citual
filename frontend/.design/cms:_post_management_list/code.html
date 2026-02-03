@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual CMS - Post Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588468",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#171b18",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#171c19] border-r border-[#313a34] flex-shrink-0 flex flex-col h-full overflow-y-auto">
+<div class="p-6">
+<div class="flex gap-3 items-center mb-8">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 relative overflow-hidden shrink-0" data-alt="Abstract green geometric logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuApu1QJhLYBKHsJRK7U_CsHOa75-YB9SxNwdOCvv2UTj42EhdJPyvQXPYzfY9WHl8UFcsY2h69OCp2qbi8WvikHz1LOW-bDlF2b0LYDMKvuLBzVGlkNel1pPEui21cWcuv6mc0m6JAVbxrnE6x2CtVgMMfK0v4GB2akQO0B7VPWBvPr0-rQfxkI1h2PQUahNV1cKBLn1HfSt5RRaB4kjL2noYZ_wO6evIt-leChRYMgjZSaoNoyE0TRAi891DLj6tK-k25z1tKg_IEb");'>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">Citual CMS</h1>
+<p class="text-[#a7b4ac] text-xs font-normal leading-normal">Management Dashboard</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="text-sm font-medium leading-normal">All Sites</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary border border-primary/10" href="#">
+<span class="material-symbols-outlined fill-1">article</span>
+<span class="text-sm font-medium leading-normal">Posts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium leading-normal">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">image</span>
+<span class="text-sm font-medium leading-normal">Media</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a7b4ac] hover:bg-[#313a34] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-sm font-medium leading-normal">Themes</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-[#313a34]">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" data-alt="User profile picture of a woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBA0xF-1ZZv1wlbxkPzzMnxbhv41PX_mKnCCasrdR1wxWL0zQ0tRxrHqjRT1hEInbFlrq5M5by_xn40sxoC2ClUpQS_9EWdxevu53v37SzPh4lxEgnOk37fsJLN-6-wUoCBcU19RCp4em6yrZMrlBJWYZ08zb1uyT4CSkg4UIHaml_ACtcKrurMSkrpJ2C3asQBo2pz_QzWDh_zLmR9Rt4CeIUD5xQ4RmbvU6Ff9VwaNAonmPufVftAoUeedzTgKLlgNAK9BPPGxxxY");'></div>
+<div class="flex flex-col">
+<p class="text-white text-sm font-medium">Jane Admin</p>
+<p class="text-[#a7b4ac] text-xs">Editor in Chief</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full bg-background-dark overflow-hidden relative">
+<!-- Top Navbar -->
+<header class="h-16 flex items-center justify-between px-6 border-b border-[#313a34] bg-[#171c19] shrink-0">
+<div class="flex items-center gap-4 text-white">
+<button class="text-[#a7b4ac] hover:text-white md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2 text-[#a7b4ac] text-sm">
+<span>Dashboard</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-white font-medium">Post Management</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#a7b4ac] material-symbols-outlined text-[20px]">search</span>
+<input class="bg-[#313a34] text-white text-sm rounded-lg pl-10 pr-4 py-2 border-none focus:ring-1 focus:ring-primary w-64 placeholder:text-[#a7b4ac]" placeholder="Search posts..." type="text"/>
+</div>
+<button class="flex items-center justify-center size-9 rounded-lg bg-[#313a34] text-[#a7b4ac] hover:text-white hover:bg-[#404b44] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg bg-[#313a34] text-[#a7b4ac] hover:text-white hover:bg-[#404b44] transition-colors">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Page Content -->
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-[1200px] mx-auto p-6 md:p-8 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<h2 class="text-3xl font-bold text-white tracking-tight">Posts</h2>
+<p class="text-[#a7b4ac] text-sm mt-1">Manage and publish your articles</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-[#4a6f57] text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-lg shadow-green-900/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add New Post</span>
+</button>
+</div>
+<!-- Filters/Chips -->
+<div class="flex flex-wrap items-center gap-2 border-b border-[#313a34] pb-1">
+<button class="px-4 py-2 rounded-t-lg bg-[#313a34] border-b-2 border-primary text-white text-sm font-medium">
+                            All <span class="ml-1 opacity-60 text-xs">(25)</span>
+</button>
+<button class="px-4 py-2 rounded-t-lg hover:bg-[#313a34]/50 text-[#a7b4ac] hover:text-white text-sm font-medium transition-colors">
+                            Published <span class="ml-1 opacity-60 text-xs">(20)</span>
+</button>
+<button class="px-4 py-2 rounded-t-lg hover:bg-[#313a34]/50 text-[#a7b4ac] hover:text-white text-sm font-medium transition-colors">
+                            Drafts <span class="ml-1 opacity-60 text-xs">(5)</span>
+</button>
+<button class="px-4 py-2 rounded-t-lg hover:bg-[#313a34]/50 text-[#a7b4ac] hover:text-white text-sm font-medium transition-colors">
+                            Trash <span class="ml-1 opacity-60 text-xs">(0)</span>
+</button>
+</div>
+<!-- Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-4 py-2">
+<div class="flex items-center gap-3">
+<select class="bg-[#313a34] border-none text-white text-sm rounded-lg py-2 pl-3 pr-8 focus:ring-1 focus:ring-primary">
+<option>Bulk Actions</option>
+<option>Edit</option>
+<option>Move to Trash</option>
+</select>
+<button class="border border-[#46534b] text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-[#313a34]">Apply</button>
+<select class="bg-[#313a34] border-none text-white text-sm rounded-lg py-2 pl-3 pr-8 focus:ring-1 focus:ring-primary ml-2">
+<option>All Dates</option>
+<option>October 2023</option>
+</select>
+<select class="bg-[#313a34] border-none text-white text-sm rounded-lg py-2 pl-3 pr-8 focus:ring-1 focus:ring-primary">
+<option>All Categories</option>
+<option>Tech</option>
+<option>Design</option>
+</select>
+<button class="border border-[#46534b] text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-[#313a34]">Filter</button>
+</div>
+<div class="text-[#a7b4ac] text-sm">
+                            25 items
+                        </div>
+</div>
+<!-- Table -->
+<div class="@container">
+<div class="w-full overflow-hidden rounded-xl border border-[#313a34] bg-[#1d2320] shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#232925] border-b border-[#313a34]">
+<th class="p-4 w-10">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider w-[35%]">Title</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider hidden @[500px]:table-cell">Author</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider hidden @[700px]:table-cell">Categories</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider hidden @[900px]:table-cell">Date</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider">Status</th>
+<th class="p-4 text-xs font-semibold text-[#a7b4ac] uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#313a34]">
+<!-- Row 1 -->
+<tr class="group hover:bg-[#252b27] transition-colors">
+<td class="p-4">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<span class="text-white font-medium text-sm">Top 10 CMS Features for 2024</span>
+<div class="flex gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:underline">Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">Quick Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-red-400 hover:text-red-300">Trash</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">View</button>
+</div>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[500px]:table-cell">John Doe</td>
+<td class="p-4 hidden @[700px]:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">Technology</span>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[900px]:table-cell">
+<div class="flex flex-col">
+<span>Published</span>
+<span class="text-xs opacity-70">2023/10/24</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Published
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-2 hover:bg-[#313a34] rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-[#252b27] transition-colors">
+<td class="p-4">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<span class="text-white font-medium text-sm">How to Optimize SEO</span>
+<div class="flex gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:underline">Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">Quick Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-red-400 hover:text-red-300">Trash</button>
+</div>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[500px]:table-cell">Jane Smith</td>
+<td class="p-4 hidden @[700px]:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">Marketing</span>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[900px]:table-cell">
+<div class="flex flex-col">
+<span>Last Modified</span>
+<span class="text-xs opacity-70">2023/10/22</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#313a34] text-[#a7b4ac] border border-[#46534b]">
+<span class="size-1.5 rounded-full bg-[#a7b4ac]"></span>
+                                                Draft
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-2 hover:bg-[#313a34] rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-[#252b27] transition-colors">
+<td class="p-4">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<span class="text-white font-medium text-sm">Citual 2.0 Release Notes</span>
+<div class="flex gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:underline">Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">Quick Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-red-400 hover:text-red-300">Trash</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">View</button>
+</div>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[500px]:table-cell">Admin User</td>
+<td class="p-4 hidden @[700px]:table-cell">
+<div class="flex gap-1">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">News</span>
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">Product</span>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[900px]:table-cell">
+<div class="flex flex-col">
+<span>Published</span>
+<span class="text-xs opacity-70">2023/10/20</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Published
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-2 hover:bg-[#313a34] rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-[#252b27] transition-colors">
+<td class="p-4">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<span class="text-white font-medium text-sm">Web Design Trends for 2024</span>
+<div class="flex gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:underline">Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">Quick Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-red-400 hover:text-red-300">Trash</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">View</button>
+</div>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[500px]:table-cell">Sarah Lee</td>
+<td class="p-4 hidden @[700px]:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">Design</span>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[900px]:table-cell">
+<div class="flex flex-col">
+<span>Published</span>
+<span class="text-xs opacity-70">2023/10/18</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Published
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-2 hover:bg-[#313a34] rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-[#252b27] transition-colors">
+<td class="p-4">
+<input class="rounded bg-[#313a34] border-[#46534b] text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<span class="text-white font-medium text-sm">Migrating from WordPress</span>
+<div class="flex gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:underline">Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-[#a7b4ac] hover:text-white">Quick Edit</button>
+<span class="text-[#46534b]">|</span>
+<button class="text-red-400 hover:text-red-300">Trash</button>
+</div>
+</div>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[500px]:table-cell">John Doe</td>
+<td class="p-4 hidden @[700px]:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#313a34] text-xs font-medium text-white border border-[#46534b]">Tutorials</span>
+</td>
+<td class="p-4 text-[#a7b4ac] text-sm hidden @[900px]:table-cell">
+<div class="flex flex-col">
+<span>Last Modified</span>
+<span class="text-xs opacity-70">2023/10/15</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#313a34] text-[#a7b4ac] border border-[#46534b]">
+<span class="size-1.5 rounded-full bg-[#a7b4ac]"></span>
+                                                Draft
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#a7b4ac] hover:text-white p-2 hover:bg-[#313a34] rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between py-4">
+<div class="text-sm text-[#a7b4ac]">
+                                Showing <span class="text-white font-medium">1</span> to <span class="text-white font-medium">5</span> of <span class="text-white font-medium">25</span> results
+                            </div>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded bg-[#313a34] text-[#a7b4ac] hover:text-white hover:bg-[#404b44] disabled:opacity-50 text-sm">Previous</button>
+<button class="px-3 py-1 rounded bg-[#313a34] text-[#a7b4ac] hover:text-white hover:bg-[#404b44] text-sm">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

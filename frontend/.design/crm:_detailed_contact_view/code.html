@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual CRM - Contact View</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', "Noto Sans", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 font-display min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-gray-900 px-6 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0d121b] dark:text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<!-- Custom Logo or Icon -->
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Citual</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-[#0d121b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Leads</a>
+<a class="text-[#0d121b] dark:text-white text-sm font-bold leading-normal text-primary" href="#">Contacts</a>
+<a class="text-[#0d121b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Organizations</a>
+<a class="text-[#0d121b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Tasks</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-gray-700 bg-[#e7ebf3] dark:bg-gray-800 focus-within:ring-2 ring-primary/50 transition-all">
+<div class="text-[#4c669a] dark:text-gray-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d121b] dark:text-white focus:outline-0 bg-transparent border-none h-full placeholder:text-[#4c669a] dark:placeholder:text-gray-500 px-3 text-sm font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center text-[#4c669a] dark:text-gray-400 hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-gray-700 shadow-sm" data-alt="User profile picture showing a smiling man" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8G6dJsznuSWfFOsfKV396FAIcdRkjo0kf5FTsps0dPdBzTNDORXSOQM4jrh18jTIJA9Wk6AWrZMbm7QkpGQzDywt0cX9TN6d1rlOnNdWzWdvIdAq2g0EAvVntraeRRze-FqKzkp6r9IbW9HgWI4ATRr4EsD-eNbuqCTw96z86BCbOFQFflUXajw-9i9WZyHTYFuULfKvDIUYobEPCwdElnHRyzkN_MwaaSiF2Y30QV08lCKyFItmLSZL1hvHeqMW-Qab4o2WIoP11");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 md:px-10 py-8 max-w-[1440px] mx-auto w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start h-full">
+<!-- Left Column: Contact Details (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Profile Card -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+<div class="h-24 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 relative">
+<!-- Abstract header background -->
+</div>
+<div class="px-6 pb-6 relative">
+<div class="-mt-12 mb-4 flex justify-between items-end">
+<div class="bg-white dark:bg-gray-800 p-1 rounded-full shadow-md">
+<div class="size-24 bg-center bg-no-repeat bg-cover rounded-full" data-alt="Profile photo of Jane Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAVy9iSfcTJJUxpRHYdPbH9iGHry2KXPY1Axo0U8rr3PVSm9V5ZWPVUyaSNxt8iGKovhkksR1HOCj5uxh8Rp3SPA_R5nzp01AN3n3mq6dVCI-Wkimpelb0IfX8InEtkBI1J4-C9M4gKPzA5Ror53swlm6ddXtIj9pcZOAgTxk6OT30iXMHwuH77mQc1YZzIaOYmD_AFKRGmsbC6e8Lhf-5Lk_18M01wRakhAp81krfr6QP0IB9dzJbejp_0886TknHcaOGTOm3h9Afp");'></div>
+</div>
+<div class="mb-1">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20">Active</span>
+</div>
+</div>
+<div class="flex flex-col mb-6">
+<h1 class="text-[#0d121b] dark:text-white tracking-tight text-2xl font-bold leading-tight">Jane Doe</h1>
+<p class="text-[#4c669a] dark:text-gray-400 text-base font-normal leading-normal">VP of Marketing at TechCorp</p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap gap-2 mb-8">
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-3 bg-primary hover:bg-blue-700 text-white text-sm font-bold leading-normal transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] mr-2">edit</span>
+<span>Edit</span>
+</button>
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-[#0d121b] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold leading-normal transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] mr-2 text-primary">call</span>
+<span>Call</span>
+</button>
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-[#0d121b] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold leading-normal transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] mr-2 text-primary">mail</span>
+<span>Email</span>
+</button>
+</div>
+<!-- Details List -->
+<div class="flex flex-col gap-y-0">
+<div class="grid grid-cols-[1fr_2fr] gap-x-4 border-t border-[#cfd7e7] dark:border-gray-800 py-4 items-center">
+<div class="flex items-center gap-2 text-[#4c669a] dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                                    Email
+                                </div>
+<p class="text-[#0d121b] dark:text-gray-200 text-sm font-normal truncate">jane.doe@techcorp.com</p>
+</div>
+<div class="grid grid-cols-[1fr_2fr] gap-x-4 border-t border-[#cfd7e7] dark:border-gray-800 py-4 items-center">
+<div class="flex items-center gap-2 text-[#4c669a] dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">phone_iphone</span>
+                                    Mobile
+                                </div>
+<p class="text-[#0d121b] dark:text-gray-200 text-sm font-normal">+1 (555) 123-4567</p>
+</div>
+<div class="grid grid-cols-[1fr_2fr] gap-x-4 border-t border-[#cfd7e7] dark:border-gray-800 py-4 items-center">
+<div class="flex items-center gap-2 text-[#4c669a] dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">apartment</span>
+                                    Department
+                                </div>
+<p class="text-[#0d121b] dark:text-gray-200 text-sm font-normal">Marketing</p>
+</div>
+<div class="grid grid-cols-[1fr_2fr] gap-x-4 border-t border-[#cfd7e7] dark:border-gray-800 py-4 items-center">
+<div class="flex items-center gap-2 text-[#4c669a] dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                                    Location
+                                </div>
+<p class="text-[#0d121b] dark:text-gray-200 text-sm font-normal">San Francisco, CA</p>
+</div>
+</div>
+<!-- Mini Stats -->
+<div class="grid grid-cols-3 gap-2 mt-2 pt-6 border-t border-gray-100 dark:border-gray-800">
+<div class="flex flex-col text-center p-2 rounded bg-background-light dark:bg-gray-800">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Deals</span>
+<span class="text-lg font-bold text-primary">3</span>
+</div>
+<div class="flex flex-col text-center p-2 rounded bg-background-light dark:bg-gray-800">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Tasks</span>
+<span class="text-lg font-bold text-primary">12</span>
+</div>
+<div class="flex flex-col text-center p-2 rounded bg-background-light dark:bg-gray-800">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Score</span>
+<span class="text-lg font-bold text-green-500">92</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tags Card -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+<h3 class="text-[#0d121b] dark:text-white text-base font-bold mb-4">Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs font-semibold">VIP</span>
+<span class="px-2.5 py-1 rounded-md bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 text-xs font-semibold">Decision Maker</span>
+<span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold cursor-pointer border border-dashed border-gray-300 dark:border-gray-600 hover:border-solid hover:border-gray-400">+ Add</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Activity Timeline (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Timeline Container -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full min-h-[600px]">
+<!-- Tabs Header -->
+<div class="border-b border-gray-100 dark:border-gray-800 px-6 pt-4">
+<div class="flex gap-6 overflow-x-auto no-scrollbar">
+<button class="pb-4 text-sm font-semibold border-b-2 border-primary text-primary">Timeline</button>
+<button class="pb-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Notes</button>
+<button class="pb-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Emails</button>
+<button class="pb-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Calls</button>
+<button class="pb-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Tasks</button>
+</div>
+</div>
+<!-- Quick Add Action -->
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/20">
+<div class="flex gap-3">
+<div class="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</div>
+<input class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white" placeholder="Log a note, call, or email..."/>
+<button class="bg-primary hover:bg-blue-700 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors">Log</button>
+</div>
+</div>
+<!-- Timeline Content -->
+<div class="p-6">
+<!-- Timeline Item 1 -->
+<div class="flex gap-4 mb-8 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 ring-4 ring-white dark:ring-gray-900 z-10">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<div class="w-0.5 h-full bg-gray-100 dark:bg-gray-800 -mt-2 group-last:hidden"></div>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-[#0d121b] dark:text-white">Email Sent: Follow up on Q4 Proposal</h4>
+<span class="text-xs text-gray-400 whitespace-nowrap">2 hours ago</span>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Jane asked about the integration timelines. Sent her the updated documentation and schedule.</p>
+<div class="flex items-center gap-2 mt-3">
+<div class="size-5 rounded-full bg-cover bg-center" data-alt="Small avatar of the sales representative" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCg_mwTJ0n0RwH47-d6KC4BUbQriS9FFzekVL7ZynyK-I5aAhLSDkwjaUiitGyfNfm1G9bJDzIWxPmn1bqnhMMRf29QO19Y9MVrai1rG9j10aP7nIEa1mWUvxd-jOnlSBR99QMov_r6xJGakPzOLzb8ozI7miSJkOOwxg69JCcqDb5Mg9HpLHXvbItL50xv_zkHp6K8r2FnekOV_ufRWVkHg_ott44ujt2IxSZHHd5k8sYD0F1rFfynZAWtxFb1-ECYcCNIlsGxIYoj");'></div>
+<span class="text-xs text-gray-500 dark:text-gray-400">You</span>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex gap-4 mb-8 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 flex items-center justify-center shrink-0 ring-4 ring-white dark:ring-gray-900 z-10">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</div>
+<div class="w-0.5 h-full bg-gray-100 dark:bg-gray-800 -mt-2 group-last:hidden"></div>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-[#0d121b] dark:text-white">Call Logged: Discovery Call</h4>
+<span class="text-xs text-gray-400 whitespace-nowrap">Yesterday, 2:30 PM</span>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Discussed budget and key stakeholders. She mentioned that the CTO needs to sign off.</p>
+<div class="flex gap-2 mt-2">
+<span class="inline-flex items-center rounded-sm bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-xs font-medium text-gray-600 dark:text-gray-400">Duration: 15m</span>
+</div>
+<div class="flex items-center gap-2 mt-3">
+<div class="size-5 rounded-full bg-cover bg-center" data-alt="Small avatar of the sales representative" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4ebfMKW_0mGxLor9trFjS5tIp-k5y07myRNCUIULaKD2tFiHQqxczAV10XcApA8NeYyHW94jlGKkjWwLeUhsd5CXIrSlhcMit28YflnIddUPDLW5zP7-TwmX8y5Tqdr1S_W92AxzqrAl59fDlJ5qfgbZ5EepBZW3r_TcZxdhNz0h4hQDvEorvWr4kzKBCcdPzDcFufi2wehnctPxPO27Hd1ol5KEuMIjxIE_6c17H4NNURWoEaIanDSbBU9PYR97mnlx_0vUR9qYi");'></div>
+<span class="text-xs text-gray-500 dark:text-gray-400">You</span>
+</div>
+</div>
+</div>
+<!-- Timeline Date Break -->
+<div class="flex gap-4 mb-8 items-center">
+<div class="w-10 flex justify-center">
+<div class="size-2 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+</div>
+<span class="text-xs font-semibold text-gray-400 uppercase tracking-widest">October 24, 2023</span>
+<div class="h-px bg-gray-100 dark:bg-gray-800 flex-1"></div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex gap-4 mb-8 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 ring-4 ring-white dark:ring-gray-900 z-10">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div class="w-0.5 h-full bg-gray-100 dark:bg-gray-800 -mt-2 group-last:hidden"></div>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-[#0d121b] dark:text-white">Task Completed: Send Intro Deck</h4>
+<span class="text-xs text-gray-400 whitespace-nowrap">Oct 24, 10:00 AM</span>
+</div>
+<div class="mt-2 p-3 bg-background-light dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-900 dark:text-white">Citual_Intro_Deck_v2.pdf</span>
+<span class="text-xs text-gray-500">2.4 MB</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-3">
+<div class="size-5 rounded-full bg-cover bg-center" data-alt="Small avatar of another team member" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuAOcbZ8wMJWcfTvtnCVnLm14NwTlB_pt5zE78TBKDAMgX7NCj7R1xUASRkpYhSR39M5lg-Ipt2uyL25ZC7CmWO1P8ndyn0XNOGOi60gDzlgre222I_wat7_6r2KI7suE1eVmhguE2gI0_6T_YjKOgTsNS0CqcVh98HSbsGeQQCGgqVt2ahNR39N41DYmAXaawfUxq4jIiBKIJ_u__R7-Ikl8bkvAkhZxO9ZxA4ddCZu1enosGXz8ByVTXAO-HYQqi1h9d8ka1qQNX");'></div>
+<span class="text-xs text-gray-500 dark:text-gray-400">Mike Ross</span>
+</div>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0 ring-4 ring-white dark:ring-gray-900 z-10">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<!-- No line for last item -->
+</div>
+<div class="flex-1 pb-0">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-[#0d121b] dark:text-white">Contact Created</h4>
+<span class="text-xs text-gray-400 whitespace-nowrap">Oct 24, 9:15 AM</span>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Lead converted from Web Form "Request Demo".</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="text-xs text-gray-500 dark:text-gray-400">System</span>
+</div>
+</div>
+</div>
+</div>
+<!-- View More -->
+<div class="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
+<button class="text-sm text-primary font-medium hover:text-blue-700 transition-colors">View older activity</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

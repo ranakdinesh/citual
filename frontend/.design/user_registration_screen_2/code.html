@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citual Registration - Light Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#588368",      // Citual Green
+                        "secondary": "#F25A29",    // Citual Orange
+                        "tertiary": "#162531",     // Citual Dark Blue
+                        "background-light": "#ffffff",
+                        "background-dark": "#162531",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<script>
+        // Simple dark mode toggle logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        // Initialize theme based on preference or defaults
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-tertiary dark:text-white min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300">
+<header class="w-full border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-[#162531] z-10 relative">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-3">
+<div class="h-10 w-auto flex items-center justify-center text-primary">
+<svg class="h-10 w-10" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 5C25.147 5 5 25.147 5 50C5 74.853 25.147 95 50 95C74.853 95 95 74.853 95 50C95 25.147 74.853 5 50 5ZM50 88C29.013 88 12 70.987 12 50C12 29.013 29.013 12 50 12C70.987 12 88 29.013 88 50C88 70.987 70.987 88 50 88Z" fill="#588368" fill-opacity="0.8"></path>
+<path d="M30 25L30 65L50 80L50 20L30 25Z" fill="#162531"></path>
+<circle cx="50" cy="20" fill="#F25A29" r="3"></circle>
+<circle cx="65" cy="35" fill="#F25A29" r="3"></circle>
+<circle cx="50" cy="40" fill="#F25A29" r="3"></circle>
+<circle cx="60" cy="50" fill="#F25A29" r="3"></circle>
+<circle cx="65" cy="65" fill="#F25A29" r="3"></circle>
+<circle cx="50" cy="70" fill="#F25A29" r="3"></circle>
+<path d="M50 20L65 35M50 40L65 35M50 40L60 50M50 70L60 50M60 50L65 65" stroke="#162531" stroke-width="1.5"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-tertiary dark:text-white uppercase">Citual</span>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Toggle Dark Mode" class="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="toggleDarkMode()">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:inline text-yellow-400">light_mode</span>
+</button>
+<div class="flex items-center">
+<span class="text-sm text-gray-500 dark:text-gray-400 mr-2 hidden sm:inline">Already have an account?</span>
+<button class="bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800 text-tertiary dark:text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors border border-gray-200 dark:border-gray-600">
+                        Log In
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
+<div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+<div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] opacity-40 translate-y-[-50%]"></div>
+<div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] opacity-30 translate-y-[50%]"></div>
+</div>
+<div class="w-full max-w-[640px] bg-white dark:bg-[#1C2C3A] rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors duration-300">
+<div class="px-8 pt-10 pb-6">
+<div class="flex flex-col gap-2 text-center sm:text-left">
+<h1 class="text-3xl sm:text-4xl font-black tracking-[-0.02em] text-tertiary dark:text-white">Create your account</h1>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal">Start your 14-day free trial today. Join thousands of users managing their workflow efficiently with Citual.</p>
+</div>
+</div>
+<div class="px-8 pb-10">
+<form class="flex flex-col gap-5">
+<div class="flex flex-col sm:flex-row gap-4">
+<label class="flex flex-col flex-1">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">First Name</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 px-4 text-base transition-colors" placeholder="Enter first name" type="text"/>
+</label>
+<label class="flex flex-col flex-1">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">Last Name</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 px-4 text-base transition-colors" placeholder="Enter last name" type="text"/>
+</label>
+</div>
+<label class="flex flex-col w-full">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">Email Address</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 pl-10 pr-4 text-base transition-colors" placeholder="name@company.com" type="email"/>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">Mobile Number</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 pl-10 pr-4 text-base transition-colors" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">Password</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 pl-10 pr-10 text-base transition-colors" placeholder="Create a password" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-tertiary dark:hover:text-gray-200 focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<div class="w-full h-1 bg-gray-200 dark:bg-gray-600 mt-2 rounded-full overflow-hidden">
+<div class="h-full w-1/4 bg-secondary"></div>
+</div>
+<p class="text-xs text-secondary mt-1">Weak password. Try adding numbers and symbols.</p>
+</label>
+<label class="flex flex-col w-full">
+<span class="text-tertiary dark:text-gray-200 text-sm font-medium pb-2">Confirm Password</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-[20px]">lock_reset</span>
+</span>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-tertiary dark:text-white placeholder:text-gray-400 focus:border-secondary focus:ring-secondary h-12 pl-10 pr-4 text-base transition-colors" placeholder="Confirm your password" type="password"/>
+</div>
+</label>
+<div class="flex items-start gap-3 mt-2">
+<div class="flex h-6 items-center">
+<input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-[#162531] text-primary focus:ring-primary" id="terms" name="terms" type="checkbox"/>
+</div>
+<div class="text-sm leading-6">
+<label class="font-medium text-gray-600 dark:text-gray-300" for="terms">
+                            I agree to the <a class="text-primary hover:text-primary/80 hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:text-primary/80 hover:underline" href="#">Privacy Policy</a>
+</label>
+</div>
+</div>
+<button class="mt-4 flex w-full items-center justify-center rounded-lg bg-primary hover:bg-[#4a6f58] py-3 px-4 text-sm font-bold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200" type="button">
+                    Create Account
+                </button>
+</form>
+</div>
+<div class="bg-gray-50 dark:bg-[#141d26] px-8 py-4 text-center border-t border-gray-200 dark:border-gray-700">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                Already have an account? 
+                <a class="font-semibold text-primary hover:text-secondary transition-colors" href="#">Log in</a>
+</p>
+</div>
+</div>
+</main>
+<footer class="w-full py-6 text-center text-sm text-gray-400 dark:text-gray-500">
+    © 2024 Citual Inc. All rights reserved.
+</footer>
+
+</body></html>
