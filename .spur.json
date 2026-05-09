@@ -12,7 +12,10 @@
     "temporal",
     "queue"
   ],
-  "modules": [],
+  "modules": [
+    "identity",
+    "messaging"
+  ],
   "protocol_ports": {
     "grpc": "9090",
     "hls": "8888",

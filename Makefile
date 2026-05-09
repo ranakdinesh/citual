@@ -48,3 +48,12 @@ setup: keys
 	@echo "  1. Edit deployments/.env and fill in FOSITE_GLOBAL_SECRET and AUTH_CLIENT_ID"
 	@echo "  2. Run: make docker-up"
 	@echo "  3. Open: http://localhost:3000"
+
+
+migrate:
+	@MIGRATIONS=$$(find $$(go env GOMODCACHE) -path "*spur-identity*/sql/migrations" -type d | sort | tail -1); \
+	if [ -z "$$MIGRATIONS" ]; then echo "No identity migrations found"; exit 1; fi; \
+	for f in $$(ls "$$MIGRATIONS"/*.sql | sort); do \
+		echo "Running: $$(basename $$f)"; \
+		docker exec -i deployments-postgres-1 psql -U citual -d citual < "$$f"; \
+	done

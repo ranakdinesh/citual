@@ -1,4 +1,4 @@
-version: '3.9'
+
 
 services:
 
@@ -9,8 +9,11 @@ services:
       POSTGRES_DB:       ${POSTGRES_DB:-spur}
       POSTGRES_USER:     ${POSTGRES_USER:-spur}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5433:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-spur}"]
       interval: 5s
@@ -35,10 +38,8 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER:-spur}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-spur}?sslmode=disable
       REDIS_URL: redis://redis:6379
     ports:
-      - "8080:8080"
-      - "9090:9090"
-      - "8888:8888"
-      - "1935:1935"
+      - "9090:8080"
+
     volumes:
       - ../keys:/app/keys:ro
       - ./data:/app/data
@@ -57,21 +58,7 @@ services:
         max-file: "5"
         tag: "{{.Name}}"
 
-  studio:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-      args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
-        NEXT_PUBLIC_THEME:   ${NEXT_PUBLIC_THEME:-spur}
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    labels:
-      app: spur
-      module: studio
-    depends_on:
-      - backend
+
 
   temporal:
     image: temporalio/auto-setup:1.22
@@ -102,7 +89,7 @@ services:
     image: grafana/loki:2.9.0
     restart: unless-stopped
     volumes:
-      - ./deployments/loki/config.yaml:/etc/loki/local-config.yaml:ro
+      - ./loki/config.yaml:/etc/loki/local-config.yaml:ro
       - loki_data:/loki
     command: -config.file=/etc/loki/local-config.yaml
 
@@ -112,13 +99,15 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./deployments/promtail/config.yaml:/etc/promtail/config.yml:ro
+      - ./promtail/config.yaml:/etc/promtail/config.yml:ro
 
   prometheus:
     image: prom/prometheus:v2.47.0
     restart: unless-stopped
+    ports:
+      - "9092:9090"
     volumes:
-      - ./deployments/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
 
   grafana:
@@ -128,7 +117,7 @@ services:
       - "3001:3000"
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./deployments/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
     depends_on:
