@@ -62,6 +62,7 @@ func New(ctx context.Context) (*App, error) {
 		AuthClientSecret:  cfg.AuthClientSecret,
 		CookieName:        "spur_sso",
 		CookieSecure:      cfg.AppEnv == "production",
+		FrontendURL:       cfg.FrontendURL,
 		BootstrapKey:      cfg.APIKeyValue,
 	}
 

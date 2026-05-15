@@ -2,6 +2,8 @@ package app
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"fmt"
 
@@ -75,6 +77,7 @@ func (a *identityMessagingAdapter) SendEmailVerification(ctx context.Context, me
 		message.VerificationURL,
 	)
 	textBody := fmt.Sprintf("Hello %s,\n\nPlease verify your email address to activate your Citual account:\n%s\n\nIf you did not request this, you can ignore this message.", message.FirstName, message.VerificationURL)
+	verificationHash := sha256.Sum256([]byte(message.VerificationURL))
 
 	_, err := a.gateway.Submit(ctx, tenantID, msgports.MessagingRequest{
 		Channel:        msgdomain.ChannelEmail,
@@ -84,7 +87,7 @@ func (a *identityMessagingAdapter) SendEmailVerification(ctx context.Context, me
 		HTMLBody:       htmlBody,
 		TextBody:       textBody,
 		Category:       "transactional",
-		IdempotencyKey: "identity:email-verification:" + message.Recipient,
+		IdempotencyKey: "identity:email-verification:" + message.Recipient + ":" + hex.EncodeToString(verificationHash[:8]),
 		CorrelationID:  "identity.email_verification",
 		Metadata: map[string]string{
 			"source":       "identity",

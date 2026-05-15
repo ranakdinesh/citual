@@ -3,13 +3,24 @@ FROM golang:1.26-alpine AS builder
 
 RUN apk add --no-cache git ca-certificates tzdata
 
-WORKDIR /app
+WORKDIR /workspace
 
 # Cache deps separately from source
-COPY go.mod go.sum ./
+COPY go.work go.work.sum ./
+COPY citual/go.mod citual/go.sum ./citual/
+COPY spur-identity/go.mod spur-identity/go.sum ./spur-identity/
+COPY spur-messaging/go.mod spur-messaging/go.sum ./spur-messaging/
+COPY spur-web/go.mod spur-web/go.sum ./spur-web/
+
+WORKDIR /workspace/citual
 RUN go mod download
 
-COPY . .
+WORKDIR /workspace
+COPY citual ./citual
+COPY spur-identity ./spur-identity
+COPY spur-messaging ./spur-messaging
+
+WORKDIR /workspace/citual
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -ldflags="-s -w -X main.version=$(git describe --tags --always 2>/dev/null || echo dev)" \
     -o /app/spur ./cmd/main.go

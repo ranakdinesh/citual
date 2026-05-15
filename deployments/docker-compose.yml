@@ -32,14 +32,16 @@ services:
 
   backend:
     build:
-      context: ..
-      dockerfile: Dockerfile.backend
+      context: ../..
+      dockerfile: citual/Dockerfile.backend
     restart: unless-stopped
     env_file: .env
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-spur}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-spur}?sslmode=disable
       REDIS_URL: redis://redis:6379
       REDIS_ENABLED: "true"
+      MESSAGING_EMAIL_PROVIDER: dev_email
+      MESSAGING_DEV_EMAIL_OUTBOX: /app/data/dev-email-outbox
     ports:
       - "9090:8080"
 
@@ -141,7 +143,7 @@ services:
     depends_on:
       - backend
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8085/api/health"]
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8085/api/health"]
       interval: 10s
       timeout: 5s
       retries: 3
