@@ -15,11 +15,20 @@ import (
 )
 
 type Config struct {
-	AppEnv                string        `env:"APP_ENV" default:"development"`
-	OtelServiceName       string        `env:"OTEL_SERVICE_NAME" default:"oauth-service"`
-	OtelExporterEndpoint  string        `env:"OTEL_EXPORTER_OTLP_ENDPOINT"`
+	// ─── Core ────────────────────────────────────────────────────────────
+	AppEnv      string `env:"APP_ENV" default:"development"`
+	AppName     string `env:"APP_NAME" default:"spur"`
+	LogLevel    string `env:"LOG_LEVEL" default:"info"`
+	FrontendURL string `env:"FRONTEND_URL" default:"http://localhost:3000"`
+
+	// ─── Observability ───────────────────────────────────────────────────
+	OtelServiceName      string `env:"OTEL_SERVICE_NAME" default:"oauth-service"`
+	OtelExporterEndpoint string `env:"OTEL_EXPORTER_OTLP_ENDPOINT"`
+	LogServiceURL        string `env:"LOG_SVC_URL"`
+	LogServiceKey        string `env:"LOG_SVC_API_KEY"`
+
+	// ─── HTTP ────────────────────────────────────────────────────────────
 	HTTPAddr              string        `env:"HTTP_ADDR" default:":8080"`
-	GRPCAddr              string        `env:"GRPC_ADDR" default:":9090"`
 	ReadTimeout           time.Duration `env:"HTTP_READ_TIMEOUT" default:"15s"`
 	WriteTimeout          time.Duration `env:"HTTP_WRITE_TIMEOUT" default:"30s"`
 	IdleTimeout           time.Duration `env:"HTTP_IDLE_TIMEOUT" default:"60s"`
@@ -27,37 +36,67 @@ type Config struct {
 	EnableCORS            bool          `env:"HTTP_ENABLE_CORS" default:"true"`
 	EnableSecurityHeaders bool          `env:"HTTP_ENABLE_SECURITY_HEADERS" default:"true"`
 	CORSAllowedOrigins    []string      `env:"CORS_ALLOWED_ORIGINS" default:"*" split:","`
-	DatabaseURL           string        `env:"DATABASE_URL"`
-	OAuthIssuer           string        `env:"OAUTH_ISSUER"`
-	OAuthAudience         string        `env:"OAUTH_AUDIENCE"`
-	OAuthJWKSURL          string        `env:"OAUTH_JWKS_URL"`
-	APIKeyHeader          string        `env:"API_KEY_HEADER"`
-	APIKeyValue           string        `env:"API_KEY_VALUE"`
-	LogServiceURL         string        `env:"LOG_SVC_URL"`
-	LogServiceKey         string        `env:"LOG_SVC_API_KEY"`
-	JWTPrivateKeyPath     string        `env:"JWT_PRIVATE_KEY_PATH"`
-	TenantHeader          string        `env:"TENANT_HEADER"`
-	FositeGlobalSecret    string        `env:"FOSITE_GLOBAL_SECRET"`
-	AuthClientID          string        `env:"AUTH_CLIENT_ID" envDefault:""`
-	AuthClientSecret      string        `env:"AUTH_CLIENT_SECRET" envDefault:""`
-	AppName               string        `env:"APP_NAME" default:"spur"`
-	LogLevel              string        `env:"LOG_LEVEL" default:"info"`
-	FrontendURL           string        `env:"FRONTEND_URL" default:"http://localhost:3000"`
-	GRPCEnabled           bool          `env:"GRPC_ENABLED"    default:"false"`
-	WSEnabled             bool          `env:"WS_ENABLED"      default:"false"`
-	SSEEnabled            bool          `env:"SSE_ENABLED"     default:"false"`
-	HLSEnabled            bool          `env:"HLS_ENABLED"     default:"false"`
-	HLSAddr               string        `env:"HLS_ADDR"        default:":8888"`
-	HLSStoragePath        string        `env:"HLS_STORAGE_PATH" default:"./data/hls"`
-	RTMPEnabled           bool          `env:"RTMP_ENABLED"    default:"false"`
-	RTMPAddr              string        `env:"RTMP_ADDR"       default:":1935"`
-	RedisEnabled          bool          `env:"REDIS_ENABLED"   default:"false"`
-	RedisURL              string        `env:"REDIS_URL"       default:"redis://localhost:6379"`
-	DBMaxConns            int32         `env:"DB_MAX_CONNS"    default:"20"`
-	TemporalHost          string        `env:"TEMPORAL_HOST"`
-	TemporalNamespace     string        `env:"TEMPORAL_NAMESPACE" default:"default"`
 
-	IdentityIssuer string `env:"IDENTITY_ISSUER"      envDefault:"http://localhost:8080"`
+	// ─── gRPC ────────────────────────────────────────────────────────────
+	GRPCEnabled bool   `env:"GRPC_ENABLED" default:"false"`
+	GRPCAddr    string `env:"GRPC_ADDR" default:":9090"`
+
+	// ─── Database ────────────────────────────────────────────────────────
+	DatabaseURL string `env:"DATABASE_URL"`
+	DBMaxConns  int32  `env:"DB_MAX_CONNS" default:"20"`
+
+	// ─── Redis ───────────────────────────────────────────────────────────
+	RedisEnabled bool   `env:"REDIS_ENABLED" default:"false"`
+	RedisURL     string `env:"REDIS_URL" default:"redis://localhost:6379"`
+
+	// ─── Auth / OAuth ────────────────────────────────────────────────────
+	OAuthIssuer        string `env:"OAUTH_ISSUER"`
+	OAuthAudience      string `env:"OAUTH_AUDIENCE"`
+	OAuthJWKSURL       string `env:"OAUTH_JWKS_URL"`
+	APIKeyHeader       string `env:"API_KEY_HEADER"`
+	APIKeyValue        string `env:"API_KEY_VALUE"`
+	JWTPrivateKeyPath  string `env:"JWT_PRIVATE_KEY_PATH"`
+	TenantHeader       string `env:"TENANT_HEADER"`
+	FositeGlobalSecret string `env:"FOSITE_GLOBAL_SECRET"`
+	AuthClientID       string `env:"AUTH_CLIENT_ID" envDefault:""`
+	AuthClientSecret   string `env:"AUTH_CLIENT_SECRET" envDefault:""`
+
+	// ─── Identity Module ─────────────────────────────────────────────────
+	IdentityIssuer string `env:"IDENTITY_ISSUER" envDefault:"http://localhost:8080"`
+
+	// ─── Protocols (optional) ────────────────────────────────────────────
+	WSEnabled         bool   `env:"WS_ENABLED" default:"false"`
+	SSEEnabled        bool   `env:"SSE_ENABLED" default:"false"`
+	HLSEnabled        bool   `env:"HLS_ENABLED" default:"false"`
+	HLSAddr           string `env:"HLS_ADDR" default:":8888"`
+	HLSStoragePath    string `env:"HLS_STORAGE_PATH" default:"./data/hls"`
+	RTMPEnabled       bool   `env:"RTMP_ENABLED" default:"false"`
+	RTMPAddr          string `env:"RTMP_ADDR" default:":1935"`
+	TemporalHost      string `env:"TEMPORAL_HOST"`
+	TemporalNamespace string `env:"TEMPORAL_NAMESPACE" default:"default"`
+
+	// ─── Messaging Module ────────────────────────────────────────────────
+	// SPUR:CONFIG:messaging:START
+	MessagingEncryptionKey     string `env:"MESSAGING_ENCRYPTION_KEY"`
+	MessagingWebhookBaseURL    string `env:"MESSAGING_WEBHOOK_BASE_URL"`
+	MessagingDefaultRateLimit  string `env:"MESSAGING_DEFAULT_RATE_LIMIT" default:"10"`
+	MessagingRedisURL          string `env:"MESSAGING_REDIS_URL"`
+	MessagingWorkerCount       string `env:"MESSAGING_WORKER_COUNT" default:"5"`
+	MessagingEmailProvider     string `env:"MESSAGING_EMAIL_PROVIDER" default:"sendgrid"`
+	MessagingEmailFromAddr     string `env:"MESSAGING_EMAIL_FROM_ADDR" default:"noreply@example.com"`
+	MessagingEmailFromName     string `env:"MESSAGING_EMAIL_FROM_NAME" default:"Spur"`
+	MessagingEmailTrackOpens   string `env:"MESSAGING_EMAIL_TRACK_OPENS" default:"true"`
+	MessagingEmailTrackClicks  string `env:"MESSAGING_EMAIL_TRACK_CLICKS" default:"true"`
+	MessagingSMSProvider       string `env:"MESSAGING_SMS_PROVIDER" default:"msg91"`
+	MessagingSMSSenderID       string `env:"MESSAGING_SMS_SENDER_ID" default:"SPUR"`
+	SendGridAPIKey             string `env:"SENDGRID_API_KEY"`
+	MailgunAPIKey              string `env:"MAILGUN_API_KEY"`
+	PostmarkServerToken        string `env:"POSTMARK_SERVER_TOKEN"`
+	MSG91AuthKey               string `env:"MSG91_AUTH_KEY"`
+	TwilioAccountSID           string `env:"TWILIO_ACCOUNT_SID"`
+	WhatsAppWebhookVerifyToken string `env:"WHATSAPP_WEBHOOK_VERIFY_TOKEN"`
+	WhatsAppMetaAppID          string `env:"WHATSAPP_META_APP_ID"`
+	// SPUR:CONFIG:messaging:END
 }
 
 func Load(out any) error {
@@ -232,6 +271,7 @@ func toUpper(r rune) rune {
 	}
 	return r
 }
+
 func LoadPrivateKey(path string) (*rsa.PrivateKey, error) {
 	if path == "" {
 		return nil, errors.New("config: private key path is empty")
@@ -262,6 +302,7 @@ func LoadPrivateKey(path string) (*rsa.PrivateKey, error) {
 
 	return nil, errors.New("config: failed to parse private key (must be PKCS1 or PKCS8 RSA)")
 }
+
 func LoadRSAKey(path string) (*rsa.PrivateKey, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {

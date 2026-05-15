@@ -6,9 +6,10 @@ import (
 	"strings"
 	"time"
 
+	"y/internal/logger"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"y/internal/logger"
 )
 
 // MountFunc lets parent apps add multiple routes at once.
@@ -40,10 +41,11 @@ func NewServer(opts Options, log *logger.Loggerx, initialMount MountFunc) *Serve
 	r := chi.NewRouter()
 
 	// Core middlewares
+	r.Use(middleware.Recoverer)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.RequestID)
 	r.Use(RequestLogger(log))
-	r.Use(middleware.Recoverer)
+
 	// r.Use(RequestLogger(log)) // Assuming RequestLogger is defined in middleware_requestlog.go and compatible
 
 	if opts.MaxBodyBytes > 0 {
