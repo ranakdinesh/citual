@@ -104,6 +104,11 @@ type Config struct {
 	StorageBucket         string `env:"STORAGE_BUCKET" default:"citual"`
 	StorageDefaultQuotaGB int64  `env:"STORAGE_DEFAULT_QUOTA_GB" default:"5"`
 	StorageMaxUploadMB    int64  `env:"STORAGE_MAX_UPLOAD_MB" default:"25"`
+	StorageS3Endpoint     string `env:"STORAGE_S3_ENDPOINT"`
+	StorageS3Region       string `env:"STORAGE_S3_REGION" default:"us-east-1"`
+	StorageS3AccessKey    string `env:"STORAGE_S3_ACCESS_KEY"`
+	StorageS3SecretKey    string `env:"STORAGE_S3_SECRET_KEY"`
+	StorageS3UsePathStyle bool   `env:"STORAGE_S3_USE_PATH_STYLE" default:"true"`
 }
 
 func Load(out any) error {

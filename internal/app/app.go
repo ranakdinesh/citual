@@ -162,6 +162,11 @@ func New(ctx context.Context) (*App, error) {
 			Bucket:         cfg.StorageBucket,
 			DefaultQuota:   cfg.StorageDefaultQuotaGB * 1024 * 1024 * 1024,
 			MaxUploadBytes: cfg.StorageMaxUploadMB * 1024 * 1024,
+			S3Endpoint:     cfg.StorageS3Endpoint,
+			S3Region:       cfg.StorageS3Region,
+			S3AccessKey:    cfg.StorageS3AccessKey,
+			S3SecretKey:    cfg.StorageS3SecretKey,
+			S3UsePathStyle: cfg.StorageS3UsePathStyle,
 		},
 	})
 	if err != nil {
