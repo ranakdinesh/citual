@@ -221,12 +221,14 @@ github.com/prometheus/common v0.63.0 h1:YR/EIY1o3mEFP/kZCD7iDMnLPlGyuU2Gb3HIcXnA
 github.com/prometheus/common v0.63.0/go.mod h1:VVFF/fBIoToEnWRVkYoXEkq3R3paCoxG9PXP74SnV18=
 github.com/prometheus/procfs v0.15.1 h1:YagwOFzUgYfKKHX6Dr+sHT7km/hxC76UB0learggepc=
 github.com/prometheus/procfs v0.15.1/go.mod h1:fB45yRUv8NstnjriLhBQLuOUt+WW4BsoGhij/e3PBqk=
-github.com/ranakdinesh/spur-identity v1.1.5 h1:ZY2TMSDQK4xsl3FCtKGbpkdocl67qPEuYDDwpoVSq2Q=
-github.com/ranakdinesh/spur-identity v1.1.5/go.mod h1:2oGP3ZEF3cY3ndL9SvQGWtyA+j0z3eBOtFXjdZMxWXA=
+github.com/ranakdinesh/spur-identity v1.1.6 h1:NOYBV1Hk+ukC7h+r0L/bmpgFPcTjtNHIUKtBIvguERw=
+github.com/ranakdinesh/spur-identity v1.1.6/go.mod h1:2oGP3ZEF3cY3ndL9SvQGWtyA+j0z3eBOtFXjdZMxWXA=
 github.com/ranakdinesh/spur-messaging v1.0.5 h1:ExQbnahrDvKEgEpYavsE2SKwvywHBGubNDguFRles+Y=
 github.com/ranakdinesh/spur-messaging v1.0.5/go.mod h1:sJFZWFlcul6l5B8zSKW5wuNqB1i77FVdrg8WmiM+/cg=
 github.com/ranakdinesh/spur-storage v0.1.1 h1:iN+E0PfeL6OwNCkjn51bZAL1zlLcsEh4OeHFEUrQuk8=
 github.com/ranakdinesh/spur-storage v0.1.1/go.mod h1:6rrW6zdlZuoZu7Fm7TYOQElg/LrcO/fLjNNPzHpoC+4=
+github.com/ranakdinesh/spur-template v0.1.1 h1:Or4QopGi+O6u4y9m4ED2616Cwgj+YMmIB0j97I4v8w8=
+github.com/ranakdinesh/spur-template v0.1.1/go.mod h1:lKz4TOBefsYdxQBQDnqhjiv/v1Lb2sQ4M0CRAvq82Ts=
 github.com/redis/go-redis/v9 v9.19.0 h1:XPVaaPSnG6RhYf7p+rmSa9zZfeVAnWsH5h3lxthOm/k=
 github.com/redis/go-redis/v9 v9.19.0/go.mod h1:v/M13XI1PVCDcm01VtPFOADfZtHf8YW3baQf57KlIkA=
 github.com/robfig/cron v1.2.0 h1:ZjScXvvxeQ63Dbyxy76Fj3AT3Ut0aKsyd2/tl3DTMuQ=

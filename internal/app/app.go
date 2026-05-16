@@ -20,6 +20,7 @@ import (
 	msgpermissions "github.com/ranakdinesh/spur-messaging/pkg/permissions"
 	storage "github.com/ranakdinesh/spur-storage"
 	storagepermissions "github.com/ranakdinesh/spur-storage/pkg/permissions"
+	template "github.com/ranakdinesh/spur-template"
 	"github.com/rs/zerolog"
 	// SPUR:IMPORTS:END
 )
@@ -30,6 +31,7 @@ type App struct {
 	Identity  *identity.Module
 	Messaging *messaging.Module
 	Storage   *storage.Module
+	Template  *template.Module
 	// SPUR:APP_VALUES:END
 }
 
@@ -173,14 +175,25 @@ func New(ctx context.Context) (*App, error) {
 		return nil, fmt.Errorf("storage: %w", err)
 	}
 
+	templateModule, err := template.New(ctx, template.Options{
+		Messaging: newTemplateMessagingAdapter(messagingModule.Services.MessagingGateway),
+		Storage:   newTemplateStorageAdapter(storageModule.Services.Storage),
+		Logger:    templateLogger{log: storageLog},
+	})
+	if err != nil {
+		return nil, fmt.Errorf("template: %w", err)
+	}
+
 	identityLog := new(zerolog.Logger)
 	*identityLog = infra.Log.Logger()
+	identityTemplate := newIdentityTemplateAdapter(templateModule.Services)
 	identityModule, err := identity.New(ctx, identity.Options{
 		DB:            infra.DB,
 		Log:           identityLog,
 		Cfg:           identityCfg,
 		PrivateKey:    privateKey,
-		Communication: newIdentityMessagingAdapter(messagingModule.Services.MessagingGateway, messagingLog),
+		Communication: identityTemplate,
+		ProfileFiles:  identityTemplate,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("identity: %w", err)
@@ -226,6 +239,7 @@ func New(ctx context.Context) (*App, error) {
 		Identity:  identityModule,
 		Messaging: messagingModule,
 		Storage:   storageModule,
+		Template:  templateModule,
 		// SPUR:APP_RETURN:END
 	}, nil
 }

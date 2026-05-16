@@ -11,6 +11,7 @@ COPY citual/go.mod citual/go.sum ./citual/
 COPY spur-identity/go.mod spur-identity/go.sum ./spur-identity/
 COPY spur-messaging/go.mod spur-messaging/go.sum ./spur-messaging/
 COPY spur-storage/go.mod ./spur-storage/
+COPY spur-template/go.mod spur-template/go.sum ./spur-template/
 COPY spur-web/go.mod spur-web/go.sum ./spur-web/
 
 WORKDIR /workspace/citual
@@ -21,6 +22,7 @@ COPY citual ./citual
 COPY spur-identity ./spur-identity
 COPY spur-messaging ./spur-messaging
 COPY spur-storage ./spur-storage
+COPY spur-template ./spur-template
 
 WORKDIR /workspace/citual
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
