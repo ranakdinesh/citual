@@ -9,8 +9,9 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.9.2
 	github.com/prometheus/client_golang v1.21.1
-	github.com/ranakdinesh/spur-identity v1.1.3
-	github.com/ranakdinesh/spur-messaging v1.0.4
+	github.com/ranakdinesh/spur-identity v1.1.5
+	github.com/ranakdinesh/spur-messaging v1.0.5
+	github.com/ranakdinesh/spur-storage v0.1.0
 	github.com/redis/go-redis/v9 v9.19.0
 	github.com/rs/zerolog v1.35.1
 	go.opentelemetry.io/otel/trace v1.43.0

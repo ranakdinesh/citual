@@ -97,6 +97,13 @@ type Config struct {
 	WhatsAppWebhookVerifyToken string `env:"WHATSAPP_WEBHOOK_VERIFY_TOKEN"`
 	WhatsAppMetaAppID          string `env:"WHATSAPP_META_APP_ID"`
 	// SPUR:CONFIG:messaging:END
+
+	// ─── Storage Module ──────────────────────────────────────────────────
+	StorageProvider       string `env:"STORAGE_PROVIDER" default:"local"`
+	StorageLocalRoot      string `env:"STORAGE_LOCAL_ROOT" default:"./data/storage"`
+	StorageBucket         string `env:"STORAGE_BUCKET" default:"citual"`
+	StorageDefaultQuotaGB int64  `env:"STORAGE_DEFAULT_QUOTA_GB" default:"5"`
+	StorageMaxUploadMB    int64  `env:"STORAGE_MAX_UPLOAD_MB" default:"25"`
 }
 
 func Load(out any) error {

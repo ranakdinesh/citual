@@ -18,6 +18,8 @@ import (
 	messaging "github.com/ranakdinesh/spur-messaging"
 	"github.com/ranakdinesh/spur-messaging/pkg/authctx"
 	msgpermissions "github.com/ranakdinesh/spur-messaging/pkg/permissions"
+	storage "github.com/ranakdinesh/spur-storage"
+	storagepermissions "github.com/ranakdinesh/spur-storage/pkg/permissions"
 	"github.com/rs/zerolog"
 	// SPUR:IMPORTS:END
 )
@@ -27,6 +29,7 @@ type App struct {
 	// SPUR:APP_VALUES
 	Identity  *identity.Module
 	Messaging *messaging.Module
+	Storage   *storage.Module
 	// SPUR:APP_VALUES:END
 }
 
@@ -148,6 +151,23 @@ func New(ctx context.Context) (*App, error) {
 		return nil, fmt.Errorf("messaging: %w", err)
 	}
 
+	storageLog := new(zerolog.Logger)
+	*storageLog = infra.Log.Logger()
+	storageModule, err := storage.New(ctx, storage.Options{
+		DB:  infra.DB,
+		Log: storageLog,
+		Cfg: storage.Config{
+			Provider:       cfg.StorageProvider,
+			LocalRoot:      cfg.StorageLocalRoot,
+			Bucket:         cfg.StorageBucket,
+			DefaultQuota:   cfg.StorageDefaultQuotaGB * 1024 * 1024 * 1024,
+			MaxUploadBytes: cfg.StorageMaxUploadMB * 1024 * 1024,
+		},
+	})
+	if err != nil {
+		return nil, fmt.Errorf("storage: %w", err)
+	}
+
 	identityLog := new(zerolog.Logger)
 	*identityLog = infra.Log.Logger()
 	identityModule, err := identity.New(ctx, identity.Options{
@@ -163,6 +183,9 @@ func New(ctx context.Context) (*App, error) {
 	if err := identityModule.Services.ModuleService.RegisterManifest(ctx, messagingIdentityManifest()); err != nil {
 		return nil, fmt.Errorf("register messaging manifest: %w", err)
 	}
+	if err := identityModule.Services.ModuleService.RegisterManifest(ctx, storageIdentityManifest()); err != nil {
+		return nil, fmt.Errorf("register storage manifest: %w", err)
+	}
 	// SPUR:MODULES:END
 
 	infra.HTTP.Mount(func(r chi.Router) {
@@ -176,6 +199,11 @@ func New(ctx context.Context) (*App, error) {
 			r.Use(messagingAuthMiddleware(identityModule))
 			r.Use(identityModule.TenantIsolation())
 			messagingModule.RegisterRoutes(r)
+		})
+		r.Group(func(r chi.Router) {
+			r.Use(identityModule.AuthMiddleware())
+			r.Use(identityModule.TenantIsolation())
+			storageModule.RegisterRoutes(r)
 		})
 		r.Get("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Verify)
 		r.Post("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Handle)
@@ -192,8 +220,35 @@ func New(ctx context.Context) (*App, error) {
 		// SPUR:APP_RETURN
 		Identity:  identityModule,
 		Messaging: messagingModule,
+		Storage:   storageModule,
 		// SPUR:APP_RETURN:END
 	}, nil
+}
+
+func storageIdentityManifest() identity.Manifest {
+	permissions := make([]identity.ManifestPermission, 0, len(storagepermissions.Catalog))
+	for _, permission := range storagepermissions.Catalog {
+		permissions = append(permissions, identity.ManifestPermission{
+			Slug:        permission.Key,
+			Description: permission.Description,
+		})
+	}
+	roleTemplates := make([]identity.ManifestRoleTemplate, 0, len(storagepermissions.RoleTemplates))
+	for _, template := range storagepermissions.RoleTemplates {
+		roleTemplates = append(roleTemplates, identity.ManifestRoleTemplate{
+			Code:        template.Code,
+			Name:        template.Name,
+			Description: template.Description,
+			Permissions: append([]string(nil), template.Permissions...),
+		})
+	}
+	return identity.Manifest{
+		Name:          "Storage",
+		Code:          storagepermissions.ModuleCode,
+		Description:   "Tenant documents, user avatars, messaging media, imports, and secure object access.",
+		Permissions:   permissions,
+		RoleTemplates: roleTemplates,
+	}
 }
 
 func (a *App) Start(ctx context.Context) error {

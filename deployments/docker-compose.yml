@@ -42,6 +42,9 @@ services:
       REDIS_ENABLED: "true"
       MESSAGING_EMAIL_PROVIDER: dev_email
       MESSAGING_DEV_EMAIL_OUTBOX: /app/data/dev-email-outbox
+      STORAGE_PROVIDER: local
+      STORAGE_LOCAL_ROOT: /app/data/storage
+      STORAGE_BUCKET: citual-dev
     ports:
       - "9090:8080"
 
