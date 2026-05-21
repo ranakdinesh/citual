@@ -14,6 +14,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
+	engage "github.com/ranakdinesh/spur-engage"
+	engagepermissions "github.com/ranakdinesh/spur-engage/pkg/permissions"
 	identity "github.com/ranakdinesh/spur-identity"
 	messaging "github.com/ranakdinesh/spur-messaging"
 	"github.com/ranakdinesh/spur-messaging/pkg/authctx"
@@ -32,6 +34,7 @@ type App struct {
 	Messaging *messaging.Module
 	Storage   *storage.Module
 	Template  *template.Module
+	Engage    *engage.Module
 	// SPUR:APP_VALUES:END
 }
 
@@ -122,6 +125,26 @@ func New(ctx context.Context) (*App, error) {
 	if smsSender == "" {
 		smsSender = "SPUR"
 	}
+	engageLog := new(zerolog.Logger)
+	*engageLog = infra.Log.Logger()
+	engageTemplate := &engageTemplateAdapter{}
+	engageBrandRepo := newIdentityEngageBrandRepository()
+	engageModule, err := engage.New(ctx, engage.Options{
+		DB:                infra.DB,
+		Log:               engageLog,
+		MessageDispatcher: engageTemplate,
+		PublicLeadGuard:   newEngageRedisPublicLeadGuard(infra.Redis),
+		BrandRepository:   engageBrandRepo,
+		Cfg: engage.Config{
+			PublicBaseURL:     cfg.EngagePublicBaseURL,
+			AIEnabled:         cfg.EngageAIEnabled,
+			AutomationEnabled: cfg.EngageAutomationEnabled,
+		},
+	})
+	if err != nil {
+		return nil, fmt.Errorf("engage: %w", err)
+	}
+
 	messagingCfg := messaging.Config{
 		AppEnv:           cfg.AppEnv,
 		EncryptionKey:    encKey,
@@ -144,10 +167,11 @@ func New(ctx context.Context) (*App, error) {
 	messagingLog := new(zerolog.Logger)
 	*messagingLog = infra.Log.Logger()
 	messagingModule, err := messaging.New(ctx, messaging.Options{
-		DB:    infra.DB,
-		Log:   messagingLog,
-		Cfg:   messagingCfg,
-		Redis: infra.Redis,
+		DB:          infra.DB,
+		Log:         messagingLog,
+		Cfg:         messagingCfg,
+		Redis:       infra.Redis,
+		EngageInbox: newMessagingEngageInboxAdapter(engageModule.Services.Inbox),
 	})
 	if err != nil {
 		return nil, fmt.Errorf("messaging: %w", err)
@@ -183,6 +207,7 @@ func New(ctx context.Context) (*App, error) {
 	if err != nil {
 		return nil, fmt.Errorf("template: %w", err)
 	}
+	engageTemplate.services = templateModule.Services
 
 	identityLog := new(zerolog.Logger)
 	*identityLog = infra.Log.Logger()
@@ -198,11 +223,15 @@ func New(ctx context.Context) (*App, error) {
 	if err != nil {
 		return nil, fmt.Errorf("identity: %w", err)
 	}
+	engageBrandRepo.service = identityModule.Services.TenantBrandService
 	if err := identityModule.Services.ModuleService.RegisterManifest(ctx, messagingIdentityManifest()); err != nil {
 		return nil, fmt.Errorf("register messaging manifest: %w", err)
 	}
 	if err := identityModule.Services.ModuleService.RegisterManifest(ctx, storageIdentityManifest()); err != nil {
 		return nil, fmt.Errorf("register storage manifest: %w", err)
+	}
+	if err := identityModule.Services.ModuleService.RegisterManifest(ctx, engageIdentityManifest()); err != nil {
+		return nil, fmt.Errorf("register engage manifest: %w", err)
 	}
 	// SPUR:MODULES:END
 
@@ -223,6 +252,12 @@ func New(ctx context.Context) (*App, error) {
 			r.Use(identityModule.TenantIsolation())
 			storageModule.RegisterRoutes(r)
 		})
+		r.Group(func(r chi.Router) {
+			r.Use(identityModule.AuthMiddleware())
+			r.Use(identityModule.TenantIsolation())
+			engageModule.RegisterRoutes(r)
+		})
+		engageModule.RegisterPublicRoutes(r)
 		r.Get("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Verify)
 		r.Post("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Handle)
 		r.Post("/messaging/webhook/email/sendgrid", messagingModule.WebhookHandler.HandleSendGrid)
@@ -240,8 +275,35 @@ func New(ctx context.Context) (*App, error) {
 		Messaging: messagingModule,
 		Storage:   storageModule,
 		Template:  templateModule,
+		Engage:    engageModule,
 		// SPUR:APP_RETURN:END
 	}, nil
+}
+
+func engageIdentityManifest() identity.Manifest {
+	permissions := make([]identity.ManifestPermission, 0, len(engagepermissions.Catalog))
+	for _, permission := range engagepermissions.Catalog {
+		permissions = append(permissions, identity.ManifestPermission{
+			Slug:        permission.Key,
+			Description: permission.Description,
+		})
+	}
+	roleTemplates := make([]identity.ManifestRoleTemplate, 0, len(engagepermissions.RoleTemplates))
+	for _, template := range engagepermissions.RoleTemplates {
+		roleTemplates = append(roleTemplates, identity.ManifestRoleTemplate{
+			Code:        template.Code,
+			Name:        template.Name,
+			Description: template.Description,
+			Permissions: append([]string(nil), template.Permissions...),
+		})
+	}
+	return identity.Manifest{
+		Name:          "Engage",
+		Code:          engagepermissions.ModuleCode,
+		Description:   "Customer engagement CRM, deals, tasks, quotes, inbox, meetings, automations, and AI-assisted business updates.",
+		Permissions:   permissions,
+		RoleTemplates: roleTemplates,
+	}
 }
 
 func storageIdentityManifest() identity.Manifest {

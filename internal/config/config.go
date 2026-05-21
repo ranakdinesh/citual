@@ -109,6 +109,11 @@ type Config struct {
 	StorageS3AccessKey    string `env:"STORAGE_S3_ACCESS_KEY"`
 	StorageS3SecretKey    string `env:"STORAGE_S3_SECRET_KEY"`
 	StorageS3UsePathStyle bool   `env:"STORAGE_S3_USE_PATH_STYLE" default:"true"`
+
+	// ─── Engage Module ───────────────────────────────────────────────────
+	EngagePublicBaseURL     string `env:"ENGAGE_PUBLIC_BASE_URL"`
+	EngageAIEnabled         bool   `env:"ENGAGE_AI_ENABLED" default:"false"`
+	EngageAutomationEnabled bool   `env:"ENGAGE_AUTOMATION_ENABLED" default:"false"`
 }
 
 func Load(out any) error {

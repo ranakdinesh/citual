@@ -14,7 +14,10 @@
   ],
   "modules": [
     "identity",
-    "messaging"
+    "messaging",
+    "template",
+    "storage",
+    "engage"
   ],
   "protocol_ports": {
     "grpc": "9090",

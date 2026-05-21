@@ -9,6 +9,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.9.2
 	github.com/prometheus/client_golang v1.21.1
+	github.com/ranakdinesh/spur-engage v0.1.0
 	github.com/ranakdinesh/spur-identity v1.1.6
 	github.com/ranakdinesh/spur-messaging v1.0.5
 	github.com/ranakdinesh/spur-storage v0.1.1

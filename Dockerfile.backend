@@ -8,6 +8,7 @@ WORKDIR /workspace
 # Cache deps separately from source
 COPY go.work go.work.sum ./
 COPY citual/go.mod citual/go.sum ./citual/
+COPY spur-engage/go.mod spur-engage/go.sum ./spur-engage/
 COPY spur-identity/go.mod spur-identity/go.sum ./spur-identity/
 COPY spur-messaging/go.mod spur-messaging/go.sum ./spur-messaging/
 COPY spur-storage/go.mod ./spur-storage/
@@ -19,6 +20,7 @@ RUN go mod download
 
 WORKDIR /workspace
 COPY citual ./citual
+COPY spur-engage ./spur-engage
 COPY spur-identity ./spur-identity
 COPY spur-messaging ./spur-messaging
 COPY spur-storage ./spur-storage
