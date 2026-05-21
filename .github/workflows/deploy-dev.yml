@@ -1,0 +1,49 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: citual-dev-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to development server
+    runs-on: self-hosted
+    timeout-minutes: 45
+    env:
+      CITUAL_DEV_WORKSPACE: /opt/citual-dev
+      DEV_DEPLOY_BRANCH: main
+      DEV_DEPLOY_PULL_REPOS: citual citual-web spur-identity spur-engage spur-messaging spur-storage spur-template
+    steps:
+      - name: Prepare workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$CITUAL_DEV_WORKSPACE"
+          if [ ! -d "$CITUAL_DEV_WORKSPACE/citual/.git" ]; then
+            git clone https://github.com/ranakdinesh/citual.git "$CITUAL_DEV_WORKSPACE/citual"
+          fi
+          cd "$CITUAL_DEV_WORKSPACE/citual"
+          git fetch origin main --tags
+          git checkout main
+          git reset --hard origin/main
+          chmod +x deployments/scripts/*.sh
+
+      - name: Update module workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$CITUAL_DEV_WORKSPACE/citual"
+          deployments/scripts/update-workspace.sh
+
+      - name: Deploy Docker stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$CITUAL_DEV_WORKSPACE/citual"
+          deployments/scripts/deploy-dev.sh
