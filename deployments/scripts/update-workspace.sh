@@ -22,15 +22,56 @@ repo_url() {
   esac
 }
 
+backup_non_git_dir() {
+  local name="$1"
+  local dir="${WORKSPACE_ROOT}/${name}"
+  local backup_root="${WORKSPACE_ROOT}/.deploy/bootstrap-backups"
+  local stamp
+  stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+
+  if [ -e "$dir" ] && [ ! -d "$dir/.git" ]; then
+    mkdir -p "$backup_root"
+    local backup_dir="${backup_root}/${name}-${stamp}"
+    echo "→ Moving non-git ${name} directory to ${backup_dir}" >&2
+    mv "$dir" "$backup_dir"
+    echo "$backup_dir"
+  fi
+}
+
+restore_local_deploy_files() {
+  local name="$1"
+  local backup_dir="$2"
+  local dir="${WORKSPACE_ROOT}/${name}"
+
+  if [ "$name" != "citual" ] || [ -z "$backup_dir" ]; then
+    return
+  fi
+
+  if [ -f "${backup_dir}/deployments/.env" ] && [ ! -f "${dir}/deployments/.env" ]; then
+    echo "→ Restoring citual deployments/.env from bootstrap backup"
+    cp "${backup_dir}/deployments/.env" "${dir}/deployments/.env"
+    chmod 600 "${dir}/deployments/.env" || true
+  fi
+
+  if [ -d "${backup_dir}/keys" ] && [ ! -d "${dir}/keys" ]; then
+    echo "→ Restoring citual keys from bootstrap backup"
+    cp -a "${backup_dir}/keys" "${dir}/keys"
+  fi
+}
+
 ensure_repo() {
   local name="$1"
   local dir="${WORKSPACE_ROOT}/${name}"
   local url
   url="$(repo_url "$name")"
+  local backup_dir=""
+
+  backup_dir="$(backup_non_git_dir "$name")"
 
   if [ ! -d "$dir/.git" ]; then
     echo "→ Cloning ${name}"
     git clone "$url" "$dir"
+    restore_local_deploy_files "$name" "$backup_dir"
   fi
 
   cd "$dir"

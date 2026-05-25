@@ -26,7 +26,20 @@ jobs:
           set -euo pipefail
           mkdir -p "$CITUAL_DEV_WORKSPACE"
           if [ ! -d "$CITUAL_DEV_WORKSPACE/citual/.git" ]; then
+            backup_dir=""
+            if [ -e "$CITUAL_DEV_WORKSPACE/citual" ]; then
+              backup_dir="$CITUAL_DEV_WORKSPACE/.deploy/bootstrap-backups/citual-$(date -u +%Y%m%dT%H%M%SZ)"
+              mkdir -p "$(dirname "$backup_dir")"
+              mv "$CITUAL_DEV_WORKSPACE/citual" "$backup_dir"
+            fi
             git clone https://github.com/ranakdinesh/citual.git "$CITUAL_DEV_WORKSPACE/citual"
+            if [ -n "$backup_dir" ] && [ -f "$backup_dir/deployments/.env" ]; then
+              cp "$backup_dir/deployments/.env" "$CITUAL_DEV_WORKSPACE/citual/deployments/.env"
+              chmod 600 "$CITUAL_DEV_WORKSPACE/citual/deployments/.env" || true
+            fi
+            if [ -n "$backup_dir" ] && [ -d "$backup_dir/keys" ]; then
+              cp -a "$backup_dir/keys" "$CITUAL_DEV_WORKSPACE/citual/keys"
+            fi
           fi
           cd "$CITUAL_DEV_WORKSPACE/citual"
           git fetch origin main --tags
