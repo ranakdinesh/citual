@@ -252,7 +252,7 @@ func New(ctx context.Context) (*App, error) {
 		})
 		// SPUR:ROUTES
 		identityModule.RegisterRoutes(r)
-		r.Route("/messaging", func(r chi.Router) {
+		r.Group(func(r chi.Router) {
 			r.Use(messagingAuthMiddleware(identityModule))
 			r.Use(identityModule.TenantIsolation())
 			messagingModule.RegisterRoutes(r)
