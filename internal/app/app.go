@@ -134,11 +134,13 @@ func New(ctx context.Context) (*App, error) {
 		Log:               engageLog,
 		MessageDispatcher: engageTemplate,
 		PublicLeadGuard:   newEngageRedisPublicLeadGuard(infra.Redis),
+		CaptchaVerifier:   newEngageTurnstileVerifier(cfg.EngageTurnstileSecret),
 		BrandRepository:   engageBrandRepo,
 		Cfg: engage.Config{
 			PublicBaseURL:     cfg.EngagePublicBaseURL,
 			AIEnabled:         cfg.EngageAIEnabled,
 			AutomationEnabled: cfg.EngageAutomationEnabled,
+			CaptchaSiteKey:    cfg.EngageTurnstileSiteKey,
 		},
 	})
 	if err != nil {
@@ -151,18 +153,26 @@ func New(ctx context.Context) (*App, error) {
 		WebhookBaseURL:   cfg.MessagingWebhookBaseURL,
 		DefaultRateLimit: rateLimit,
 
-		WorkerCount:                workerCount,
-		EmailProvider:              emailProvider,
-		EmailAPIKey:                emailAPIKey,
-		EmailFromAddress:           emailFrom,
-		EmailFromName:              emailName,
-		EmailTrackOpens:            cfg.MessagingEmailTrackOpens != "false",
-		EmailTrackClicks:           cfg.MessagingEmailTrackClicks != "false",
-		SMSProvider:                smsProvider,
-		SMSAPIKey:                  smsAPIKey,
-		SMSSenderID:                smsSender,
-		WhatsAppWebhookVerifyToken: cfg.WhatsAppWebhookVerifyToken,
-		WhatsAppMetaAppID:          cfg.WhatsAppMetaAppID,
+		WorkerCount:                    workerCount,
+		EmailProvider:                  emailProvider,
+		EmailAPIKey:                    emailAPIKey,
+		EmailFromAddress:               emailFrom,
+		EmailFromName:                  emailName,
+		EmailTrackOpens:                cfg.MessagingEmailTrackOpens != "false",
+		EmailTrackClicks:               cfg.MessagingEmailTrackClicks != "false",
+		SMSProvider:                    smsProvider,
+		SMSAPIKey:                      smsAPIKey,
+		SMSSenderID:                    smsSender,
+		WhatsAppWebhookVerifyToken:     cfg.WhatsAppWebhookVerifyToken,
+		WhatsAppMetaAppID:              cfg.WhatsAppMetaAppID,
+		WhatsAppMetaAppSecret:          cfg.WhatsAppMetaAppSecret,
+		WhatsAppGraphAPIVersion:        cfg.WhatsAppGraphAPIVersion,
+		WhatsAppEmbeddedSignupConfigID: cfg.WhatsAppEmbeddedSignupConfigID,
+		WhatsAppAccessToken:            cfg.WhatsAppAccessToken,
+		WhatsAppDefaultWABAID:          cfg.WhatsAppDefaultWABAID,
+		WhatsAppDefaultPhoneNumberID:   cfg.WhatsAppDefaultPhoneNumberID,
+		WhatsAppDefaultBusinessID:      cfg.WhatsAppDefaultBusinessID,
+		WhatsAppDefaultDisplayPhone:    cfg.WhatsAppDefaultDisplayPhone,
 	}
 	messagingLog := new(zerolog.Logger)
 	*messagingLog = infra.Log.Logger()
@@ -257,6 +267,7 @@ func New(ctx context.Context) (*App, error) {
 			r.Use(identityModule.TenantIsolation())
 			engageModule.RegisterRoutes(r)
 		})
+		registerPublicBrandAssetRoutes(r, engageModule, storageModule)
 		engageModule.RegisterPublicRoutes(r)
 		r.Get("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Verify)
 		r.Post("/messaging/webhook/whatsapp", messagingModule.WebhookHandler.Handle)
@@ -374,7 +385,7 @@ func messagingAuthMiddleware(identityModule *identity.Module) func(http.Handler)
 				return
 			}
 
-			key, err := identityModule.Services.APIKeyService.Authenticate(r.Context(), apiKeyValue, r.Header.Get("Origin"))
+			key, err := identityModule.Services.APIKeyService.Authenticate(r.Context(), apiKeyValue, r.Header.Get("Origin"), requestIP(r))
 			if err != nil {
 				http.Error(w, "invalid api key", http.StatusUnauthorized)
 				return
@@ -385,6 +396,17 @@ func messagingAuthMiddleware(identityModule *identity.Module) func(http.Handler)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
+}
+
+func requestIP(r *http.Request) string {
+	if forwarded := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); forwarded != "" {
+		parts := strings.Split(forwarded, ",")
+		return strings.TrimSpace(parts[0])
+	}
+	if realIP := strings.TrimSpace(r.Header.Get("X-Real-IP")); realIP != "" {
+		return realIP
+	}
+	return r.RemoteAddr
 }
 
 func messagingAPIKey(r *http.Request) string {

@@ -281,10 +281,14 @@ func (a *templateStorageAdapter) Store(ctx context.Context, input template.Store
 	if a.storage == nil {
 		return nil, errors.New("storage service is not configured")
 	}
+	scope := storagedomain.ObjectScopeUser
+	if input.Purpose == template.FilePurposeTenantLogo || input.Purpose == template.FilePurposeTenantFavicon {
+		scope = storagedomain.ObjectScopeCompany
+	}
 	object, err := a.storage.UploadObject(ctx, storageports.UploadObjectInput{
 		TenantID:    input.TenantID,
 		UserID:      input.UserID,
-		Scope:       storagedomain.ObjectScopeUser,
+		Scope:       scope,
 		Module:      "identity",
 		FileName:    input.FileName,
 		ContentType: input.ContentType,

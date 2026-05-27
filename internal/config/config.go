@@ -77,25 +77,33 @@ type Config struct {
 
 	// ─── Messaging Module ────────────────────────────────────────────────
 	// SPUR:CONFIG:messaging:START
-	MessagingEncryptionKey     string `env:"MESSAGING_ENCRYPTION_KEY"`
-	MessagingWebhookBaseURL    string `env:"MESSAGING_WEBHOOK_BASE_URL"`
-	MessagingDefaultRateLimit  string `env:"MESSAGING_DEFAULT_RATE_LIMIT" default:"10"`
-	MessagingRedisURL          string `env:"MESSAGING_REDIS_URL"`
-	MessagingWorkerCount       string `env:"MESSAGING_WORKER_COUNT" default:"5"`
-	MessagingEmailProvider     string `env:"MESSAGING_EMAIL_PROVIDER" default:"sendgrid"`
-	MessagingEmailFromAddr     string `env:"MESSAGING_EMAIL_FROM_ADDR" default:"noreply@example.com"`
-	MessagingEmailFromName     string `env:"MESSAGING_EMAIL_FROM_NAME" default:"Spur"`
-	MessagingEmailTrackOpens   string `env:"MESSAGING_EMAIL_TRACK_OPENS" default:"true"`
-	MessagingEmailTrackClicks  string `env:"MESSAGING_EMAIL_TRACK_CLICKS" default:"true"`
-	MessagingSMSProvider       string `env:"MESSAGING_SMS_PROVIDER" default:"msg91"`
-	MessagingSMSSenderID       string `env:"MESSAGING_SMS_SENDER_ID" default:"SPUR"`
-	SendGridAPIKey             string `env:"SENDGRID_API_KEY"`
-	MailgunAPIKey              string `env:"MAILGUN_API_KEY"`
-	PostmarkServerToken        string `env:"POSTMARK_SERVER_TOKEN"`
-	MSG91AuthKey               string `env:"MSG91_AUTH_KEY"`
-	TwilioAccountSID           string `env:"TWILIO_ACCOUNT_SID"`
-	WhatsAppWebhookVerifyToken string `env:"WHATSAPP_WEBHOOK_VERIFY_TOKEN"`
-	WhatsAppMetaAppID          string `env:"WHATSAPP_META_APP_ID"`
+	MessagingEncryptionKey         string `env:"MESSAGING_ENCRYPTION_KEY"`
+	MessagingWebhookBaseURL        string `env:"MESSAGING_WEBHOOK_BASE_URL"`
+	MessagingDefaultRateLimit      string `env:"MESSAGING_DEFAULT_RATE_LIMIT" default:"10"`
+	MessagingRedisURL              string `env:"MESSAGING_REDIS_URL"`
+	MessagingWorkerCount           string `env:"MESSAGING_WORKER_COUNT" default:"5"`
+	MessagingEmailProvider         string `env:"MESSAGING_EMAIL_PROVIDER" default:"sendgrid"`
+	MessagingEmailFromAddr         string `env:"MESSAGING_EMAIL_FROM_ADDR" default:"noreply@example.com"`
+	MessagingEmailFromName         string `env:"MESSAGING_EMAIL_FROM_NAME" default:"Spur"`
+	MessagingEmailTrackOpens       string `env:"MESSAGING_EMAIL_TRACK_OPENS" default:"true"`
+	MessagingEmailTrackClicks      string `env:"MESSAGING_EMAIL_TRACK_CLICKS" default:"true"`
+	MessagingSMSProvider           string `env:"MESSAGING_SMS_PROVIDER" default:"msg91"`
+	MessagingSMSSenderID           string `env:"MESSAGING_SMS_SENDER_ID" default:"SPUR"`
+	SendGridAPIKey                 string `env:"SENDGRID_API_KEY"`
+	MailgunAPIKey                  string `env:"MAILGUN_API_KEY"`
+	PostmarkServerToken            string `env:"POSTMARK_SERVER_TOKEN"`
+	MSG91AuthKey                   string `env:"MSG91_AUTH_KEY"`
+	TwilioAccountSID               string `env:"TWILIO_ACCOUNT_SID"`
+	WhatsAppWebhookVerifyToken     string `env:"WHATSAPP_WEBHOOK_VERIFY_TOKEN"`
+	WhatsAppMetaAppID              string `env:"WHATSAPP_META_APP_ID"`
+	WhatsAppMetaAppSecret          string `env:"WHATSAPP_META_APP_SECRET"`
+	WhatsAppGraphAPIVersion        string `env:"WHATSAPP_GRAPH_API_VERSION" default:"v23.0"`
+	WhatsAppEmbeddedSignupConfigID string `env:"WHATSAPP_EMBEDDED_SIGNUP_CONFIG_ID"`
+	WhatsAppAccessToken            string `env:"WHATSAPP_ACCESS_TOKEN"`
+	WhatsAppDefaultWABAID          string `env:"WHATSAPP_DEFAULT_WABA_ID"`
+	WhatsAppDefaultPhoneNumberID   string `env:"WHATSAPP_DEFAULT_PHONE_NUMBER_ID"`
+	WhatsAppDefaultBusinessID      string `env:"WHATSAPP_DEFAULT_BUSINESS_ID"`
+	WhatsAppDefaultDisplayPhone    string `env:"WHATSAPP_DEFAULT_DISPLAY_PHONE"`
 	// SPUR:CONFIG:messaging:END
 
 	// ─── Storage Module ──────────────────────────────────────────────────
@@ -114,6 +122,8 @@ type Config struct {
 	EngagePublicBaseURL     string `env:"ENGAGE_PUBLIC_BASE_URL"`
 	EngageAIEnabled         bool   `env:"ENGAGE_AI_ENABLED" default:"false"`
 	EngageAutomationEnabled bool   `env:"ENGAGE_AUTOMATION_ENABLED" default:"false"`
+	EngageTurnstileSecret   string `env:"ENGAGE_TURNSTILE_SECRET"`
+	EngageTurnstileSiteKey  string `env:"ENGAGE_TURNSTILE_SITE_KEY"`
 }
 
 func Load(out any) error {

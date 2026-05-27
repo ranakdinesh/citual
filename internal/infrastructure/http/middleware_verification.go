@@ -3,6 +3,7 @@ package http
 import (
 	"context"
 	"net/http"
+	"strings"
 
 	"github.com/google/uuid"
 )
@@ -76,7 +77,7 @@ func (g *VerificationGuard) ChiMiddleware(next http.Handler) http.Handler {
 
 // APIKeyAuthenticator is implemented by the identity module's APIKeyService.
 type APIKeyAuthenticator interface {
-	Authenticate(ctx context.Context, fullKey string, origin string) (interface{}, error)
+	Authenticate(ctx context.Context, fullKey string, origin string, clientIP string) (interface{}, error)
 }
 
 // APIKeyGuard validates API key authentication on routes that accept it.
@@ -99,7 +100,7 @@ func (g *APIKeyGuard) ChiMiddleware(next http.Handler) http.Handler {
 		}
 
 		origin := r.Header.Get("Origin")
-		_, err := g.svc.Authenticate(r.Context(), key, origin)
+		_, err := g.svc.Authenticate(r.Context(), key, origin, requestIP(r))
 		if err != nil {
 			http.Error(w, `{"error":"invalid_api_key"}`, http.StatusUnauthorized)
 			return
@@ -107,4 +108,15 @@ func (g *APIKeyGuard) ChiMiddleware(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r)
 	})
+}
+
+func requestIP(r *http.Request) string {
+	if forwarded := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); forwarded != "" {
+		parts := strings.Split(forwarded, ",")
+		return strings.TrimSpace(parts[0])
+	}
+	if realIP := strings.TrimSpace(r.Header.Get("X-Real-IP")); realIP != "" {
+		return realIP
+	}
+	return r.RemoteAddr
 }
