@@ -378,10 +378,11 @@ func messagingIdentityManifest() identity.Manifest {
 func messagingAuthMiddleware(identityModule *identity.Module) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		jwtMiddleware := identityModule.AuthMiddleware()
+		jwtBridge := authctx.IdentityJWTBridge(identityModule.Config.CookieName)
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			apiKeyValue := messagingAPIKey(r)
 			if apiKeyValue == "" {
-				jwtMiddleware(next).ServeHTTP(w, r)
+				jwtMiddleware(jwtBridge(next)).ServeHTTP(w, r)
 				return
 			}
 
